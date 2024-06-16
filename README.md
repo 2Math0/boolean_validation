@@ -1,4 +1,3 @@
-```markdown
 # boolean_validation
 
 A Dart package providing various validation utilities for common data types.
@@ -132,6 +131,4 @@ String? validateUsername(String value, String? usernameRequiredMessage,
     - `usernameRequiredMessage`: Custom message when username is required but not provided.
     - `validUsernameMessage`: Custom message when username format is invalid.
 - **Returns**: Error message if invalid, `null` if valid.
-
-```
 
