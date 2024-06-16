@@ -15,11 +15,13 @@ mixin class ValidationLogic {
     return pattern.hasMatch(value);
   }
 
+  /// ## Explanation:
+  /// <img width="1200" src="https://i.sstatic.net/2QfiC.png"/>
   bool isCorrectMobileNumber(String? value) {
     if (value == null || value.isEmpty) {
       return false;
     }
-    final pattern = RegExp(r'^(?:[+0]9)?[0-9]{10}$');
+    final pattern = RegExp(r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$)');
     return pattern.hasMatch(value);
   }
 
