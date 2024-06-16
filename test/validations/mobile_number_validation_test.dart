@@ -5,7 +5,6 @@ void main() {
   final Validators validators = Validators();
 
   group('Mobile Number Validation Tests', () {
-    Validators validators = Validators();
     const String required = 'Mobile number is required';
     const String enterValid = 'Please enter a valid mobile number';
 
