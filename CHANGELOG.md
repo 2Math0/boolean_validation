@@ -28,3 +28,9 @@
 
 - Provided an example Flutter app demonstrating how to use the validation methods in a form.
 
+<hr/>
+
+## [0.0.2] - 2024-09-24
+
+- support for version 3.3.2 in flutter
+
