@@ -45,3 +45,11 @@
 4- add validation for Full Name, First and Last Name
 5- add Validations for required fields
 6- add alpha and alpha numeric validations
+
+
+<hr/>
+
+## [0.1.1] - 2024-09-29
+
+- changed the License To MPL
+- add description in pubspec yaml

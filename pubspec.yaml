@@ -3,7 +3,7 @@ description: "A comprehensive validation package for Dart and Flutter applicatio
 version: 0.1.0
 homepage: https://github.com/2Math0/boolean_validation
 repository: https://github.com/2Math0/boolean_validation
-issues_tracker: https://github.com/2Math0/boolean_validation/issues
+issue_tracker: https://github.com/2Math0/boolean_validation/issues
 keywords:
   - validation
   - dart
