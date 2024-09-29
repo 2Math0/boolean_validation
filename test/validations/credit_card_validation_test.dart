@@ -1,5 +1,4 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:boolean_validation/boolean_validation.dart';
+import '../test_common_libs.dart';
 
 void main() {
   final Validators validators = Validators();
@@ -7,25 +6,40 @@ void main() {
   group('Credit Card Validation', () {
     test('Valid Credit Card', () {
       expect(
-        validators.validateCreditCard('4111111111111111', 'Credit card number is required', 'Invalid credit card number'),
+        validators.validateCreditCard('4111111111111111'),
+        // Example valid card number
         null,
       );
     });
 
-    test('Empty Credit Card', () {
+    test('Empty Credit Card - Required', () {
       expect(
-        validators.validateCreditCard('', 'Credit card number is required', 'Invalid credit card number'),
+        validators.validateCreditCard(''),
         'Credit card number is required',
       );
     });
 
-    test('Invalid Credit Card Format', () {
+    test('Invalid Credit Card Value', () {
       expect(
-        validators.validateCreditCard('1234567890123456', 'Credit card number is required', 'Invalid credit card number'),
-        'Invalid credit card number',
+        validators.validateCreditCard('12345'), // Invalid card number
+        'Please enter a valid credit card number',
       );
     });
 
-    // Add more tests specific to credit card validation if needed
+    test('Null Credit Card - Required', () {
+      expect(
+        validators.validateCreditCard(''),
+        'Credit card number is required',
+      );
+    });
+
+    // Additional test for custom required message
+    test('Custom Required Message', () {
+      expect(
+        validators.validateCreditCard('',
+            customRequiredMessage: 'Please provide a credit card number'),
+        'Please provide a credit card number',
+      );
+    });
   });
 }

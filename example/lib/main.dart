@@ -51,66 +51,67 @@ class ValidationFormState extends State<ValidationForm> {
           key: _formKey,
           child: ListView(
             children: <Widget>[
-              TextFormField(
+              _buildTextField(
                 controller: _emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
-                validator: (value) => _validators.validateEmail(
+                label: 'Email',
+                validator: (value) => _validators.userInput.validateEmail(
                   value,
-                  'Email is required',
-                  'Invalid email',
+                  customRequiredMessage: 'Email is required',
+                  customInvalidMessage: 'Invalid email',
                 ),
               ),
-              TextFormField(
+              _buildTextField(
                 controller: _mobileController,
-                decoration: const InputDecoration(labelText: 'Mobile Number'),
+                label: 'Mobile Number',
                 validator: (value) => _validators.validateMobileNumber(
                   value,
-                  'Mobile number is required',
-                  'Invalid mobile number',
+                  customRequiredMessage: 'Mobile number is required',
+                  customInvalidMessage: 'Invalid mobile number',
                 ),
               ),
-              TextFormField(
+              _buildTextField(
                 controller: _integerController,
-                decoration: const InputDecoration(labelText: 'Integer'),
-                validator: (value) => _validators.validateInteger(
+                label: 'Integer',
+                validator: (value) => _validators.dataType.validateInteger(
                   value,
-                  'Number is required',
+                  customRequiredMessage: 'Number is required',
                 ),
               ),
-              TextFormField(
+              _buildTextField(
                 controller: _urlController,
-                decoration: const InputDecoration(labelText: 'URL'),
-                validator: (value) => _validators.validateUrl(
+                label: 'URL',
+                validator: (value) => _validators.dataType.validateUrl(
                   value!,
-                  'URL is required',
-                  'Invalid URL',
+                  customRequiredMessage: 'URL is required',
+                  customInvalidMessage: 'Invalid URL',
+                  isRequired: true,
                 ),
               ),
-              TextFormField(
+              _buildTextField(
                 controller: _dateController,
-                decoration: const InputDecoration(labelText: 'Date (YYYY-MM-DD)'),
-                validator: (value) => _validators.validateDate(
+                label: 'Date (YYYY-MM-DD)',
+                validator: (value) => _validators.dataType.validateDate(
                   value!,
-                  'Date is required',
-                  'Invalid date',
+                  customRequiredMessage: 'Date is required',
+                  customInvalidMessage: 'Invalid date',
                 ),
               ),
-              TextFormField(
+              _buildTextField(
                 controller: _creditCardController,
-                decoration: const InputDecoration(labelText: 'Credit Card Number'),
+                label: 'Credit Card Number',
                 validator: (value) => _validators.validateCreditCard(
                   value!,
-                  'Credit card number is required',
-                  'Invalid credit card number',
+                  customRequiredMessage: 'Credit card number is required',
+                  customInvalidMessage: 'Invalid credit card number',
                 ),
               ),
-              TextFormField(
+              _buildTextField(
                 controller: _usernameController,
-                decoration: const InputDecoration(labelText: 'Username'),
-                validator: (value) => _validators.validateUsername(
+                label: 'Username',
+                validator: (value) => _validators.userInput.validateUsername(
                   value!,
-                  'Username is required',
-                  'Invalid username',
+                  customRequiredMessage: 'Username is required',
+                  customInvalidMessage: 'Invalid username',
                 ),
               ),
               const SizedBox(height: 20),
@@ -128,6 +129,18 @@ class ValidationFormState extends State<ValidationForm> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required String? Function(String?) validator,
+  }) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(labelText: label),
+      validator: validator,
     );
   }
 
