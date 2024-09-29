@@ -28,12 +28,17 @@
 
 - Provided an example Flutter app demonstrating how to use the validation methods in a form.
 
+<hr/>
+
 ## [0.0.2] - 2024-09-24
 
 - support for version 3.3.2 in flutter
 
+<hr/>
+
 ## [0.1.0] - 2024-09-29
 
+### Added
 1- Add constrained email validation for specific providers like gmail, yahoo, etc.
 2- add more advanced password validation for complex stages if developers required them
 3- add lat and long validations
