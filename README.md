@@ -20,7 +20,7 @@ Add the following to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  boolean_validation: ^0.0.1
+  boolean_validation: ^0.1.1
 ```
 
 Import the package in your Dart file:
