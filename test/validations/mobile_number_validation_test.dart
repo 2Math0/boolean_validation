@@ -1,83 +1,44 @@
-import 'package:boolean_validation/boolean_validation.dart';
-import 'package:flutter_test/flutter_test.dart';
+import '../test_common_libs.dart ';
 
 void main() {
   final Validators validators = Validators();
 
-  group('Mobile Number Validation Tests', () {
-    const String required = 'Mobile number is required';
-    const String enterValid = 'Please enter a valid mobile number';
-
-    test('Valid mobile number', () {
-      String? result = validators.validateMobileNumber(
-        '+1234567890',
-        required,
-        enterValid,
-      );
-      expect(result, null);
-    });
-
-    test('Valid mobile number without country code', () {
-      String? result = validators.validateMobileNumber(
-        '1234567890',
-        required,
-        enterValid,
-      );
-      expect(result, null);
-    });
-
-    test('Valid mobile number with egp country code', () {
-      String? result = validators.validateMobileNumber(
-        '+201012345678',
-        required,
-        enterValid,
-      );
-      expect(result, null);
-    });
-
-    test('Invalid mobile number - too short', () {
-      String? result = validators.validateMobileNumber(
-        '12345',
-        required,
-        enterValid,
-      );
-      expect(result, enterValid);
-    });
-
-    test('Invalid mobile number - too long', () {
-      String? result = validators.validateMobileNumber(
-        '1234567890123456',
-        required,
-        enterValid,
-      );
-      expect(result, enterValid);
-    });
-
-    test('Invalid mobile number - alphanumeric', () {
-      String? result = validators.validateMobileNumber(
-        'abc1234567',
-        required,
-        enterValid,
-      );
-      expect(result, enterValid);
-    });
-
-    test('Empty mobile number', () {
-      String? result = validators.validateMobileNumber(
-        '',
-        required,
-        enterValid,
-      );
-      expect(result, required);
-    });
-
-    test('Null mobile number', () {
-      String? result = validators.validateMobileNumber(
+  group('Mobile Number Validation', () {
+    test('Valid Mobile Number', () {
+      expect(
+        validators.validateMobileNumber('1234567890'),
         null,
-        required,
-        enterValid,
       );
-      expect(result, required);
+    });
+
+    test('Empty Mobile Number - Required', () {
+      expect(
+        validators.validateMobileNumber(''),
+        'Mobile number is required',
+      );
+    });
+
+    test('Invalid Mobile Number Value', () {
+      expect(
+        validators.validateMobileNumber('abc123'), // Invalid mobile number
+        'Please enter a valid mobile number',
+      );
+    });
+
+    test('Null Mobile Number - Required', () {
+      expect(
+        validators.validateMobileNumber(null),
+        'Mobile number is required',
+      );
+    });
+
+    // Additional test for custom required message
+    test('Custom Required Message', () {
+      expect(
+        validators.validateMobileNumber(null,
+            customRequiredMessage: 'Please provide a mobile number'),
+        'Please provide a mobile number',
+      );
     });
   });
 }

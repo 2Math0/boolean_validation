@@ -1,10 +1,18 @@
 name: boolean_validation
-description: "flutter package for validation"
-version: 0.0.1
+description: "A comprehensive validation package for Dart and Flutter applications, providing utilities to validate various data types such as names, email addresses, URLs, mobile numbers, and more. It ensures that user inputs are accurate and conform to specified formats, making it easier to handle user data securely and effectively."
+version: 0.1.1
 homepage: https://github.com/2Math0/boolean_validation
+repository: https://github.com/2Math0/boolean_validation
+issue_tracker: https://github.com/2Math0/boolean_validation/issues
+keywords:
+  - validation
+  - dart
+  - flutter
+documentation: https://2Math0.github.io/boolean_validation
+example: https://github.com/2Math0/boolean_validation/example
 
 environment:
-  sdk: '>=3.3.4 <4.0.0'
+  sdk: '>=3.0.0 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
@@ -14,7 +22,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: any
 
 permittedLicenses:
   - 'Apache-2.0'

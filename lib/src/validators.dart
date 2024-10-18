@@ -1,98 +1,57 @@
 import 'package:boolean_validation/src/is_valid.dart';
+import 'package:boolean_validation/src/validation_groups/data_type_validators.dart';
+import 'package:boolean_validation/src/validation_groups/location_validators.dart';
+import 'package:boolean_validation/src/validation_groups/user_input_validators.dart';
 
+/// A class that provides high-level validation methods for common user inputs.
+/// It uses the [ValidationLogic] mixin for actual validation logic.
 class Validators {
   final ValidationLogic validationLogic = ValidationLogic();
+  static final Validators _instance = Validators._internal();
 
-  String? validateEmail(
-      String? value,
-      String? emailRequiredMessage,
-      String? validEmailMessage,
-      ) {
-    if (value == null || value.isEmpty) {
-      return emailRequiredMessage ?? 'Must Enter an Email';
-    } else if (!validationLogic.isValidEmail(value)) {
-      return validEmailMessage ?? 'Please Enter a valid Email!';
-    }
-    return null;
+  factory Validators() {
+    return _instance;
   }
 
+  Validators._internal();
+
+  final UserInputValidators userInput = UserInputValidators();
+  final LocationValidators location = LocationValidators();
+  final DataTypeValidators dataType = DataTypeValidators();
+
+  /// Validates a mobile number.
+  /// Returns an error message if invalid; otherwise, null.
   String? validateMobileNumber(
-      String? value,
-      String? mobileRequiredMessage,
-      String? validMobileMessage,
-      ) {
-    if (value == null || value.isEmpty) {
-      return mobileRequiredMessage ?? 'Mobile number is required';
-    } else if (!validationLogic.isCorrectMobileNumber(value)) {
-      return validMobileMessage ?? 'Please enter a valid mobile number';
+    String? value, {
+    bool isRequired = true,
+    String? customRequiredMessage,
+    String? customInvalidMessage,
+    String? prefix,
+  }) {
+    if (isRequired && (value == null || value.isEmpty)) {
+      return customRequiredMessage ?? 'Mobile number is required';
+    }
+    if (value != null &&
+        !validationLogic.isCorrectMobileNumber(value, prefix)) {
+      return customInvalidMessage ?? 'Please enter a valid mobile number';
     }
     return null;
   }
 
-  String? validateInteger(
-      String? value,
-      String? integerRequiredMessage,
-      ) {
-    if (value == null || value.isEmpty) {
-      return integerRequiredMessage ?? 'Number is required';
-    } else if (!validationLogic.isInteger(value)) {
-      return 'Enter a valid number';
-    }
-    return null;
-  }
-
-  String? validateUrl(
-      String value,
-      String? urlRequiredMessage,
-      String? validUrlMessage,
-      ) {
-    if (value.isEmpty) {
-      return urlRequiredMessage ?? 'URL is required';
-    } else if (!validationLogic.isValidUrl(value)) {
-      return validUrlMessage ?? 'Please enter a valid URL';
-    }
-    return null;
-  }
-
-  String? validateDate(
-      String value,
-      String? dateRequiredMessage,
-      String? validDateMessage,
-      ) {
-    if (value.isEmpty) {
-      return dateRequiredMessage ?? 'Date is required';
-    } else if (!validationLogic.isValidDate(value)) {
-      return validDateMessage ?? 'Please enter a valid date';
-    }
-    return null;
-  }
-
+  /// Validates a 16-digit credit card number using the Luhn algorithm.
+  /// Returns an error message if invalid; otherwise, null.
   String? validateCreditCard(
-      String value,
-      String? cardRequiredMessage,
-      String? validCardMessage,
-      ) {
-    if (value.isEmpty) {
-      return cardRequiredMessage ?? 'Credit card number is required';
-    } else if (!validationLogic.isValidCreditCard(value)) {
-      return validCardMessage ?? 'Please enter a valid credit card number';
+    String value, {
+    bool isRequired = true,
+    String? customRequiredMessage,
+    String? customInvalidMessage,
+  }) {
+    if (isRequired && value.isEmpty) {
+      return customRequiredMessage ?? 'Credit card number is required';
     }
-    return null;
-  }
-
-  String? validateUsername(
-      String value,
-      String? usernameRequiredMessage,
-      String? validUsernameMessage,
-      ) {
-    if (value.isEmpty) {
-      return usernameRequiredMessage ?? 'Username is required';
-    } else if (!validationLogic.isValidUsername(value)) {
-      return validUsernameMessage ??
-          'Username must be 4-20 characters long and can include letters, numbers, and underscores';
+    if (!validationLogic.isValidCreditCard(value)) {
+      return customInvalidMessage ?? 'Please enter a valid credit card number';
     }
     return null;
   }
 }
-
-
