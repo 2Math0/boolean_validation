@@ -39,12 +39,12 @@
 ## [0.1.0] - 2024-09-29
 
 ### Added
-1- Add constrained email validation for specific providers like gmail, yahoo, etc.
-2- add more advanced password validation for complex stages if developers required them
-3- add lat and long validations
-4- add validation for Full Name, First and Last Name
-5- add Validations for required fields
-6- add alpha and alpha numeric validations
+1) Add `constrained email validation` for specific providers like gmail, yahoo, etc.
+2) add more advanced `password validation` for complex stages if developers required them
+3) add `lat and long` validations
+4) add validation for `Full Name`, `First and Last Name`
+5) add Validations for `required fields`
+6) add `alpha` and `alpha numeric` validations
 
 
 <hr/>
