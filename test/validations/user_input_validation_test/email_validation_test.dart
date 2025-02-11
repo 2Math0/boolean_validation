@@ -1,5 +1,6 @@
 import 'package:boolean_validation/src/enum/email_domains.dart';
-import '../../test_common_libs.dart ';
+
+import '../../test_common_libs.dart';
 
 void main() {
   final Validators validators = Validators();

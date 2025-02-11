@@ -22,11 +22,6 @@ class RegexPatterns {
   /// This pattern ensures that the name contains only alphabets (uppercase and lowercase).
   static const String name = r'^[a-zA-Z]+$';
 
-  /// Regular expression for validating mobile numbers.
-  /// This pattern supports various formats of mobile numbers including international formats.
-  static const String mobileNumber =
-      r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$)';
-
   /// Regular expression for validating integers.
   /// This pattern supports both positive and negative integers.
   static const String integer = r'^[+-]?\d+$';
