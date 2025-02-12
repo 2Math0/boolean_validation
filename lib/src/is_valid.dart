@@ -29,7 +29,7 @@ mixin class ValidationLogic {
     if (value == null || value.isEmpty) {
       return false;
     }
-    final pattern = RegExp(RegexPatterns.name);
+    final pattern = RegExp(RegexPatterns.alpha);
     return pattern.hasMatch(value);
   }
 
@@ -154,19 +154,19 @@ mixin class ValidationLogic {
 
   /// Check if password contains at least one uppercase letter.
   bool containsUppercase(String password) {
-    final upperCasePattern = RegExp(r'[A-Z]');
+    final upperCasePattern = RegExp(RegexPatterns.uppercaseLetters);
     return upperCasePattern.hasMatch(password);
   }
 
   /// Check if password contains at least one digit.
   bool containsDigits(String password) {
-    final digitPattern = RegExp(r'\d');
+    final digitPattern = RegExp(RegexPatterns.numbers);
     return digitPattern.hasMatch(password);
   }
 
   /// Check if password contains at least one special character.
   bool containsSpecialCharacter(String password) {
-    final specialCharPattern = RegExp(r'[!@#\$&*~]');
+    final specialCharPattern = RegExp(RegexPatterns.specialCharacters);
     return specialCharPattern.hasMatch(password);
   }
 
