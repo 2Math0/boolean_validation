@@ -79,6 +79,7 @@ class UserInputValidators {
     // Validate each part of the name
     for (var part in parts) {
       if (!_validationLogic.isAlpha(part)) {
+        if (part == ' ') continue;
         return customInvalidMessage ?? 'Name must contains only alphabets.';
       }
     }

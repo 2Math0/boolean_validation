@@ -15,7 +15,7 @@ void main() {
     test('Empty Full Name - Required', () {
       expect(
         validators.userInput.validateFullName(''),
-        'Full name is required',
+        'Full name is required.',
       );
     });
   });

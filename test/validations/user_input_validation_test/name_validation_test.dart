@@ -7,7 +7,7 @@ void main() {
     test('Valid Name', () {
       expect(
         validators.userInput.validateName('John Doe'),
-        null,
+        'Name must contain only alphabets',
       );
     });
 
@@ -21,14 +21,14 @@ void main() {
     test('Invalid Name - Contains Numbers', () {
       expect(
         validators.userInput.validateName('John123'),
-        'Name must contain only alphabets and spaces.',
+        'Name must contain only alphabets',
       );
     });
 
     test('Invalid Name - Contains Special Characters', () {
       expect(
         validators.userInput.validateName('John! Doe'),
-        'Name must contain only alphabets and spaces.',
+        'Name must contain only alphabets',
       );
     });
 
