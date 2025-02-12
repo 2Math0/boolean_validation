@@ -22,7 +22,8 @@ class DataTypeValidators {
   /// Validates a URL.
   /// Returns an error message if invalid; otherwise, null.
   String? validateUrl(
-    String value, {
+    String
+    value, {
     bool isRequired = true,
     String? customRequiredMessage,
     String? customInvalidMessage,

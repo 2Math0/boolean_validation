@@ -24,6 +24,8 @@ class RegexPatterns {
 
   /// Regular expression for validating URLs.
   /// This pattern supports HTTP and HTTPS protocols.
+  @Deprecated(
+      "Uri.parse() is being used instead of regex as this regex cause performance issues")
   static const String url =
       r'^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$';
 

@@ -65,8 +65,12 @@ mixin class ValidationLogic {
 
   /// Validates a URL format.
   bool isValidUrl(String value) {
-    final pattern = RegExp(RegexPatterns.url);
-    return pattern.hasMatch(value.trim());
+    try {
+      final uri = Uri.parse(value);
+      return uri.hasScheme && uri.host.isNotEmpty;
+    } catch (e) {
+      return false;
+    }
   }
 
   /// Validates date in the format YYYY-MM-DD.
