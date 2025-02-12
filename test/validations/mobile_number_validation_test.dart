@@ -1,4 +1,4 @@
-import '../test_common_libs.dart ';
+import '../test_common_libs.dart';
 
 void main() {
   final Validators validators = Validators();
@@ -38,6 +38,18 @@ void main() {
         validators.validateMobileNumber(null,
             customRequiredMessage: 'Please provide a mobile number'),
         'Please provide a mobile number',
+      );
+    });
+    test('unValid Egyptian Mobile Number (Internation dialing code)', () {
+      expect(
+        validators.validateMobileNumber('11234567890', prefix: '+20'),
+        'Please enter a valid mobile number',
+      );
+    });
+    test('valid Egyptian Mobile Number (Country code)', () {
+      expect(
+        validators.validateMobileNumber('01234567890', prefix: 'eg'),
+        'Please enter a valid mobile number',
       );
     });
   });

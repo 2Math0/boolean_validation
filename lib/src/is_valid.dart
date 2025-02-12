@@ -1,5 +1,7 @@
 // validation_logic.dart
-import 'regex_patterns.dart';
+import 'package:boolean_validation/src/regex/regex_mobile.dart';
+
+import 'regex/regex_patterns.dart';
 import 'package:boolean_validation/src/enum/email_domains.dart';
 
 mixin class ValidationLogic {
@@ -37,16 +39,18 @@ mixin class ValidationLogic {
   /// ## Explanation:
   /// <img width="1200" src="https://i.sstatic.net/2QfiC.png"/>
   bool isCorrectMobileNumber(String? value, String? prefix) {
-    if (value == null || value.isEmpty) {
-      return false;
-    }
+    if (value == null || value.isEmpty) return false;
 
-    if (prefix != null) {
-      value = prefix + value;
-    }
+    // Ensure prefix is formatted correctly
+    final String countryCode = prefix?.replaceAll('+', '') ?? '';
+    final String normalizedNumber =
+        value.replaceAll(RegExp(r'\D'), ''); // Remove non-numeric characters
 
-    final pattern = RegExp(RegexPatterns.mobileNumber);
-    return pattern.hasMatch(value.trim());
+    // Use country-specific regex if available, otherwise fall back to default regex
+    final RegExp pattern = RegExp(
+        MobileRegex.mobileNumberPatterns[countryCode.toUpperCase()] ??
+            MobileRegex.mobileNumber);
+    return pattern.hasMatch(normalizedNumber);
   }
 
   /// Validates if the input string can be parsed as an integer.
