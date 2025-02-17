@@ -1,5 +1,6 @@
 import 'package:boolean_validation/src/enum/email_domains.dart';
 import 'package:boolean_validation/src/is_valid.dart';
+import 'package:boolean_validation/src/validation_messages/validation_messages.dart';
 
 class UserInputValidators {
   final ValidationLogic _validationLogic = ValidationLogic();
@@ -13,23 +14,37 @@ class UserInputValidators {
     String? customInvalidMessage,
   }) {
     if (isRequired && (value == null || value.isEmpty)) {
-      return customRequiredMessage ?? 'Must enter an email';
+      return ValidationMessages().getRequiredMessage(
+        customMessage: customRequiredMessage,
+        defaultSpecificMessage: ValidationMessages().emailRequired,
+      );
     }
+
     if (value != null && !_validationLogic.isValidEmail(value)) {
-      return customInvalidMessage ?? 'Please enter a valid email!';
+      return customInvalidMessage ?? ValidationMessages().invalidEmail;
     }
+
     return null;
   }
 
   /// Validates constrained email and provides a detailed error message.
   /// This method returns a string message indicating the validation result.
-  String? validateConstrainedEmail(String? value, EmailDomain domain) {
-    if (value == null || value.isEmpty) {
-      return 'Email is required.';
+  String? validateConstrainedEmail(
+    String? value, {
+    required EmailDomain domain,
+    bool isRequired = true,
+    String? customRequiredMessage,
+    String? customInvalidMessage,
+  }) {
+    if (isRequired && (value == null || value.isEmpty)) {
+      return ValidationMessages().getRequiredMessage(
+        customMessage: customRequiredMessage,
+        defaultSpecificMessage: ValidationMessages().emailRequired,
+      );
     }
 
     if (!_validationLogic.isValidEmail(value)) {
-      return 'Email format is invalid.';
+      return ValidationMessages().emailFormatValidation;
     }
 
     if (!_validationLogic.isValidConstrainedEmail(value, domain)) {

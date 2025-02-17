@@ -26,13 +26,18 @@ class Validators {
     String? value, {
     bool isRequired = true,
     String? prefix,
+    String? customRequiredMessage,
+    String? customInvalidMessage,
   }) {
     if (isRequired && (value == null || value.isEmpty)) {
-      return ValidationMessages().mobileNumberRequired;
+      return ValidationMessages().getRequiredMessage(
+        customMessage: customRequiredMessage,
+        defaultSpecificMessage: ValidationMessages().mobileNumberRequired,
+      );
     }
     if (value != null &&
         !validationLogic.isCorrectMobileNumber(value, prefix)) {
-      return ValidationMessages().invalidMobileNumber;
+      return customInvalidMessage ?? ValidationMessages().invalidMobileNumber;
     }
     return null;
   }
@@ -42,12 +47,17 @@ class Validators {
   String? validateCreditCard(
     String? value, {
     bool isRequired = true,
+    String? customRequiredMessage,
+    String? customInvalidMessage,
   }) {
     if (isRequired && (value == null || value.isEmpty)) {
-      return ValidationMessages().creditCardRequired;
+      return ValidationMessages().getRequiredMessage(
+        customMessage: customRequiredMessage,
+        defaultSpecificMessage: ValidationMessages().creditCardRequired,
+      );
     }
     if (!validationLogic.isValidCreditCard(value!)) {
-      return ValidationMessages().invalidCreditCard;
+      return customInvalidMessage ?? ValidationMessages().invalidCreditCard;
     }
     return null;
   }
