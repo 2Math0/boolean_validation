@@ -63,7 +63,7 @@ class ValidationFormState extends State<ValidationForm> {
               _buildTextField(
                 controller: _mobileController,
                 label: 'Mobile Number',
-                validator: (value) => _validators.validateMobileNumber(
+                validator: (value) => _validators.userInput.validateMobileNumber(
                   value,
                   customRequiredMessage: 'Mobile number is required',
                   customInvalidMessage: 'Invalid mobile number',
@@ -99,7 +99,7 @@ class ValidationFormState extends State<ValidationForm> {
               _buildTextField(
                 controller: _creditCardController,
                 label: 'Credit Card Number',
-                validator: (value) => _validators.validateCreditCard(
+                validator: (value) => _validators.userInput.validateCreditCard(
                   value!,
                   customRequiredMessage: 'Credit card number is required',
                   customInvalidMessage: 'Invalid credit card number',

@@ -69,7 +69,7 @@ class ValidationMessages {
   ///
   /// Parameters:
   /// - [customMessage]: A custom message provided by the developer.
-  /// - [defaultSpecificMessage]: The default message for the specific input (e.g., [mobileNumberRequired]).
+  /// - [defaultSpecificMessage]: The default message for the specific input (e.g., [mobileNumberRequired]). coming from `ValidationMessages()`
   ///
   /// Returns:
   /// - The custom message if provided.

@@ -1,10 +1,8 @@
 import 'package:boolean_validation/src/enum/email_domains.dart';
-import 'package:boolean_validation/src/is_valid.dart';
+import 'package:boolean_validation/src/validation_groups/validation_common.dart';
 import 'package:boolean_validation/src/validation_messages/validation_messages.dart';
 
-class UserInputValidators {
-  final ValidationLogic _validationLogic = ValidationLogic();
-
+class UserInputValidators extends ValidationCommon {
   /// Validates an email input.
   /// Returns an error message if invalid; otherwise, null.
   String? validateEmail(
@@ -20,7 +18,7 @@ class UserInputValidators {
       );
     }
 
-    if (value != null && !_validationLogic.isValidEmail(value)) {
+    if (value != null && !validationLogic.isValidEmail(value)) {
       return customInvalidMessage ?? ValidationMessages().invalidEmail;
     }
 
@@ -43,11 +41,11 @@ class UserInputValidators {
       );
     }
 
-    if (!_validationLogic.isValidEmail(value)) {
+    if (!validationLogic.isValidEmail(value)) {
       return ValidationMessages().emailFormatValidation;
     }
 
-    if (!_validationLogic.isValidConstrainedEmail(value, domain)) {
+    if (!validationLogic.isValidConstrainedEmail(value, domain)) {
       return 'Email must be a ${domain.domain} address.';
     }
 
@@ -65,7 +63,7 @@ class UserInputValidators {
     if (isRequired && value.isEmpty) {
       return customRequiredMessage ?? 'Username is required';
     }
-    if (!_validationLogic.isValidUsername(value)) {
+    if (!validationLogic.isValidUsername(value)) {
       return customInvalidMessage ??
           'Username must be 4-20 characters long and can include letters, numbers, and underscores';
     }
@@ -93,7 +91,7 @@ class UserInputValidators {
 
     // Validate each part of the name
     for (var part in parts) {
-      if (!_validationLogic.isAlpha(part)) {
+      if (!validationLogic.isAlpha(part)) {
         if (part == ' ') continue;
         return customInvalidMessage ?? 'Name must contains only alphabets.';
       }
@@ -112,7 +110,7 @@ class UserInputValidators {
     if (isRequired && (value == null || value.isEmpty)) {
       return customRequiredMessage ?? 'Name is required.';
     }
-    if (value != null && !_validationLogic.isValidName(value)) {
+    if (value != null && !validationLogic.isValidName(value)) {
       return customInvalidMessage ?? 'Name must contain only alphabets';
     }
     return null;
@@ -137,20 +135,59 @@ class UserInputValidators {
       errors.add(customMinLengthMessage ??
           'Password must be at least $minLength characters long.');
     }
-    if (requireUppercase && !_validationLogic.containsUppercase(value)) {
+    if (requireUppercase && !validationLogic.containsUppercase(value)) {
       errors.add(customUppercaseMessage ??
           'Password must contain at least one uppercase letter.');
     }
-    if (requireDigit && !_validationLogic.containsDigits(value)) {
+    if (requireDigit && !validationLogic.containsDigits(value)) {
       errors.add(
           customDigitMessage ?? 'Password must contain at least one digit.');
     }
     if (requireSpecialChar &&
-        !_validationLogic.containsSpecialCharacter(value)) {
+        !validationLogic.containsSpecialCharacter(value)) {
       errors.add(customSpecialCharMessage ??
           'Password must contain at least one special character (!@#\$&*~).');
     }
 
     return errors.isNotEmpty ? errors.join('\n') : null;
+  }
+
+  /// Validates a mobile number.
+  /// Returns an error message if invalid; otherwise, null.
+  String? validateMobileNumber(
+    String? value, {
+    bool isRequired = true,
+    String? prefix,
+    String? customRequiredMessage,
+    String? customInvalidMessage,
+  }) {
+    return validateRequired(
+          value: value,
+          isRequired: isRequired,
+          customMessage: customRequiredMessage,
+          defaultMessage: messages.mobileNumberRequired,
+        ) ??
+        (!validationLogic.isCorrectMobileNumber(value!, prefix)
+            ? customInvalidMessage ?? messages.invalidMobileNumber
+            : null);
+  }
+
+  /// Validates a 16-digit credit card number using the Luhn algorithm.
+  /// Returns an error message if invalid; otherwise, null.
+  String? validateCreditCard(
+    String? value, {
+    bool isRequired = true,
+    String? customRequiredMessage,
+    String? customInvalidMessage,
+  }) {
+    return validateRequired(
+          value: value,
+          isRequired: isRequired,
+          customMessage: customRequiredMessage,
+          defaultMessage: messages.creditCardRequired,
+        ) ??
+        (!validationLogic.isValidCreditCard(value!)
+            ? customInvalidMessage ?? messages.invalidCreditCard
+            : null);
   }
 }

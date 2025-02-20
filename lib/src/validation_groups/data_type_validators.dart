@@ -1,8 +1,7 @@
 import 'package:boolean_validation/src/is_valid.dart';
+import 'package:boolean_validation/src/validation_groups/validation_common.dart';
 
-class DataTypeValidators {
-  final ValidationLogic _validationLogic = ValidationLogic();
-
+class DataTypeValidators extends ValidationCommon {
   /// Validates if the input is an integer.
   /// Returns an error message if invalid; otherwise, null.
   String? validateInteger(
@@ -13,7 +12,7 @@ class DataTypeValidators {
     if (isRequired && (value == null || value.isEmpty)) {
       return customRequiredMessage ?? 'Number is required';
     }
-    if (value != null && !_validationLogic.isInteger(value)) {
+    if (value != null && !validationLogic.isInteger(value)) {
       return 'Enter a valid number';
     }
     return null;
@@ -22,8 +21,7 @@ class DataTypeValidators {
   /// Validates a URL.
   /// Returns an error message if invalid; otherwise, null.
   String? validateUrl(
-    String
-    value, {
+    String value, {
     bool isRequired = true,
     String? customRequiredMessage,
     String? customInvalidMessage,
@@ -31,7 +29,7 @@ class DataTypeValidators {
     if (isRequired && value.isEmpty) {
       return customRequiredMessage ?? 'URL is required';
     }
-    if (!_validationLogic.isValidUrl(value)) {
+    if (!validationLogic.isValidUrl(value)) {
       return customInvalidMessage ?? 'Please enter a valid URL';
     }
     return null;
@@ -48,7 +46,7 @@ class DataTypeValidators {
     if (isRequired && value.isEmpty) {
       return customRequiredMessage ?? 'Date is required';
     }
-    if (!_validationLogic.isValidDate(value)) {
+    if (!validationLogic.isValidDate(value)) {
       return customInvalidMessage ?? 'Please enter a valid date';
     }
     return null;
@@ -65,7 +63,7 @@ class DataTypeValidators {
     if (isRequired && value.isEmpty) {
       return customRequiredMessage ?? 'This field is required.';
     }
-    if (!_validationLogic.isAlpha(value)) {
+    if (!validationLogic.isAlpha(value)) {
       return customInvalidMessage ?? 'This field must contain only alphabets.';
     }
     return null;
@@ -82,7 +80,7 @@ class DataTypeValidators {
     if (isRequired && value.isEmpty) {
       return customRequiredMessage ?? 'This field is required.';
     }
-    if (!_validationLogic.isAlphanumeric(value)) {
+    if (!validationLogic.isAlphanumeric(value)) {
       return customInvalidMessage ??
           'This field must contain only alphanumeric characters.';
     }

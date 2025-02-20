@@ -1,10 +1,11 @@
 // validation_logic.dart
 import 'package:boolean_validation/src/regex/regex_mobile.dart';
-
+import 'package:boolean_validation/src/core/extensions/string_extension.dart';
 import 'regex/regex_patterns.dart';
 import 'package:boolean_validation/src/enum/email_domains.dart';
 
 mixin class ValidationLogic {
+
   /// Validates if the input is a valid email.
   ///
   /// Uses regex to ensure the email format is correct.
@@ -142,7 +143,7 @@ mixin class ValidationLogic {
 
   /// Validates that the value is non-null and non-empty (for required fields).
   bool isRequiredField(String? value) {
-    return value != null && value.isNotEmpty;
+    return value.notNullOrEmpty();
   }
 
   /// Validates if the password meets basic complexity requirements.
