@@ -1,3 +1,3 @@
-library txt_form_validation;
+library;
 
 export 'src/validators.dart';

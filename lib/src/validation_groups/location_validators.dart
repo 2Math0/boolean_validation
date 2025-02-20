@@ -1,4 +1,3 @@
-import 'package:boolean_validation/src/is_valid.dart';
 import 'package:boolean_validation/src/validation_groups/validation_common.dart';
 
 class LocationValidators extends ValidationCommon {
