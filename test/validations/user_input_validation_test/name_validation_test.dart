@@ -11,6 +11,7 @@ void main() {
     test('Valid Name', () {
       expect(
         validators.validateName('Thomas Meshail'),
+        // because of the space
         messages.nameMustBeAlphabetic,
       );
     });
@@ -49,9 +50,8 @@ void main() {
     test('Custom Invalid Message', () {
       const String invalidMsg = 'Invalid name format';
       expect(
-        validators.validateName('2Math',
-            customInvalidMessage: 'Invalid name format'),
-        'Invalid name format',
+        validators.validateName('TwoMath0', customInvalidMessage: invalidMsg),
+        invalidMsg,
       );
     });
   });
