@@ -1,50 +1,55 @@
+import 'package:boolean_validation/src/core/common_libs.dart';
+import 'package:boolean_validation/src/validation_groups/user_input_validators.dart';
+
 import '../../test_common_libs.dart';
 
 void main() {
-  final Validators validators = Validators();
+  final UserInputValidators validators = Validators().userInput;
+  final ValidationMessages messages = ValidationMessages();
 
   group('Name Validation', () {
     test('Valid Name', () {
       expect(
-        validators.userInput.validateName('John Doe'),
-        'Name must contain only alphabets',
+        validators.validateName('Thomas Meshail'),
+        messages.nameMustBeAlphabetic,
       );
     });
 
     test('Empty Name - Required', () {
       expect(
-        validators.userInput.validateName(''),
-        'Name is required.',
+        validators.validateName(''),
+        messages.nameRequired,
       );
     });
 
     test('Invalid Name - Contains Numbers', () {
       expect(
-        validators.userInput.validateName('John123'),
-        'Name must contain only alphabets',
+        validators.validateName('2Math'),
+        messages.nameMustBeAlphabetic,
       );
     });
 
     test('Invalid Name - Contains Special Characters', () {
       expect(
-        validators.userInput.validateName('John! Doe'),
-        'Name must contain only alphabets',
+        validators.validateName('Thomas! Meshail'),
+        messages.nameMustBeAlphabetic,
       );
     });
 
     // Additional test for custom required message
     test('Custom Required Message', () {
+      const String nameMsg = 'Please provide your name';
       expect(
-        validators.userInput.validateName('',
-            customRequiredMessage: 'Please provide your name'),
-        'Please provide your name',
+        validators.validateName('', customRequiredMessage: nameMsg),
+        nameMsg,
       );
     });
 
     // Additional test for custom invalid message
     test('Custom Invalid Message', () {
+      const String invalidMsg = 'Invalid name format';
       expect(
-        validators.userInput.validateName('John123',
+        validators.validateName('2Math',
             customInvalidMessage: 'Invalid name format'),
         'Invalid name format',
       );

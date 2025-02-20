@@ -1,6 +1,6 @@
 import 'package:boolean_validation/src/enum/email_domains.dart';
 import 'package:boolean_validation/src/validation_groups/validation_common.dart';
-import 'package:boolean_validation/src/validation_messages/validation_messages.dart';
+import 'package:boolean_validation/src/validation_messages/message_replacements_keys.dart';
 
 class UserInputValidators extends ValidationCommon {
   /// Validates an email input.
@@ -11,15 +11,16 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (isRequired && (value == null || value.isEmpty)) {
-      return ValidationMessages().getRequiredMessage(
-        customMessage: customRequiredMessage,
-        defaultSpecificMessage: ValidationMessages().emailRequired,
-      );
-    }
+    final requiredValidation = validateRequired(
+      value: value,
+      isRequired: isRequired,
+      customMessage: customRequiredMessage,
+      defaultMessage: messages.emailRequired,
+    );
+    if (requiredValidation != null) return requiredValidation;
 
-    if (value != null && !validationLogic.isValidEmail(value)) {
-      return customInvalidMessage ?? ValidationMessages().invalidEmail;
+    if (!validationLogic.isValidEmail(value)) {
+      return customInvalidMessage ?? messages.invalidEmail;
     }
 
     return null;
@@ -34,19 +35,20 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (isRequired && (value == null || value.isEmpty)) {
-      return ValidationMessages().getRequiredMessage(
-        customMessage: customRequiredMessage,
-        defaultSpecificMessage: ValidationMessages().emailRequired,
-      );
-    }
-
-    if (!validationLogic.isValidEmail(value)) {
-      return ValidationMessages().emailFormatValidation;
-    }
+    var emailValidation = validateEmail(
+      value,
+      isRequired: isRequired,
+      customInvalidMessage: customInvalidMessage,
+      customRequiredMessage: customRequiredMessage,
+    );
+    if (emailValidation != null) return emailValidation;
 
     if (!validationLogic.isValidConstrainedEmail(value, domain)) {
-      return 'Email must be a ${domain.domain} address.';
+      return messages.formatMessage(
+          message: messages.emailDomainValidation,
+          replacements: {
+            MessageReplacementKeys.domain: domain.domain,
+          });
     }
 
     return null;
@@ -55,17 +57,21 @@ class UserInputValidators extends ValidationCommon {
   /// Validates a username.
   /// Returns an error message if invalid; otherwise, null.
   String? validateUsername(
-    String value, {
+    String? value, {
     bool isRequired = true,
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (isRequired && value.isEmpty) {
-      return customRequiredMessage ?? 'Username is required';
-    }
-    if (!validationLogic.isValidUsername(value)) {
-      return customInvalidMessage ??
-          'Username must be 4-20 characters long and can include letters, numbers, and underscores';
+    final requiredValidation = validateRequired(
+      value: value,
+      isRequired: isRequired,
+      customMessage: customRequiredMessage,
+      defaultMessage: messages.usernameRequired,
+    );
+    if (requiredValidation != null) return requiredValidation;
+
+    if (!validationLogic.isValidUsername(value!)) {
+      return customInvalidMessage ?? messages.usernameInvalid;
     }
     return null;
   }
@@ -75,25 +81,27 @@ class UserInputValidators extends ValidationCommon {
   /// Validates a full name.
   /// Returns an error message if invalid; otherwise, null.
   String? validateFullName(
-    String fullName, {
+    String? fullName, {
     bool isRequired = true,
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (isRequired && fullName.isEmpty) {
-      return customRequiredMessage ?? 'Full name is required.';
-    }
+    final requiredValidation = validateRequired(
+      value: fullName,
+      isRequired: isRequired,
+      customMessage: customRequiredMessage,
+      defaultMessage: messages.fullNameRequired,
+    );
+    if (requiredValidation != null) return requiredValidation;
 
-    final parts = fullName.split(' ');
+    final parts = fullName!.split(' ');
     if (parts.length < 2) {
-      return customInvalidMessage ?? 'Please enter both first and last names.';
+      return customInvalidMessage ?? messages.fullNameInvalid;
     }
 
-    // Validate each part of the name
     for (var part in parts) {
       if (!validationLogic.isAlpha(part)) {
-        if (part == ' ') continue;
-        return customInvalidMessage ?? 'Name must contains only alphabets.';
+        return customInvalidMessage ?? messages.nameMustBeAlphabetic;
       }
     }
 
@@ -107,11 +115,16 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (isRequired && (value == null || value.isEmpty)) {
-      return customRequiredMessage ?? 'Name is required.';
-    }
-    if (value != null && !validationLogic.isValidName(value)) {
-      return customInvalidMessage ?? 'Name must contain only alphabets';
+    final requiredValidation = validateRequired(
+      value: value,
+      isRequired: isRequired,
+      customMessage: customRequiredMessage,
+      defaultMessage: messages.nameRequired,
+    );
+    if (requiredValidation != null) return requiredValidation;
+
+    if (!validationLogic.isValidName(value!)) {
+      return customInvalidMessage ?? messages.nameMustBeAlphabetic;
     }
     return null;
   }
@@ -119,7 +132,7 @@ class UserInputValidators extends ValidationCommon {
   /// Validates a password with multiple rules.
   /// Returns an error message if invalid; otherwise, null.
   String? validatePassword(
-    String value, {
+    String? value, {
     int minLength = 8,
     String? customMinLengthMessage,
     bool requireUppercase = true,
@@ -131,22 +144,21 @@ class UserInputValidators extends ValidationCommon {
   }) {
     List<String> errors = [];
 
-    if (value.length < minLength) {
-      errors.add(customMinLengthMessage ??
-          'Password must be at least $minLength characters long.');
+    if (value == null || value.length < minLength) {
+      errors.add(messages.formatMessage(
+        message: customMinLengthMessage ?? messages.passwordMinLength,
+        replacements: {MessageReplacementKeys.minLength: minLength},
+      ));
     }
-    if (requireUppercase && !validationLogic.containsUppercase(value)) {
-      errors.add(customUppercaseMessage ??
-          'Password must contain at least one uppercase letter.');
+    if (requireUppercase && !validationLogic.containsUppercase(value!)) {
+      errors.add(customUppercaseMessage ?? messages.passwordUppercase);
     }
-    if (requireDigit && !validationLogic.containsDigits(value)) {
-      errors.add(
-          customDigitMessage ?? 'Password must contain at least one digit.');
+    if (requireDigit && !validationLogic.containsDigits(value!)) {
+      errors.add(customDigitMessage ?? messages.passwordDigit);
     }
     if (requireSpecialChar &&
-        !validationLogic.containsSpecialCharacter(value)) {
-      errors.add(customSpecialCharMessage ??
-          'Password must contain at least one special character (!@#\$&*~).');
+        !validationLogic.containsSpecialCharacter(value!)) {
+      errors.add(customSpecialCharMessage ?? messages.passwordSpecialChar);
     }
 
     return errors.isNotEmpty ? errors.join('\n') : null;

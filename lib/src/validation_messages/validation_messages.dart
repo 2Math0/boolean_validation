@@ -1,3 +1,5 @@
+import 'package:boolean_validation/src/validation_messages/message_replacements_keys.dart';
+
 /// A centralized class for managing validation error messages.
 ///
 /// This class provides default English messages for common validation scenarios.
@@ -16,8 +18,25 @@ class ValidationMessages {
   String emailRequired = 'Email is required';
   String invalidEmail = 'Please enter a valid email address';
   String emailFormatValidation = 'Email format is invalid.';
+  String emailDomainValidation =
+      'Email must be a {$MessageReplacementKeys.domain} address.';
 
+  String usernameRequired = 'Username is required';
+  String usernameInvalid =
+      'Username must be 4-20 characters long and can include letters, numbers, and underscores';
 
+  String fullNameRequired = 'Full name is required.';
+  String fullNameInvalid = 'Please enter both first and last names.';
+  String nameMustBeAlphabetic = 'Name must contain only alphabets.';
+  String nameRequired = 'Name is Required';
+
+  String passwordMinLength =
+      'Password must be at least {$MessageReplacementKeys.minLength} characters long.';
+  String passwordUppercase =
+      'Password must contain at least one uppercase letter.';
+  String passwordDigit = 'Password must contain at least one digit.';
+  String passwordSpecialChar =
+      'Password must contain at least one special character (!@#\$&*~).';
 
   /// Global flag to determine whether to use the generic required message for all inputs.
   bool useGenericRequiredMessage = true;
@@ -87,5 +106,38 @@ class ValidationMessages {
     }
     return defaultSpecificMessage ??
         genericRequiredMessage; // Fallback to specific or generic message
+  }
+
+  /// Formats messages dynamically.
+  ///
+  /// - Automatically converts enums, objects, and other values to strings.
+  /// - Replaces `{key}` placeholders in the message with corresponding values.
+  /// - Handles null values safely by replacing them with an empty string.
+  String formatMessage({
+    required String message,
+    required Map<String, dynamic> replacements,
+  }) {
+    if (replacements.isEmpty) return message;
+
+    String formattedMessage = message;
+
+    replacements.forEach((key, value) {
+      String replacementValue = _convertToString(value);
+      formattedMessage =
+          formattedMessage.replaceAll('{$key}', replacementValue);
+    });
+
+    return formattedMessage;
+  }
+
+  /// Converts different types of values to strings safely.
+  ///
+  /// - Enums: Converts `Enum.value` to a readable string (e.g., `EmailDomain.google → "google"`).
+  /// - Other Objects: Uses `toString()`, handling null values as empty strings.
+  /// - Numbers, Strings, Booleans: Converted as expected.
+  String _convertToString(dynamic value) {
+    if (value == null) return '';
+    if (value is Enum) return value.name;
+    return value.toString();
   }
 }
