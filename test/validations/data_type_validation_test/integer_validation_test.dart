@@ -1,43 +1,47 @@
+import 'package:boolean_validation/src/validation_groups/data_type_validators.dart';
+
 import '../../test_common_libs.dart';
 
 void main() {
-  final Validators validators = Validators();
+  final DataTypeValidators validators = Validators().dataType;
+  final ValidationMessages messages = ValidationMessages();
+  messages.copyWith(useGenericRequiredMessage: false);
 
   group('Integer Validation', () {
     test('Valid Integer', () {
       expect(
-        validators.dataType.validateInteger('42'),
+        validators.validateInteger('42'),
         null,
       );
     });
 
     test('Empty Integer - Required', () {
       expect(
-        validators.dataType.validateInteger(''),
-        'Number is required',
+        validators.validateInteger(''),
+        messages.numberRequired,
       );
     });
 
     test('Invalid Integer Value', () {
       expect(
-        validators.dataType.validateInteger('abc'), // Invalid integer
-        'Enter a valid number',
+        validators.validateInteger('abc'), // Invalid integer
+        messages.invalidNumber,
       );
     });
 
     test('Null Integer - Required', () {
       expect(
-        validators.dataType.validateInteger(null),
-        'Number is required',
+        validators.validateInteger(null),
+        messages.numberRequired,
       );
     });
 
     // Additional test for custom required message
     test('Custom Required Message', () {
+      var numberMsg = 'Please provide a number';
       expect(
-        validators.dataType.validateInteger(null,
-            customRequiredMessage: 'Please provide a number'),
-        'Please provide a number',
+        validators.validateInteger(null, customRequiredMessage: numberMsg),
+        numberMsg,
       );
     });
   });

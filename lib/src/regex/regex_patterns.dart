@@ -59,13 +59,13 @@ class RegexPatterns {
 
   /// Regular expression for validating passwords.
   /// This pattern enforces a password to have at least 8 characters, including at least one uppercase letter, one digit, and one special character.
-  static const String password = r'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~]).{8,}$';
+  static const String password = r'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~_-]).{8,}$';
 
   /// Regular expression for validating numbers.
   static const String numbers = r'\d';
 
   /// Regular expression for validating special characters.
-  static const String specialCharacters = r'[!@#\$&*~]';
+  static const String specialCharacters = r'[!@#\$&*~_-]';
 
   /// Regular expression for validating lower characters only
   static const String lowercaseLetters = r'[a-z]';

@@ -80,22 +80,24 @@ class UserInputValidators extends ValidationCommon {
   /// Returns an error message if invalid; otherwise, null.
   /// Validates a full name.
   /// Returns an error message if invalid; otherwise, null.
+  /// [nameLength] the required length of the Full Name
   String? validateFullName(
-    String? fullName, {
+    String? value, {
     bool isRequired = true,
     String? customRequiredMessage,
     String? customInvalidMessage,
+    int nameLength = 2,
   }) {
     final requiredValidation = validateRequired(
-      value: fullName,
+      value: value,
       isRequired: isRequired,
       customMessage: customRequiredMessage,
       defaultMessage: messages.fullNameRequired,
     );
     if (requiredValidation != null) return requiredValidation;
 
-    final parts = fullName!.split(' ');
-    if (parts.length < 2) {
+    final parts = value!.split(' ');
+    if (parts.length < nameLength) {
       return customInvalidMessage ?? messages.fullNameInvalid;
     }
 
@@ -150,6 +152,10 @@ class UserInputValidators extends ValidationCommon {
         replacements: {MessageReplacementKeys.minLength: minLength},
       ));
     }
+    if (requireUppercase && !validationLogic.containsLowerCase(value!)) {
+      errors.add(customUppercaseMessage ?? messages.passwordLowercase);
+    }
+
     if (requireUppercase && !validationLogic.containsUppercase(value!)) {
       errors.add(customUppercaseMessage ?? messages.passwordUppercase);
     }
@@ -173,15 +179,18 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    return validateRequired(
-          value: value,
-          isRequired: isRequired,
-          customMessage: customRequiredMessage,
-          defaultMessage: messages.mobileNumberRequired,
-        ) ??
-        (!validationLogic.isCorrectMobileNumber(value!, prefix)
-            ? customInvalidMessage ?? messages.invalidMobileNumber
-            : null);
+    final requiredValidation = validateRequired(
+      value: value,
+      isRequired: isRequired,
+      customMessage: customRequiredMessage,
+      defaultMessage: messages.mobileNumberRequired,
+    );
+    if (requiredValidation != null) return requiredValidation;
+
+    if (!validationLogic.isCorrectMobileNumber(value!, prefix)) {
+      return customInvalidMessage ?? messages.invalidMobileNumber;
+    }
+    return null;
   }
 
   /// Validates a 16-digit credit card number using the Luhn algorithm.
@@ -192,14 +201,18 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    return validateRequired(
-          value: value,
-          isRequired: isRequired,
-          customMessage: customRequiredMessage,
-          defaultMessage: messages.creditCardRequired,
-        ) ??
-        (!validationLogic.isValidCreditCard(value!)
-            ? customInvalidMessage ?? messages.invalidCreditCard
-            : null);
+    final requiredValidation = validateRequired(
+      value: value,
+      isRequired: isRequired,
+      customMessage: customRequiredMessage,
+      defaultMessage: messages.creditCardRequired,
+    );
+
+    if (requiredValidation != null) return requiredValidation;
+
+    if (!validationLogic.isValidCreditCard(value!)) {
+      return customInvalidMessage ?? messages.invalidCreditCard;
+    }
+    return null;
   }
 }

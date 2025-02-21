@@ -8,7 +8,7 @@ extension MobileRegex on RegexPatterns {
 
   /// Regex for Mobile Numbers for Different Countries
   static const String egypt =
-      r'^(?:010|011|012|015)\d{7}$'; // Egypt (11 digits)
+      r'^(?:010|011|012|015)\d{8}$'; // Egypt (11 digits)
   static const String usa = r'^\d{10}$'; // USA (10 digits)
   static const String canada = r'^\d{10}$'; // Canada (10 digits)
   static const String india =

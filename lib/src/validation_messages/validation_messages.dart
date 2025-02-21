@@ -26,7 +26,7 @@ class ValidationMessages {
       'Username must be 4-20 characters long and can include letters, numbers, and underscores';
 
   String fullNameRequired = 'Full name is required.';
-  String fullNameInvalid = 'Please enter both first and last names.';
+  String fullNameInvalid = 'Please enter your full name';
   String nameMustBeAlphabetic = 'Name must contain only alphabets.';
   String nameRequired = 'Name is Required';
 
@@ -34,9 +34,31 @@ class ValidationMessages {
       'Password must be at least {$MessageReplacementKeys.minLength} characters long.';
   String passwordUppercase =
       'Password must contain at least one uppercase letter.';
+  String passwordLowercase =
+      'Password must contain at least one lowercase letter.';
   String passwordDigit = 'Password must contain at least one digit.';
   String passwordSpecialChar =
       'Password must contain at least one special character (!@#\$&*~).';
+
+  String latitudeRequired = 'Latitude is required';
+  String invalidLatitude = 'invalid latitude value';
+  String longitudeRequired = 'Longitude is required';
+  String invalidLongitude = 'invalid longitude value';
+
+  String numberRequired = 'Digits Number is required';
+  String invalidNumber = 'Invalid digits';
+
+  String urlRequired = 'URL is required';
+  String invalidUrl = 'Please enter a valid URL format';
+
+  String dateRequired = 'Date is Required';
+  String invalidDate = 'Please enter a valid date';
+
+  String alphaRequired = 'Alphabets are Required';
+  String alphaInvalid = 'This field must contain only alphabets.';
+
+  String alphaNumericRequired =  'This Field is Required';
+  String alphaNumericInvalid = 'This field must contain only Alphabets and Numbers characters.';
 
   /// Global flag to determine whether to use the generic required message for all inputs.
   bool useGenericRequiredMessage = true;

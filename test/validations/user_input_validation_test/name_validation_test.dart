@@ -1,4 +1,3 @@
-import 'package:boolean_validation/src/core/common_libs.dart';
 import 'package:boolean_validation/src/validation_groups/user_input_validators.dart';
 
 import '../../test_common_libs.dart';
@@ -6,6 +5,7 @@ import '../../test_common_libs.dart';
 void main() {
   final UserInputValidators validators = Validators().userInput;
   final ValidationMessages messages = ValidationMessages();
+  messages.copyWith(useGenericRequiredMessage: false);
 
   group('Name Validation', () {
     test('Valid Name', () {

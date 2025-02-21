@@ -1,8 +1,9 @@
-import 'package:boolean_validation/boolean_validation.dart';
-import 'package:flutter_test/flutter_test.dart';
+import '../../test_common_libs.dart';
 
 void main() {
   final Validators validators = Validators();
+  final ValidationMessages messages = ValidationMessages();
+  messages.copyWith(useGenericRequiredMessage: false);
 
   group('Latitude Validation', () {
     test('Valid Latitude', () {
@@ -15,30 +16,30 @@ void main() {
     test('Empty Latitude - Required', () {
       expect(
         validators.location.validateLat(''),
-        'Latitude is required',
+        messages.latitudeRequired,
       );
     });
 
     test('Invalid Latitude Value', () {
       expect(
         validators.location.validateLat('200.0'), // Invalid latitude
-        'Invalid latitude value',
+        messages.invalidLatitude,
       );
     });
 
     test('Null Latitude - Required', () {
       expect(
         validators.location.validateLat(null),
-        'Latitude is required',
+        messages.latitudeRequired,
       );
     });
 
     // Additional test for custom required message
     test('Custom Required Message', () {
+      var customMsg = 'Please provide latitude';
       expect(
-        validators.location.validateLat(null,
-            customRequiredMessage: 'Please provide latitude'),
-        'Please provide latitude',
+        validators.location.validateLat(null, customRequiredMessage: customMsg),
+        customMsg,
       );
     });
   });

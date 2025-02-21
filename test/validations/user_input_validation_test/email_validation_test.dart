@@ -1,10 +1,13 @@
 import 'package:boolean_validation/src/enum/email_domains.dart';
-import 'package:boolean_validation/src/validation_messages/validation_messages.dart';
+import 'package:boolean_validation/src/validation_messages/message_replacements_keys.dart';
 
 import '../../test_common_libs.dart';
 
 void main() {
   final Validators validators = Validators();
+  final ValidationMessages messages = ValidationMessages();
+  messages.copyWith(useGenericRequiredMessage: false);
+
   EmailDomain domain = EmailDomain.custom('domain.com');
 
   group('Email Validation', () {
@@ -41,14 +44,18 @@ void main() {
       expect(
         validators.userInput
             .validateConstrainedEmail('test@other.com', domain: domain),
-        'Email must be a domain.com address.',
+        messages.formatMessage(
+            message: messages.emailDomainValidation,
+            replacements: {
+              MessageReplacementKeys.domain: domain.domain,
+            }),
       );
     });
 
     test('Empty Constrained Email', () {
       expect(
         validators.userInput.validateConstrainedEmail('', domain: domain),
-        'Email is required.',
+        messages.emailRequired,
       );
     });
   });

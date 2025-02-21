@@ -2,6 +2,8 @@ import '../../test_common_libs.dart';
 
 void main() {
   final Validators validators = Validators();
+  final ValidationMessages messages = ValidationMessages();
+  messages.copyWith(useGenericRequiredMessage: false);
 
   group('URL Validation', () {
     test('Valid URL', () {
@@ -14,25 +16,23 @@ void main() {
     test('Empty URL - Required', () {
       expect(
         validators.dataType.validateUrl(''),
-        'URL is required',
+        messages.urlRequired,
       );
     });
 
     test('Invalid URL Value', () {
       expect(
         validators.dataType.validateUrl('invalid-url'), // Invalid URL
-        'Please enter a valid URL',
+        messages.invalidUrl,
       );
     });
 
-    /// it might be YAGNI but I left it anyway
-    ///
-    // test('Null URL - Required', () {
-    //   expect(
-    //     validators.dataType.validateUrl(null),
-    //     'URL is required',
-    //   );
-    // });
+    test('Null URL - Required', () {
+      expect(
+        validators.dataType.validateUrl(null),
+        messages.urlRequired,
+      );
+    });
 
     // Additional test for custom required message
     test('Custom Required Message', () {
@@ -46,7 +46,7 @@ void main() {
     test('Advanced give a bad formated link', () {
       expect(
         validators.dataType.validateUrl('https:/www.example.com/bad'),
-        'Please enter a valid URL',
+        messages.invalidUrl,
       );
     });
   });

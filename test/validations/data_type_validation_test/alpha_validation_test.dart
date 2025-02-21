@@ -1,43 +1,47 @@
+import 'package:boolean_validation/src/validation_groups/data_type_validators.dart';
+
 import '../../test_common_libs.dart';
 
 void main() {
-  final Validators validators = Validators();
+  final DataTypeValidators validators = Validators().dataType;
+  final ValidationMessages messages = ValidationMessages();
+  messages.copyWith(useGenericRequiredMessage: false);
 
   group('Alpha Validation', () {
     test('Valid Alpha', () {
       expect(
-        validators.dataType.validateAlpha('HelloWorld'),
+        validators.validateAlpha('ThomasMeshail'),
         null,
       );
     });
 
     test('Empty Alpha - Required', () {
       expect(
-        validators.dataType.validateAlpha(''),
-        'This field is required.',
+        validators.validateAlpha(''),
+        messages.alphaRequired,
       );
     });
 
     test('Invalid Alpha Value', () {
       expect(
-        validators.dataType.validateAlpha('Hello123'), // Invalid alpha
-        'This field must contain only alphabets.',
+        validators.validateAlpha('2Math'), // Invalid alpha
+        messages.alphaInvalid,
       );
     });
 
     test('Null Alpha - Required', () {
       expect(
-        validators.dataType.validateAlpha(''),
-        'This field is required.',
+        validators.validateAlpha(null),
+        messages.alphaRequired,
       );
     });
 
     // Additional test for custom required message
     test('Custom Required Message', () {
+      var nameMsg = 'Please provide a name';
       expect(
-        validators.dataType
-            .validateAlpha('', customRequiredMessage: 'Please provide a name'),
-        'Please provide a name',
+        validators.validateAlpha('', customRequiredMessage: nameMsg),
+        nameMsg,
       );
     });
   });

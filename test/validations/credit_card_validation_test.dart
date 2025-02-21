@@ -1,9 +1,10 @@
 import 'package:boolean_validation/src/validation_groups/user_input_validators.dart';
-
 import '../test_common_libs.dart';
 
 void main() {
   final UserInputValidators validators = Validators().userInput;
+  final ValidationMessages messages = ValidationMessages();
+  messages.copyWith(useGenericRequiredMessage: false);
 
   group('Credit Card Validation', () {
     test('Valid Credit Card', () {
@@ -17,30 +18,30 @@ void main() {
     test('Empty Credit Card - Required', () {
       expect(
         validators.validateCreditCard(''),
-        'Credit card number is required',
+        messages.creditCardRequired,
       );
     });
 
     test('Invalid Credit Card Value', () {
       expect(
-        validators.validateCreditCard('12345'), // Invalid card number
-        'Please enter a valid credit card number',
+        validators.validateCreditCard('0'), // Invalid card number
+        messages.invalidCreditCard,
       );
     });
 
     test('Null Credit Card - Required', () {
       expect(
-        validators.validateCreditCard(''),
-        'Credit card number is required',
+        validators.validateCreditCard(null),
+        messages.creditCardRequired,
       );
     });
 
     // Additional test for custom required message
     test('Custom Required Message', () {
+      var customMsg = 'Please provide a credit card number';
       expect(
-        validators.validateCreditCard('',
-            customRequiredMessage: 'Please provide a credit card number'),
-        'Please provide a credit card number',
+        validators.validateCreditCard('', customRequiredMessage: customMsg),
+        customMsg,
       );
     });
   });

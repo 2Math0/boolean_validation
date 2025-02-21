@@ -2,6 +2,8 @@ import '../../test_common_libs.dart';
 
 void main() {
   final Validators validators = Validators();
+  final ValidationMessages messages = ValidationMessages();
+  messages.copyWith(useGenericRequiredMessage: false);
 
   group('Alphanumeric Validation', () {
     test('Valid Alphanumeric', () {
@@ -14,7 +16,7 @@ void main() {
     test('Empty Alphanumeric - Required', () {
       expect(
         validators.dataType.validateAlphanumeric(''),
-        'This field is required.',
+        messages.alphaNumericRequired,
       );
     });
 
@@ -22,14 +24,14 @@ void main() {
       expect(
         validators.dataType.validateAlphanumeric('Hello@123'),
         // Invalid alphanumeric
-        'This field must contain only alphanumeric characters.',
+        messages.alphaNumericInvalid,
       );
     });
 
     test('Null Alphanumeric - Required', () {
       expect(
-        validators.dataType.validateAlphanumeric(''),
-        'This field is required.',
+        validators.dataType.validateAlphanumeric(null),
+        messages.alphaNumericRequired,
       );
     });
 

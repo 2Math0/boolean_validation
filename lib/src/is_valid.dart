@@ -5,7 +5,6 @@ import 'regex/regex_patterns.dart';
 import 'package:boolean_validation/src/enum/email_domains.dart';
 
 mixin class ValidationLogic {
-
   /// Validates if the input is a valid email.
   ///
   /// Uses regex to ensure the email format is correct.
@@ -161,6 +160,11 @@ mixin class ValidationLogic {
   bool containsUppercase(String password) {
     final upperCasePattern = RegExp(RegexPatterns.uppercaseLetters);
     return upperCasePattern.hasMatch(password);
+  }
+
+  bool containsLowerCase(String password) {
+    final lowerCasePattern = RegExp(RegexPatterns.lowercaseLetters);
+    return lowerCasePattern.hasMatch(password);
   }
 
   /// Check if password contains at least one digit.

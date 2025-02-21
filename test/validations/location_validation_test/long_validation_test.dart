@@ -1,8 +1,9 @@
-import 'package:boolean_validation/boolean_validation.dart';
-import 'package:flutter_test/flutter_test.dart';
+import '../../test_common_libs.dart';
 
 void main() {
   final Validators validators = Validators();
+  final ValidationMessages messages = ValidationMessages();
+  messages.copyWith(useGenericRequiredMessage: false);
   group('Longitude Validation', () {
     test('Valid Longitude', () {
       expect(
@@ -14,30 +15,31 @@ void main() {
     test('Empty Longitude - Required', () {
       expect(
         validators.location.validateLong(''),
-        'Longitude is required',
+        messages.longitudeRequired,
       );
     });
 
     test('Invalid Longitude Value', () {
       expect(
         validators.location.validateLong('400.0'), // Invalid longitude
-        'Invalid longitude value',
+        messages.invalidLongitude,
       );
     });
 
     test('Null Longitude - Required', () {
       expect(
         validators.location.validateLong(null),
-        'Longitude is required',
+        messages.longitudeRequired,
       );
     });
 
     // Additional test for custom required message
     test('Custom Required Message', () {
+      var customMsg = 'Please provide longitude';
       expect(
-        validators.location.validateLong(null,
-            customRequiredMessage: 'Please provide longitude'),
-        'Please provide longitude',
+        validators.location
+            .validateLong(null, customRequiredMessage: customMsg),
+        customMsg,
       );
     });
   });

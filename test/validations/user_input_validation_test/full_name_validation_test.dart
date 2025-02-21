@@ -1,8 +1,11 @@
-import 'package:boolean_validation/src/validators.dart';
-import 'package:flutter_test/flutter_test.dart';
+
+
+import '../../test_common_libs.dart';
 
 void main() {
   final Validators validators = Validators();
+  final ValidationMessages messages = ValidationMessages();
+  messages.copyWith(useGenericRequiredMessage: false);
 
   group('Full Name Validation', () {
     test('Valid Full Name', () {

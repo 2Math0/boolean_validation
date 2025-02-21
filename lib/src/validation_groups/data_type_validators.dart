@@ -7,12 +7,18 @@ class DataTypeValidators extends ValidationCommon {
     String? value, {
     bool isRequired = true,
     String? customRequiredMessage,
+    String? customInvalidMessage,
   }) {
-    if (isRequired && (value == null || value.isEmpty)) {
-      return customRequiredMessage ?? 'Number is required';
-    }
+    final requiredValidation = validateRequired(
+      value: value,
+      isRequired: isRequired,
+      customMessage: customRequiredMessage,
+      defaultMessage: messages.numberRequired,
+    );
+    if (requiredValidation != null) return requiredValidation;
+
     if (value != null && !validationLogic.isInteger(value)) {
-      return 'Enter a valid number';
+      return customInvalidMessage ?? messages.invalidNumber;
     }
     return null;
   }
@@ -20,16 +26,21 @@ class DataTypeValidators extends ValidationCommon {
   /// Validates a URL.
   /// Returns an error message if invalid; otherwise, null.
   String? validateUrl(
-    String value, {
+    String? value, {
     bool isRequired = true,
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (isRequired && value.isEmpty) {
-      return customRequiredMessage ?? 'URL is required';
-    }
-    if (!validationLogic.isValidUrl(value)) {
-      return customInvalidMessage ?? 'Please enter a valid URL';
+    final requiredValidation = validateRequired(
+      value: value,
+      isRequired: isRequired,
+      customMessage: customRequiredMessage,
+      defaultMessage: messages.urlRequired,
+    );
+    if (requiredValidation != null) return requiredValidation;
+
+    if (!validationLogic.isValidUrl(value!)) {
+      return customInvalidMessage ?? messages.invalidUrl;
     }
     return null;
   }
@@ -37,16 +48,21 @@ class DataTypeValidators extends ValidationCommon {
   /// Validates a date in the format YYYY-MM-DD.
   /// Returns an error message if invalid; otherwise, null.
   String? validateDate(
-    String value, {
+    String? value, {
     bool isRequired = true,
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (isRequired && value.isEmpty) {
-      return customRequiredMessage ?? 'Date is required';
-    }
-    if (!validationLogic.isValidDate(value)) {
-      return customInvalidMessage ?? 'Please enter a valid date';
+    final requiredValidation = validateRequired(
+      value: value,
+      isRequired: isRequired,
+      customMessage: customRequiredMessage,
+      defaultMessage: messages.dateRequired,
+    );
+    if (requiredValidation != null) return requiredValidation;
+
+    if (!validationLogic.isValidDate(value!)) {
+      return customInvalidMessage ?? messages.invalidDate;
     }
     return null;
   }
@@ -54,16 +70,21 @@ class DataTypeValidators extends ValidationCommon {
   /// Validates a string to ensure it contains only alphabets.
   /// Returns an error message if invalid; otherwise, null.
   String? validateAlpha(
-    String value, {
+    String? value, {
     bool isRequired = true,
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (isRequired && value.isEmpty) {
-      return customRequiredMessage ?? 'This field is required.';
-    }
+    final requiredValidation = validateRequired(
+      value: value,
+      isRequired: isRequired,
+      customMessage: customRequiredMessage,
+      defaultMessage: messages.alphaRequired,
+    );
+    if (requiredValidation != null) return requiredValidation;
+
     if (!validationLogic.isAlpha(value)) {
-      return customInvalidMessage ?? 'This field must contain only alphabets.';
+      return customInvalidMessage ?? messages.alphaInvalid;
     }
     return null;
   }
@@ -71,17 +92,21 @@ class DataTypeValidators extends ValidationCommon {
   /// Validates a string to ensure it contains only alphanumeric characters.
   /// Returns an error message if invalid; otherwise, null.
   String? validateAlphanumeric(
-    String value, {
+    String? value, {
     bool isRequired = true,
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (isRequired && value.isEmpty) {
-      return customRequiredMessage ?? 'This field is required.';
-    }
+    final requiredValidation = validateRequired(
+      value: value,
+      isRequired: isRequired,
+      customMessage: customRequiredMessage,
+      defaultMessage: messages.alphaNumericRequired,
+    );
+    if (requiredValidation != null) return requiredValidation;
+
     if (!validationLogic.isAlphanumeric(value)) {
-      return customInvalidMessage ??
-          'This field must contain only alphanumeric characters.';
+      return customInvalidMessage ?? messages.alphaNumericInvalid;
     }
     return null;
   }
