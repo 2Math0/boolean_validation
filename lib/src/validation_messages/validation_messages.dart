@@ -57,8 +57,9 @@ class ValidationMessages {
   String alphaRequired = 'Alphabets are Required';
   String alphaInvalid = 'This field must contain only alphabets.';
 
-  String alphaNumericRequired =  'This Field is Required';
-  String alphaNumericInvalid = 'This field must contain only Alphabets and Numbers characters.';
+  String alphaNumericRequired = 'This Field is Required';
+  String alphaNumericInvalid =
+      'This field must contain only Alphabets and Numbers characters.';
 
   /// Global flag to determine whether to use the generic required message for all inputs.
   bool useGenericRequiredMessage = true;
@@ -96,6 +97,39 @@ class ValidationMessages {
     String? creditCardRequired,
     String? invalidCreditCard,
     bool? useGenericRequiredMessage,
+    String? expirationDateRequired,
+    String? securityCodeRequired,
+    String? cardholderNameRequired,
+    String? invalidCardholderName,
+    String? emailRequired,
+    String? invalidEmail,
+    String? emailFormatValidation,
+    String? emailDomainValidation,
+    String? usernameRequired,
+    String? usernameInvalid,
+    String? fullNameRequired,
+    String? fullNameInvalid,
+    String? nameMustBeAlphabetic,
+    String? nameRequired,
+    String? passwordMinLength,
+    String? passwordUppercase,
+    String? passwordLowercase,
+    String? passwordDigit,
+    String? passwordSpecialChar,
+    String? latitudeRequired,
+    String? invalidLatitude,
+    String? longitudeRequired,
+    String? invalidLongitude,
+    String? numberRequired,
+    String? invalidNumber,
+    String? urlRequired,
+    String? invalidUrl,
+    String? dateRequired,
+    String? invalidDate,
+    String? alphaRequired,
+    String? alphaInvalid,
+    String? alphaNumericRequired,
+    String? alphaNumericInvalid,
   }) {
     this.mobileNumberRequired =
         mobileNumberRequired ?? this.mobileNumberRequired;
@@ -104,6 +138,77 @@ class ValidationMessages {
     this.invalidCreditCard = invalidCreditCard ?? this.invalidCreditCard;
     this.useGenericRequiredMessage =
         useGenericRequiredMessage ?? this.useGenericRequiredMessage;
+    this.expirationDateRequired =
+        expirationDateRequired ?? this.expirationDateRequired;
+    this.securityCodeRequired =
+        securityCodeRequired ?? this.securityCodeRequired;
+    this.cardholderNameRequired =
+        cardholderNameRequired ?? this.cardholderNameRequired;
+
+    this.invalidCardholderName =
+        invalidCardholderName ?? this.invalidCardholderName;
+
+    this.emailRequired = emailRequired ?? this.emailRequired;
+
+    this.invalidEmail = invalidEmail ?? this.invalidEmail;
+
+    this.emailFormatValidation =
+        emailFormatValidation ?? this.emailFormatValidation;
+
+    this.emailDomainValidation =
+        emailDomainValidation ?? this.emailDomainValidation;
+
+    this.usernameRequired = usernameRequired ?? this.usernameRequired;
+
+    this.usernameInvalid = usernameInvalid ?? this.usernameInvalid;
+
+    this.fullNameRequired = fullNameRequired ?? this.fullNameRequired;
+
+    this.fullNameInvalid = fullNameInvalid ?? this.fullNameInvalid;
+
+    this.nameMustBeAlphabetic =
+        nameMustBeAlphabetic ?? this.nameMustBeAlphabetic;
+
+    this.nameRequired = nameRequired ?? this.nameRequired;
+
+    this.passwordMinLength = passwordMinLength ?? this.passwordMinLength;
+
+    this.passwordUppercase = passwordUppercase ?? this.passwordUppercase;
+
+    this.passwordLowercase = passwordLowercase ?? this.passwordLowercase;
+
+    this.passwordDigit = passwordDigit ?? this.passwordDigit;
+
+    this.passwordSpecialChar = passwordSpecialChar ?? this.passwordSpecialChar;
+
+    this.latitudeRequired = latitudeRequired ?? this.latitudeRequired;
+
+    this.invalidLatitude = invalidLatitude ?? this.invalidLatitude;
+
+    this.longitudeRequired = longitudeRequired ?? this.longitudeRequired;
+
+    this.invalidLongitude = invalidLongitude ?? this.invalidLongitude;
+
+    this.numberRequired = numberRequired ?? this.numberRequired;
+
+    this.invalidNumber = invalidNumber ?? this.invalidNumber;
+
+    this.urlRequired = urlRequired ?? this.urlRequired;
+
+    this.invalidUrl = invalidUrl ?? this.invalidUrl;
+
+    this.dateRequired = dateRequired ?? this.dateRequired;
+
+    this.invalidDate = invalidDate ?? this.invalidDate;
+
+    this.alphaRequired = alphaRequired ?? this.alphaRequired;
+
+    this.alphaInvalid = alphaInvalid ?? this.alphaInvalid;
+
+    this.alphaNumericRequired =
+        alphaNumericRequired ?? this.alphaNumericRequired;
+
+    this.alphaNumericInvalid = alphaNumericInvalid ?? this.alphaNumericInvalid;
   }
 
   /// Returns the appropriate required message based on the global configuration and custom message.
