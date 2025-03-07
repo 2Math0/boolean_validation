@@ -1,5 +1,3 @@
-import 'package:boolean_validation/src/enum/email_domains.dart';
-import 'package:boolean_validation/src/validation_messages/message_replacements_keys.dart';
 
 import '../../test_common_libs.dart';
 
