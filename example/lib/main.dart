@@ -17,6 +17,7 @@ void main() {
 /// 5. Credit card validation
 /// 6. Username and full name validation
 /// 7. Animated form fields
+///
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
