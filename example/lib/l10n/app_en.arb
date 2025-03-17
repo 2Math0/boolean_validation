@@ -1,94 +1,237 @@
 {
+  "@@locale": "en",
   "appTitle": "Boolean Validation Demo",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
   "validationFormTitle": "Validation Form",
+  "@validationFormTitle": {
+    "description": "The title of the validation form"
+  },
   "emailLabel": "Email (gmail.com)",
+  "@emailLabel": {
+    "description": "Label for email input field"
+  },
   "mobileLabel": "Mobile Number",
-  "countryCode" : "Country Code",
+  "@mobileLabel": {
+    "description": "Label for mobile number input field"
+  },
+  "countryCode": "Code",
+  "@countryCode": {
+    "description": "Label for country code field"
+  },
   "passwordLabel": "Password",
+  "@passwordLabel": {
+    "description": "Label for password input field"
+  },
   "usernameLabel": "Username",
+  "@usernameLabel": {
+    "description": "Label for username input field"
+  },
   "fullNameLabel": "Full Name",
+  "@fullNameLabel": {
+    "description": "Label for full name input field"
+  },
   "creditCardLabel": "Credit Card",
+  "@creditCardLabel": {
+    "description": "Label for credit card input field"
+  },
   "urlLabel": "URL",
+  "@urlLabel": {
+    "description": "Label for URL input field"
+  },
   "dateLabel": "Date (YYYY-MM-DD)",
-  "alphaLabel": "Alpha Only",
+  "@dateLabel": {
+    "description": "Label for date input field"
+  },
+  "alphaLabel": "Letters Only",
+  "@alphaLabel": {
+    "description": "Label for alphabetic input field"
+  },
   "alphanumericLabel": "Alphanumeric",
+  "@alphanumericLabel": {
+    "description": "Label for alphanumeric input field"
+  },
   "latitudeLabel": "Latitude",
+  "@latitudeLabel": {
+    "description": "Label for latitude input field"
+  },
   "longitudeLabel": "Longitude",
+  "@longitudeLabel": {
+    "description": "Label for longitude input field"
+  },
   "submitButton": "Submit",
+  "@submitButton": {
+    "description": "Text for the submit button"
+  },
   "validationSuccess": "Form submitted successfully!",
+  "@validationSuccess": {
+    "description": "Success message shown after form submission"
+  },
   "selectEmailDomain": "Select Email Domain",
-  "emailRequired": "Email is required",
-  "invalidEmail": "Invalid email format",
-  "mobileNumberRequired": "Mobile number is required",
-  "invalidMobileNumber": "Invalid mobile number format",
-  "passwordRequired": "Password is required",
-  "passwordMinLength": "Password must be at least {minLength} characters",
-  "passwordUppercase": "Password must contain at least one uppercase letter",
-  "passwordLowercase": "Password must contain at least one lowercase letter",
-  "passwordDigit": "Password must contain at least one digit",
-  "passwordSpecialChar": "Password must contain at least one special character",
-  "usernameRequired": "Username is required",
-  "usernameInvalid": "Username must be 4-20 characters and can include letters, numbers, and underscores",
-  "fullNameRequired": "Full name is required",
-  "fullNameInvalid": "Please enter your full name",
-  "creditCardRequired": "Credit card number is required",
-  "invalidCreditCard": "Invalid credit card number",
-  "urlRequired": "URL is required",
-  "invalidUrl": "Invalid URL format",
-  "dateRequired": "Date is required",
-  "invalidDate": "Invalid date format",
-  "alphaRequired": "This field is required",
-  "alphaInvalid": "Only alphabetic characters are allowed",
-  "alphaNumericRequired": "This field is required",
-  "alphaNumericInvalid": "Only alphanumeric characters are allowed",
-  "numericRequired": "This field is required",
-  "numericInvalid": "Only numeric characters are allowed",
-  "latitudeRequired": "Latitude is required",
-  "invalidLatitude": "Invalid latitude value",
-  "longitudeRequired": "Longitude is required",
-  "invalidLongitude": "Invalid longitude value",
+  "@selectEmailDomain": {
+    "description": "Label for email domain selection"
+  },
   "countryCodeLabel": "Country Code",
-  "timeRequired": "Time is required",
-  "invalidTime": "Invalid time format",
-  "colorRequired": "Color is required",
-  "invalidColor": "Invalid color format",
-  "ipRequired": "IP address is required",
-  "invalidIp": "Invalid IP address format",
-  "fileRequired": "File is required",
-  "invalidFileSize": "File size exceeds maximum limit",
-  "invalidFileType": "File type not supported",
-  "macRequired": "MAC address is required",
-  "invalidMac": "Invalid MAC address format",
-  "portRequired": "Port number is required",
-  "invalidPort": "Invalid port number",
-  "ibanRequired": "IBAN is required",
-  "invalidIban": "Invalid IBAN format",
-  "swiftRequired": "SWIFT code is required",
-  "invalidSwift": "Invalid SWIFT code format",
-  "taxIdRequired": "Tax ID is required",
-  "invalidTaxId": "Invalid Tax ID format",
-  "socialHandleRequired": "Social media handle is required",
-  "invalidSocialHandle": "Invalid social media handle format",
-  "minValueMessage": "Value must be at least {min}",
-  "maxValueMessage": "Value must be at most {max}",
-  "rangeValueMessage": "Value must be between {min} and {max}",
-  "listMinLengthMessage": "List must contain at least {minLength} items",
-  "listMaxLengthMessage": "List must contain at most {maxLength} items",
-  "listRangeLengthMessage": "List must contain between {minLength} and {maxLength} items",
-  "equalToMessage": "Value must be equal to {value}",
-  "notEqualToMessage": "Value must not be equal to {value}",
-  "greaterThanMessage": "Value must be greater than {value}",
-  "lessThanMessage": "Value must be less than {value}",
-  "greaterThanOrEqualToMessage": "Value must be greater than or equal to {value}",
-  "lessThanOrEqualToMessage": "Value must be less than or equal to {value}",
+  "@countryCodeLabel": {
+    "description": "Label for country code selection"
+  },
+  "mobileNumberRequired": "Mobile number is required",
+  "@mobileNumberRequired": {
+    "description": "Error message when mobile number field is empty"
+  },
+  "invalidMobileNumber": "Invalid mobile number format",
+  "@invalidMobileNumber": {
+    "description": "Error message when mobile number format is invalid"
+  },
+  "creditCardRequired": "Credit card number is required",
+  "@creditCardRequired": {
+    "description": "Error message when credit card field is empty"
+  },
+  "invalidCreditCard": "Invalid credit card number",
+  "@invalidCreditCard": {
+    "description": "Error message when credit card number is invalid"
+  },
   "expirationDateRequired": "Expiration date is required",
+  "@expirationDateRequired": {
+    "description": "Error message when expiration date field is empty"
+  },
   "securityCodeRequired": "Security code (CVV) is required",
+  "@securityCodeRequired": {
+    "description": "Error message when security code field is empty"
+  },
   "cardholderNameRequired": "Cardholder name is required",
+  "@cardholderNameRequired": {
+    "description": "Error message when cardholder name field is empty"
+  },
   "invalidCardholderName": "Invalid cardholder name",
+  "@invalidCardholderName": {
+    "description": "Error message when cardholder name format is invalid"
+  },
+  "emailRequired": "Email is required",
+  "@emailRequired": {
+    "description": "Error message when email field is empty"
+  },
+  "invalidEmail": "Invalid email format",
+  "@invalidEmail": {
+    "description": "Error message when email format is invalid"
+  },
   "emailFormatValidation": "Please enter a valid email address",
+  "@emailFormatValidation": {
+    "description": "Error message when email format is invalid"
+  },
   "emailDomainValidation": "Email must be from {domain} domain",
+  "@emailDomainValidation": {
+    "description": "Error message when email domain is invalid",
+    "placeholders": {
+      "domain": {
+        "type": "String"
+      }
+    }
+  },
+  "usernameRequired": "Username is required",
+  "@usernameRequired": {
+    "description": "Error message when username field is empty"
+  },
+  "usernameInvalid": "Username must be 4-20 characters and can include letters, numbers, and underscores",
+  "@usernameInvalid": {
+    "description": "Error message when username format is invalid"
+  },
+  "fullNameRequired": "Full name is required",
+  "@fullNameRequired": {
+    "description": "Error message when full name field is empty"
+  },
+  "fullNameInvalid": "Please enter your full name",
+  "@fullNameInvalid": {
+    "description": "Error message when full name format is invalid"
+  },
   "nameMustBeAlphabetic": "Name must contain only letters",
+  "@nameMustBeAlphabetic": {
+    "description": "Error message when name contains non-alphabetic characters"
+  },
   "nameRequired": "Name is required",
+  "@nameRequired": {
+    "description": "Error message when name field is empty"
+  },
+  "passwordMinLength": "Password must be at least {minLength} characters",
+  "@passwordMinLength": {
+    "description": "Error message when password is too short",
+    "placeholders": {
+      "minLength": {
+        "type": "int"
+      }
+    }
+  },
+  "passwordUppercase": "Password must contain at least one uppercase letter",
+  "@passwordUppercase": {
+    "description": "Error message when password lacks uppercase letter"
+  },
+  "passwordLowercase": "Password must contain at least one lowercase letter",
+  "@passwordLowercase": {
+    "description": "Error message when password lacks lowercase letter"
+  },
+  "passwordDigit": "Password must contain at least one digit",
+  "@passwordDigit": {
+    "description": "Error message when password lacks digit"
+  },
+  "passwordSpecialChar": "Password must contain at least one special character",
+  "@passwordSpecialChar": {
+    "description": "Error message when password lacks special character"
+  },
+  "latitudeRequired": "Latitude is required",
+  "@latitudeRequired": {
+    "description": "Error message when latitude field is empty"
+  },
+  "invalidLatitude": "Invalid latitude value",
+  "@invalidLatitude": {
+    "description": "Error message when latitude value is invalid"
+  },
+  "longitudeRequired": "Longitude is required",
+  "@longitudeRequired": {
+    "description": "Error message when longitude field is empty"
+  },
+  "invalidLongitude": "Invalid longitude value",
+  "@invalidLongitude": {
+    "description": "Error message when longitude value is invalid"
+  },
   "numberRequired": "Number is required",
-  "invalidNumber": "Invalid number format"
+  "@numberRequired": {
+    "description": "Error message when number field is empty"
+  },
+  "invalidNumber": "Invalid number format",
+  "@invalidNumber": {
+    "description": "Error message when number format is invalid"
+  },
+  "urlRequired": "URL is required",
+  "@urlRequired": {
+    "description": "Error message when URL field is empty"
+  },
+  "invalidUrl": "Invalid URL format",
+  "@invalidUrl": {
+    "description": "Error message when URL format is invalid"
+  },
+  "dateRequired": "Date is required",
+  "@dateRequired": {
+    "description": "Error message when date field is empty"
+  },
+  "invalidDate": "Invalid date format",
+  "@invalidDate": {
+    "description": "Error message when date format is invalid"
+  },
+  "alphaRequired": "This field is required",
+  "@alphaRequired": {
+    "description": "Error message when alphabetic field is empty"
+  },
+  "alphaInvalid": "Only alphabetic characters are allowed",
+  "@alphaInvalid": {
+    "description": "Error message when non-alphabetic characters are entered"
+  },
+  "alphaNumericRequired": "This field is required",
+  "@alphaNumericRequired": {
+    "description": "Error message when alphanumeric field is empty"
+  },
+  "alphaNumericInvalid": "Only alphanumeric characters are allowed",
+  "@alphaNumericInvalid": {
+    "description": "Error message when non-alphanumeric characters are entered"
+  }
 } 

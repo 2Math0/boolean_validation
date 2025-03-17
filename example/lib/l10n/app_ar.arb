@@ -1,73 +1,237 @@
 {
+  "@@locale": "ar",
   "appTitle": "عرض التحقق البولياني",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
   "validationFormTitle": "نموذج التحقق",
+  "@validationFormTitle": {
+    "description": "The title of the validation form"
+  },
   "emailLabel": "البريد الإلكتروني (gmail.com)",
+  "@emailLabel": {
+    "description": "Label for email input field"
+  },
   "mobileLabel": "رقم الجوال",
-  "countryCode": "كود الدوله",
+  "@mobileLabel": {
+    "description": "Label for mobile number input field"
+  },
+  "countryCode": "كود",
+  "@countryCode": {
+    "description": "Label for country code field"
+  },
   "passwordLabel": "كلمة المرور",
+  "@passwordLabel": {
+    "description": "Label for password input field"
+  },
   "usernameLabel": "اسم المستخدم",
+  "@usernameLabel": {
+    "description": "Label for username input field"
+  },
   "fullNameLabel": "الاسم الكامل",
+  "@fullNameLabel": {
+    "description": "Label for full name input field"
+  },
   "creditCardLabel": "بطاقة الائتمان",
+  "@creditCardLabel": {
+    "description": "Label for credit card input field"
+  },
   "urlLabel": "الرابط",
+  "@urlLabel": {
+    "description": "Label for URL input field"
+  },
   "dateLabel": "التاريخ (سنة-شهر-يوم)",
+  "@dateLabel": {
+    "description": "Label for date input field"
+  },
   "alphaLabel": "أحرف فقط",
+  "@alphaLabel": {
+    "description": "Label for alphabetic input field"
+  },
   "alphanumericLabel": "أحرف وأرقام",
+  "@alphanumericLabel": {
+    "description": "Label for alphanumeric input field"
+  },
   "latitudeLabel": "خط العرض",
+  "@latitudeLabel": {
+    "description": "Label for latitude input field"
+  },
   "longitudeLabel": "خط الطول",
+  "@longitudeLabel": {
+    "description": "Label for longitude input field"
+  },
   "submitButton": "إرسال",
+  "@submitButton": {
+    "description": "Text for the submit button"
+  },
   "validationSuccess": "تم إرسال النموذج بنجاح!",
+  "@validationSuccess": {
+    "description": "Success message shown after form submission"
+  },
   "selectEmailDomain": "اختر نطاق البريد الإلكتروني",
-  "emailRequired": "البريد الإلكتروني مطلوب",
-  "invalidEmail": "البريد الإلكتروني غير صالح",
-  "mobileNumberRequired": "رقم الجوال مطلوب",
-  "invalidMobileNumber": "رقم الجوال غير صالح",
-  "passwordMinLength": "يجب أن تحتوي كلمة المرور على {minLength} أحرف على الأقل",
-  "passwordUppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
-  "passwordLowercase": "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل",
-  "passwordDigit": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
-  "passwordSpecialChar": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل",
-  "usernameRequired": "اسم المستخدم مطلوب",
-  "usernameInvalid": "يجب أن يكون اسم المستخدم بين 4-20 حرفًا ويمكن أن يتضمن أحرف وأرقام وشرطات سفلية",
-  "fullNameRequired": "الاسم الكامل مطلوب",
-  "fullNameInvalid": "الرجاء إدخال الاسم الكامل",
-  "creditCardRequired": "رقم بطاقة الائتمان مطلوب",
-  "invalidCreditCard": "رقم بطاقة الائتمان غير صالح",
-  "urlRequired": "الرابط مطلوب",
-  "invalidUrl": "الرابط غير صالح",
-  "dateRequired": "التاريخ مطلوب",
-  "invalidDate": "صيغة التاريخ غير صالحة (سنة-شهر-يوم)",
-  "alphaRequired": "هذا الحقل مطلوب",
-  "alphaInvalid": "يمكن أن يحتوي هذا الحقل على أحرف فقط",
-  "alphaNumericRequired": "هذا الحقل مطلوب",
-  "alphaNumericInvalid": "يمكن أن يحتوي هذا الحقل على أحرف وأرقام فقط",
-  "latitudeRequired": "خط العرض مطلوب",
-  "invalidLatitude": "قيمة خط العرض غير صالحة",
-  "longitudeRequired": "خط الطول مطلوب",
-  "invalidLongitude": "قيمة خط الطول غير صالحة",
+  "@selectEmailDomain": {
+    "description": "Label for email domain selection"
+  },
   "countryCodeLabel": "رمز البلد",
+  "@countryCodeLabel": {
+    "description": "Label for country code selection"
+  },
+  "mobileNumberRequired": "رقم الجوال مطلوب",
+  "@mobileNumberRequired": {
+    "description": "Error message when mobile number field is empty"
+  },
+  "invalidMobileNumber": "رقم الجوال غير صالح",
+  "@invalidMobileNumber": {
+    "description": "Error message when mobile number format is invalid"
+  },
+  "creditCardRequired": "رقم بطاقة الائتمان مطلوب",
+  "@creditCardRequired": {
+    "description": "Error message when credit card field is empty"
+  },
+  "invalidCreditCard": "رقم بطاقة الائتمان غير صالح",
+  "@invalidCreditCard": {
+    "description": "Error message when credit card number is invalid"
+  },
   "expirationDateRequired": "تاريخ انتهاء الصلاحية مطلوب",
+  "@expirationDateRequired": {
+    "description": "Error message when expiration date field is empty"
+  },
   "securityCodeRequired": "رمز الأمان (CVV) مطلوب",
+  "@securityCodeRequired": {
+    "description": "Error message when security code field is empty"
+  },
   "cardholderNameRequired": "اسم حامل البطاقة مطلوب",
+  "@cardholderNameRequired": {
+    "description": "Error message when cardholder name field is empty"
+  },
   "invalidCardholderName": "اسم حامل البطاقة غير صالح",
-  "customRequired": "هذا الحقل مطلوب",
-  "customInvalid": "تنسيق الإدخال غير صالح",
-  "minValueMessage": "يجب أن تكون القيمة {min} على الأقل",
-  "maxValueMessage": "يجب أن تكون القيمة {max} على الأكثر",
-  "rangeValueMessage": "يجب أن تكون القيمة بين {min} و {max}",
-  "listMinLengthMessage": "يجب أن تحتوي القائمة على {minLength} عناصر على الأقل",
-  "listMaxLengthMessage": "يجب أن تحتوي القائمة على {maxLength} عناصر على الأكثر",
-  "listRangeLengthMessage": "يجب أن تحتوي القائمة على عدد من العناصر بين {minLength} و {maxLength}",
-  "equalToMessage": "يجب أن تكون القيمة مساوية لـ {value}",
-  "notEqualToMessage": "يجب أن لا تكون القيمة مساوية لـ {value}",
-  "greaterThanMessage": "يجب أن تكون القيمة أكبر من {value}",
-  "lessThanMessage": "يجب أن تكون القيمة أقل من {value}",
-  "greaterThanOrEqualToMessage": "يجب أن تكون القيمة أكبر من أو تساوي {value}",
-  "lessThanOrEqualToMessage": "يجب أن تكون القيمة أقل من أو تساوي {value}",
+  "@invalidCardholderName": {
+    "description": "Error message when cardholder name format is invalid"
+  },
+  "emailRequired": "البريد الإلكتروني مطلوب",
+  "@emailRequired": {
+    "description": "Error message when email field is empty"
+  },
+  "invalidEmail": "البريد الإلكتروني غير صالح",
+  "@invalidEmail": {
+    "description": "Error message when email format is invalid"
+  },
   "emailFormatValidation": "الرجاء إدخال بريد إلكتروني صالح",
+  "@emailFormatValidation": {
+    "description": "Error message when email format is invalid"
+  },
   "emailDomainValidation": "يجب أن يكون البريد الإلكتروني من نطاق {domain}",
+  "@emailDomainValidation": {
+    "description": "Error message when email domain is invalid",
+    "placeholders": {
+      "domain": {
+        "type": "String"
+      }
+    }
+  },
+  "usernameRequired": "اسم المستخدم مطلوب",
+  "@usernameRequired": {
+    "description": "Error message when username field is empty"
+  },
+  "usernameInvalid": "يجب أن يكون اسم المستخدم بين 4-20 حرفًا ويمكن أن يتضمن أحرف وأرقام وشرطات سفلية",
+  "@usernameInvalid": {
+    "description": "Error message when username format is invalid"
+  },
+  "fullNameRequired": "الاسم الكامل مطلوب",
+  "@fullNameRequired": {
+    "description": "Error message when full name field is empty"
+  },
+  "fullNameInvalid": "الرجاء إدخال الاسم الكامل",
+  "@fullNameInvalid": {
+    "description": "Error message when full name format is invalid"
+  },
   "nameMustBeAlphabetic": "يجب أن يحتوي الاسم على حروف فقط",
+  "@nameMustBeAlphabetic": {
+    "description": "Error message when name contains non-alphabetic characters"
+  },
   "nameRequired": "الاسم مطلوب",
+  "@nameRequired": {
+    "description": "Error message when name field is empty"
+  },
+  "passwordMinLength": "يجب أن تحتوي كلمة المرور على {minLength} أحرف على الأقل",
+  "@passwordMinLength": {
+    "description": "Error message when password is too short",
+    "placeholders": {
+      "minLength": {
+        "type": "int"
+      }
+    }
+  },
+  "passwordUppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
+  "@passwordUppercase": {
+    "description": "Error message when password lacks uppercase letter"
+  },
+  "passwordLowercase": "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل",
+  "@passwordLowercase": {
+    "description": "Error message when password lacks lowercase letter"
+  },
+  "passwordDigit": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
+  "@passwordDigit": {
+    "description": "Error message when password lacks digit"
+  },
+  "passwordSpecialChar": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل",
+  "@passwordSpecialChar": {
+    "description": "Error message when password lacks special character"
+  },
+  "latitudeRequired": "خط العرض مطلوب",
+  "@latitudeRequired": {
+    "description": "Error message when latitude field is empty"
+  },
+  "invalidLatitude": "قيمة خط العرض غير صالحة",
+  "@invalidLatitude": {
+    "description": "Error message when latitude value is invalid"
+  },
+  "longitudeRequired": "خط الطول مطلوب",
+  "@longitudeRequired": {
+    "description": "Error message when longitude field is empty"
+  },
+  "invalidLongitude": "قيمة خط الطول غير صالحة",
+  "@invalidLongitude": {
+    "description": "Error message when longitude value is invalid"
+  },
   "numberRequired": "الرقم مطلوب",
-  "invalidNumber": "صيغة الرقم غير صالحة"
+  "@numberRequired": {
+    "description": "Error message when number field is empty"
+  },
+  "invalidNumber": "صيغة الرقم غير صالحة",
+  "@invalidNumber": {
+    "description": "Error message when number format is invalid"
+  },
+  "urlRequired": "الرابط مطلوب",
+  "@urlRequired": {
+    "description": "Error message when URL field is empty"
+  },
+  "invalidUrl": "الرابط غير صالح",
+  "@invalidUrl": {
+    "description": "Error message when URL format is invalid"
+  },
+  "dateRequired": "التاريخ مطلوب",
+  "@dateRequired": {
+    "description": "Error message when date field is empty"
+  },
+  "invalidDate": "صيغة التاريخ غير صالحة",
+  "@invalidDate": {
+    "description": "Error message when date format is invalid"
+  },
+  "alphaRequired": "هذا الحقل مطلوب",
+  "@alphaRequired": {
+    "description": "Error message when alphabetic field is empty"
+  },
+  "alphaInvalid": "يمكن أن يحتوي هذا الحقل على أحرف فقط",
+  "@alphaInvalid": {
+    "description": "Error message when non-alphabetic characters are entered"
+  },
+  "alphaNumericRequired": "هذا الحقل مطلوب",
+  "@alphaNumericRequired": {
+    "description": "Error message when alphanumeric field is empty"
+  },
+  "alphaNumericInvalid": "يمكن أن يحتوي هذا الحقل على أحرف وأرقام فقط",
+  "@alphaNumericInvalid": {
+    "description": "Error message when non-alphanumeric characters are entered"
+  }
 } 
-
