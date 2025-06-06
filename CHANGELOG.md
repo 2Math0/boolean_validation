@@ -64,4 +64,5 @@
 - Add `double` and `positive number` validators
 - Add Github action for complete Example on WebAssembly with (.arb in localization)
 - Add String Extension for regex
+- add `runMultiValidators()` method in Validation Logic Mixin
 - Fix some bugs

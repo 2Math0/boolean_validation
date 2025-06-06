@@ -252,4 +252,16 @@ mixin class ValidationLogic {
 
     return pattern.hasMatch(value.trim());
   }
+
+  // use this function to run many validators at same time
+  bool runMultiValidators({
+    required List<bool Function()> validators,
+  }) {
+    for (final validator in validators) {
+      if (!validator()) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

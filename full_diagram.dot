@@ -91,6 +91,7 @@ class "ValidationLogic" << (U, UTILITY_COLOR) >> {
 +bool containsSpecialCharacter()
 +bool isAlpha()
 +bool isAlphanumeric()
++bool runMultiValidators()
 }
 }
 
