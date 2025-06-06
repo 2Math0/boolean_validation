@@ -1,0 +1,36 @@
+name: Deploy boolean_validation Example Web app to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: stable
+
+      - name: Enable Flutter web
+        run: flutter config --enable-web
+
+      - name: Get dependencies for example
+        run: flutter pub get
+        working-directory: example
+
+      - name: Build example web release *(WebAssembly ;P )*
+        run: flutter build web --wasm --release
+        working-directory: example
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: example/build/web

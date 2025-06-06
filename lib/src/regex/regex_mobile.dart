@@ -7,58 +7,39 @@ extension MobileRegex on RegexPatterns {
       r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$)';
 
   /// Regex for Mobile Numbers for Different Countries
-  static const String egypt =
-      r'^(?:010|011|012|015)\d{8}$'; // Egypt (11 digits)
-  static const String usa = r'^\d{10}$'; // USA (10 digits)
-  static const String canada = r'^\d{10}$'; // Canada (10 digits)
-  static const String india =
+  static const String egyptRegex =
+      r'^(?:10|11|12|15)\d{8}$'; // Egypt (11 digits)
+  static const String usaRegex = r'^\d{10}$'; // USA (10 digits)
+  static const String canadaRegex = r'^\d{10}$'; // Canada (10 digits)
+  static const String indiaRegex =
       r'^[6789]\d{9}$'; // India (10 digits, starts with 6,7,8,9)
-  static const String saudiArabia =
+  static const String saudiArabiaRegex =
       r'^(?:05|9665)\d{8}$'; // Saudi Arabia (10 digits)
-  static const String uk = r'^(?:7\d{9})$'; // UK (11 digits, starts with 7)
-  static const String france =
+  static const String ukRegex =
+      r'^(?:7\d{9})$'; // UK (11 digits, starts with 7)
+  static const String franceRegex =
       r'^(?:06|07)\d{8}$'; // France (10 digits, starts with 06,07)
-  static const String germany =
+  static const String germanyRegex =
       r'^(?:015|016|017)\d{8}$'; // Germany (10-11 digits)
-  static const String italy =
+  static const String italyRegex =
       r'^(?:3\d{9})$'; // Italy (10 digits, starts with 3)
-  static const String brazil = r'^\d{11}$'; // Brazil (11 digits)
-  static const String mexico = r'^\d{10}$'; // Mexico (10 digits)
-  static const String china =
+  static const String brazilRegex = r'^\d{11}$'; // Brazil (11 digits)
+  static const String mexicoRegex = r'^\d{10}$'; // Mexico (10 digits)
+  static const String chinaRegex =
       r'^1[3-9]\d{9}$'; // China (11 digits, starts with 13-19)
-  static const String japan = r'^\d{10,11}$'; // Japan (10-11 digits)
-  static const String australia =
+  static const String japanRegex = r'^\d{10,11}$'; // Japan (10-11 digits)
+  static const String australiaRegex =
       r'^(?:04)\d{8}$'; // Australia (10 digits, starts with 04)
-  static const String southAfrica =
+  static const String southAfricaRegex =
       r'^(?:06|07|08)\d{8}$'; // South Africa (10 digits)
-  static const String russia =
+  static const String russiaRegex =
       r'^(?:9\d{9})$'; // Russia (10 digits, starts with 9)
-  static const String turkey =
+  static const String turkeyRegex =
       r'^(?:5\d{9})$'; // Turkey (10 digits, starts with 5)
-  static const String pakistan =
+  static const String pakistanRegex =
       r'^(?:03\d{9})$'; // Pakistan (11 digits, starts with 03)
-  static const String indonesia =
+  static const String indonesiaRegex =
       r'^(?:08\d{9,10})$'; // Indonesia (10-11 digits)
-
-  static final Map<String, String> mobileNumberPatterns = {
-    'EG': egypt, '20': egypt,   // Egypt
-    'US': usa, '1': usa,        // USA
-    'CA': canada, // Canada, its internation dialing code same as US so as it regex
-    'IN': india, '91': india,   // India
-    'SA': saudiArabia, '966': saudiArabia, // Saudi Arabia
-    'UK': uk, '44': uk,         // United Kingdom
-    'FR': france, '33': france, // France
-    'DE': germany, '49': germany, // Germany
-    'IT': italy, '39': italy,   // Italy
-    'BR': brazil, '55': brazil, // Brazil
-    'MX': mexico, '52': mexico, // Mexico
-    'CN': china, '86': china,   // China
-    'JP': japan, '81': japan,   // Japan
-    'AU': australia, '61': australia, // Australia
-    'ZA': southAfrica, '27': southAfrica, // South Africa
-    'RU': russia, '7': russia,  // Russia
-    'TR': turkey, '90': turkey, // Turkey
-    'PK': pakistan, '92': pakistan, // Pakistan
-    'ID': indonesia, '62': indonesia, // Indonesia
-  };
 }
+
+

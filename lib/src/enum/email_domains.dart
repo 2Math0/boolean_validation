@@ -1,8 +1,8 @@
 class EmailDomain {
-  final String domain;
+  final String name;
 
   // Private constructor to prevent direct instantiation
-  const EmailDomain._(this.domain);
+  const EmailDomain._(this.name);
 
   // Predefined domains
   static const EmailDomain gmail = EmailDomain._('gmail.com');

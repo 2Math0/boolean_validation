@@ -1,4 +1,3 @@
-
 import '../test_common_libs.dart';
 
 void main() {
@@ -45,49 +44,60 @@ void main() {
     });
     test('InValid Egyptian Mobile Number (Internation dialing code)', () {
       expect(
-        validators.validateMobileNumber('11234567890', prefix: '+20'),
+        validators.validateMobileNumber('11234567890',
+            prefix: CountryPhonePattern.egypt.dialCode),
         messages.invalidMobileNumber,
       );
     });
 
     test('Valid Egyptian Mobile Number (Internation dialing code)', () {
       expect(
-        validators.validateMobileNumber('01234567890', prefix: '+20'),
+        validators.validateMobileNumber('1234567890',
+            prefix: CountryPhonePattern.egypt.dialCode),
         null,
       );
     });
 
     test('InValid Egyptian Mobile Number (Internation dialing code)', () {
       expect(
-        validators.validateMobileNumber('01734567890', prefix: '+20'),
+        validators.validateMobileNumber('01734567890',
+            prefix: CountryPhonePattern.egypt.dialCode),
         messages.invalidMobileNumber,
       );
     });
 
-    test('Invalid Egyptian Mobile Number (Embedded Country code with (+) Sign)', () {
+    test('Invalid Egyptian Mobile Number (Embedded Country code with (+) Sign)',
+        () {
       expect(
-        validators.validateMobileNumber('+201734567890',),
+        validators.validateMobileNumber(
+          '+201734567890',
+        ),
         null,
       );
     });
 
     test('Valid Egyptian Mobile Number (Embedded Country code)', () {
       expect(
-        validators.validateMobileNumber('201734567890',),
+        validators.validateMobileNumber(
+          '201734567890',
+        ),
         null,
       );
     });
 
     test('Valid Egyptian Mobile Number (With Spaces and Brackets)', () {
       expect(
-        validators.validateMobileNumber('(017) 345-678-90',),
+        validators.validateMobileNumber(
+          '(017) 345-678-90',
+        ),
         null,
       );
     });
 
     test('valid Egyptian Mobile Number (Country code)', () {
       expect(
-        validators.validateMobileNumber('01234567890', prefix: 'eg'),
+        validators.validateMobileNumber('1234567890',
+            prefix: CountryPhonePattern.egypt.isoCode),
         null,
       );
     });

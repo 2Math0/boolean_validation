@@ -1,16 +1,12 @@
-# example
+# Example
 
-A new Flutter project.
+An Example Project for boolean_validation 
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Use the Commands in [COMMANDS.md](COMMANDS.md)
 
-A few resources to get you started if this is your first Flutter project:
+All Details kept in main.dart to ease the accessibility through pub.dev
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### For Localization
+you can use the [localization yaml](l10n.yaml)

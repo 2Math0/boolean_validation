@@ -53,3 +53,15 @@
 
 - changed the License To MPL
 - add description in pubspec yaml
+
+<hr/>
+
+## [1.0.0] - 2025-06-7
+
+- Separate the validation messages in another layer to ease localization and override
+- Add Validation for Mobile Number depending on country dial or iso code
+- Add Validation for alpha in 10 languages 
+- Add `double` and `positive number` validators
+- Add Github action for complete Example on WebAssembly with (.arb in localization)
+- Add String Extension for regex
+- Fix some bugs

@@ -1,4 +1,5 @@
 import 'package:boolean_validation/src/enum/email_domains.dart';
+import 'package:boolean_validation/src/enum/supported_languages.dart';
 import 'package:boolean_validation/src/validation_groups/validation_common.dart';
 import 'package:boolean_validation/src/validation_messages/message_replacements_keys.dart';
 
@@ -47,7 +48,7 @@ class UserInputValidators extends ValidationCommon {
       return messages.formatMessage(
           message: messages.emailDomainValidation,
           replacements: {
-            MessageReplacementKeys.domain: domain.domain,
+            MessageReplacementKeys.domain: domain.name,
           });
     }
 
@@ -87,6 +88,7 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
     int nameLength = 2,
+    List<SupportedLanguage> multiLang = const [SupportedLanguage.english],
   }) {
     final requiredValidation = validateRequired(
       value: value,
@@ -102,7 +104,7 @@ class UserInputValidators extends ValidationCommon {
     }
 
     for (var part in parts) {
-      if (!validationLogic.isAlpha(part)) {
+      if (!validationLogic.isAlpha(part, multiLang: multiLang)) {
         return customInvalidMessage ?? messages.nameMustBeAlphabetic;
       }
     }
@@ -116,6 +118,7 @@ class UserInputValidators extends ValidationCommon {
     bool isRequired = true,
     String? customRequiredMessage,
     String? customInvalidMessage,
+    List<SupportedLanguage> multiLang = const [SupportedLanguage.english],
   }) {
     final requiredValidation = validateRequired(
       value: value,
@@ -125,7 +128,7 @@ class UserInputValidators extends ValidationCommon {
     );
     if (requiredValidation != null) return requiredValidation;
 
-    if (!validationLogic.isValidName(value!)) {
+    if (!validationLogic.isValidName(value!, multiLang: multiLang)) {
       return customInvalidMessage ?? messages.nameMustBeAlphabetic;
     }
     return null;
@@ -136,7 +139,6 @@ class UserInputValidators extends ValidationCommon {
   String? validatePassword(
     String? value, {
     int minLength = 8,
-    String? customMinLengthMessage,
     bool requireUppercase = true,
     String? customUppercaseMessage,
     bool requireDigit = true,
@@ -148,7 +150,7 @@ class UserInputValidators extends ValidationCommon {
 
     if (value == null || value.length < minLength) {
       errors.add(messages.formatMessage(
-        message: customMinLengthMessage ?? messages.passwordMinLength,
+        message: messages.passwordMinLength,
         replacements: {MessageReplacementKeys.minLength: minLength},
       ));
     }

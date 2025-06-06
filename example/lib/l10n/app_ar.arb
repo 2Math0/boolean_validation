@@ -9,6 +9,7 @@
     "description": "The title of the validation form"
   },
   "emailLabel": "البريد الإلكتروني (gmail.com)",
+  "email2MathLabel": "البريد الإلكتروني (2math.com)",
   "@emailLabel": {
     "description": "Label for email input field"
   },
@@ -31,6 +32,10 @@
   "fullNameLabel": "الاسم الكامل",
   "@fullNameLabel": {
     "description": "Label for full name input field"
+  },
+  "arabicFullNameLabel": "الاسم الكامل بالعربية",
+  "@arabicFullNameLabel": {
+    "description": "Label for Arabic full name input field"
   },
   "creditCardLabel": "بطاقة الائتمان",
   "@creditCardLabel": {
@@ -120,7 +125,7 @@
   "@emailFormatValidation": {
     "description": "Error message when email format is invalid"
   },
-  "emailDomainValidation": "يجب أن يكون البريد الإلكتروني من نطاق {domain}",
+  "emailDomainValidation": "يجب أن يكون البريد الإلكتروني من نطاق <domain>",
   "@emailDomainValidation": {
     "description": "Error message when email domain is invalid",
     "placeholders": {
@@ -145,6 +150,14 @@
   "@fullNameInvalid": {
     "description": "Error message when full name format is invalid"
   },
+  "arabicFullNameRequired": "الاسم مطلوب كامل \"بالعربية\"",
+  "@arabicFullNameRequired": {
+    "description": "Error message when Arabic full name field is empty"
+  },
+  "arabicFullNameInvalid": "يرجى إدخال اسم كامل \"بالعربي\" صحيح",
+  "@arabicFullNameInvalid": {
+    "description": "Error message when Arabic full name format is invalid"
+  },
   "nameMustBeAlphabetic": "يجب أن يحتوي الاسم على حروف فقط",
   "@nameMustBeAlphabetic": {
     "description": "Error message when name contains non-alphabetic characters"
@@ -153,7 +166,7 @@
   "@nameRequired": {
     "description": "Error message when name field is empty"
   },
-  "passwordMinLength": "يجب أن تحتوي كلمة المرور على {minLength} أحرف على الأقل",
+  "passwordMinLength": "يجب أن تحتوي كلمة المرور على <minLength> أحرف على الأقل",
   "@passwordMinLength": {
     "description": "Error message when password is too short",
     "placeholders": {

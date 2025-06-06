@@ -1,134 +1,215 @@
-# boolean_validation
+# Boolean Validation
 
-A Dart package providing various validation utilities for common data types.
+I basically build this Package so Devs can use
 
-## Validation Functions
+1. A complete set of regex patterns for common validation needs.
+2. Handy shorthand methods to simplify built-in `TextFormField` validation.
+3. `isValid` methods for easy `bool` checks in any context.
+4. Built-in validation messages with override and localization support.
+5. Customizable "required" messages globally or per field type.
+6. Field-specific messages that override the default ones when needed.
+7. Support for validating email addresses with specific domain rules.
+8. Phone number validation tailored for 19 supported countries.
+9. Validate alphabetic characters for 10 languages, allowing checks against one or multiple selected
+   languages (e.g., English and Arabic).
 
-| Function                    | Description                                            | Example Usage                                            |
-|-----------------------------|--------------------------------------------------------|----------------------------------------------------------|
-| `validateEmail`             | Validates if a string is a properly formatted email.   | `validateEmail('test@example.com')`                      |
-| `validateMobileNumber`      | Validates if a string is a valid mobile number.        | `validateMobileNumber('1234567890')`                     |
-| `validateInteger`           | Validates if a string is a valid integer.              | `validateInteger('123')`                                 |
-| `validateUrl`               | Validates if a string is a properly formatted URL.     | `validateUrl('http://example.com')`                      |
-| `validateDate`              | Validates if a string is a valid date (YYYY-MM-DD).    | `validateDate('2020-01-01')`                             |
-| `validateCreditCard`        | Validates if a string is a valid credit card number.   | `validateCreditCard('4111111111111111')`                 |
-| `validateUsername`          | Validates if a string is a valid username.             | `validateUsername('username_123')`                       |
+## Table of Contents
 
-## Usage
+- [Some Visual References](#some-visual-references)
+    - [Overview Graph](#overview-graph)
+    - [Full Detailed Graph](#fully-detailed)
+- [Get Ready](#get-ready)
+- [Available Validators](#available-validators)
+    - [User Input Validators](#User-Input-Validators)
+    - [Data Type Validators](#Data-Type-validators)
+- [Some Complex Examples](#some-complex-examples)
+    - [Email Constrained Domain Validation](#email-constrained-domain-validation)
+    - [Mobile Number Validation](#mobile-number-validation)
+    - [Password Validation](#password-validation)
+    - [Name Validation](#name-validation)
+- [Contributing](#contributing)
+- [License](#license)
 
-Add the following to your `pubspec.yaml`:
+## Some Visual References
+
+### Overview Graph
+
+```mermaid
+graph TD
+    A[boolean_validation] --> B[Validators Class]
+    A[boolean_validation] --> F[Validation Messages]
+    B --> C[UserInputValidators]
+    B --> D[DataTypeValidators]
+    B --> E[LocationValidators]
+    C --> C1[validateEmail]
+    C --> C2[validateConstrainedEmail]
+    C --> C3[validateUsername]
+    C --> C4[validateFullName]
+    C --> C5[validateName]
+    C --> C6[validatePassword]
+    C --> C7[validateCreditCard]
+    D --> D1[validateInteger]
+    D --> D2[validateDouble]
+    D --> D3[validatePositiveNum]
+    D --> D4[validateUrl]
+    D --> D5[validateDate]
+    D --> D6[validateAlpha]
+    D --> D7[validateAlphanumeric]
+    E --> E1[validateLat]
+    E --> E2[validateLong]
+```
+
+### Fully Detailed:
+
+![Architecture Diagram](./full_diagram.png)
+
+## Get Ready
+
+Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  boolean_validation: ^0.1.1
+  boolean_validation: ^1.0.0
 ```
 
-Import the package in your Dart file:
+Basic usage:
 
 ```dart
 import 'package:boolean_validation/boolean_validation.dart';
 
-void main() {
-  final Validators validators = Validators();
+final validators = Validators();
 
-  // Example: Validate Email
-  String? emailValidation = validators.validateEmail(
-      'test@example.com', 'Email is required', 'Invalid email');
-  print(emailValidation); // Output: null (indicating valid email)
-}
+// Validate email
+TextFormField(
+  controller: TextEditingController(),
+  decoration: InputDecoration(
+    labelText: 'Email',
+    border: OutlineInputBorder(),
+    ),
+  keyboardType: TextInputType.emailAddress,
+  validator: (value) =>
+    _validators.userInput.validateEmail(value,
+    // in case of using arb as localization
+    customRequiredMessage: l10n.emailRequired,
+    customInvalidMessage:l10n.invalidEmail,
+  ),
+ ),
 ```
 
-## Validators Class
+## Available Validators
 
-### validateEmail
+### User Input Validators
+
+| Validator                  | Description                                                                            | Example                                                                                                                                                                                |
+|----------------------------|----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `validateEmail`            | Email format                                                                           | `validateEmail('test@example.com')`                                                                                                                                                    |
+| `validateConstrainedEmail` | Email format depending on specific domain validation                                   | `validateConstrainedEmail('test@2math.op', domain: EmailDomain.custom('2math.op')`                                                                                                     |
+| `validateMobileNumber`     | Mobile number validation depending on country (iso or code)                            | `validateMobileNumber('1201234567', prefix: CountryPhonePattern.egypt.dialCode)`                                                                                                       |
+| `validateCreditCard`       | Credit card validation                                                                 | • Luhn algorithm<br>• Card type detection<br>• Format validation                                                                                                                       |
+| `validatePassword`         | Password strength validation  includes all characters, you can change that if you need | • Length requirements<br>• Character type requirements<br>• Complexity rules                                                                                                           |
+| `validateUsername`         | Username format validation                                                             | • Length requirements<br>• Character restrictions<br>• Format validation                                                                                                               |
+| `validateFullName`         | at least first and last names                                                          | • Words Count requirements<br>• Alpha **Language** Characters' restrictions<br>• Format validation                                                                                     |
+| `validateName`             | it must be a legit name                                                                | ```validateName(isRequired = true, customRequiredMessage = "required Name",customInvalidMessage= "Invalid Name", multiLang = [SupportedLanguage.arabic,SupportedLanguage.english,]}``` |
+
+### Data Type Validators
+
+| Validator              | Description                            | Features                             |
+|------------------------|----------------------------------------|--------------------------------------|
+| `validateUrl`          | URL format validation                  | `validateUrl('https://example.com')` |
+| `validateDate`         | Date format validation (YYYY-MM-DD)    | `validateDate('2020-4-20')`          |
+| `validateInteger`      | validate on Integer Numbers            | `validateInteger(123)`               |
+| `validateDouble`       | validate on Double (Decimal) Numbers   | `validateDouble(3.47)`               |
+| `validatePositiveNum`  | validate on Positive Numbers           | `validatePositiveNum(12)`            |
+| `validateAlpha`        | validate on Alpha characters (letters) | `validateAlpha("Thomas")`            |
+| `validateAlphanumeric` | validate on characters with numbers    | `validateAlphanumeric(2Math)`        |
+
+## Some Complex Examples
+
+### Email Constrained Domain Validation
 
 ```dart
-String? validateEmail(String? value, String? emailRequiredMessage, String? validEmailMessage);
+  String? validateConstrainedEmail(String? value, {
+  required EmailDomain domain,
+  bool isRequired = true,
+  String? customRequiredMessage,
+  String? customInvalidMessage,
+});
 ```
 
-- **Description**: Validates if the given string is a properly formatted email.
-- **Parameters**:
-    - `value`: The email string to validate.
-    - `emailRequiredMessage`: Custom message when email is required but not provided.
-    - `validEmailMessage`: Custom message when email format is invalid.
-- **Returns**: Error message if invalid, `null` if valid.
-
-### validateMobileNumber
+| Parameter               | Type      | Description          |
+|-------------------------|-----------|----------------------|
+| `value`                 | `String?` | Email to validate    |
+| `customRequiredMessage` | `String?` | Message when empty   |
+| `customInvalidMessage`  | `String?` | Message when invalid |
+| `domain`                | `String?` | Required domain      |
+---
+### Mobile Number Validation
 
 ```dart
-String? validateMobileNumber(String? value, String? mobileRequiredMessage,
-    String? validMobileMessage);
+String? validateMobileNumber(String? value,
+    {
+      bool isRequired = true,
+      String? customRequiredMessage,
+      String? customInvalidMessage,
+      String? prefix,
+    });
 ```
 
-- **Description**: Validates if the given string is a valid mobile number.
-- **Parameters**:
-    - `value`: The mobile number string to validate.
-    - `mobileRequiredMessage`: Custom message when mobile number is required but not provided.
-    - `validMobileMessage`: Custom message when mobile number format is invalid.
-- **Returns**: Error message if invalid, `null` if valid.
-
-### validateInteger
+| Parameter               | Type      | Description                                              |
+|-------------------------|-----------|----------------------------------------------------------|
+| `value`                 | `String?` | Mobile number to validate                                |
+| `customRequiredMessage` | `String?` | Message when empty                                       |
+| `customInvalidMessage`  | `String?` | Message when invalid                                     |
+| `prefix`                | `String?` | Country code to validate from `CountryPhonePattern` enum |
+---
+### Password Validation
 
 ```dart
-String? validateInteger(String? value, String? integerRequiredMessage);
+ String? validatePassword(String? value, {
+  int minLength = 8,
+  bool requireUppercase = true,
+  String? customUppercaseMessage,
+  bool requireDigit = true,
+  String? customDigitMessage,
+  bool requireSpecialChar = true,
+  String? customSpecialCharMessage,
+});
 ```
 
-- **Description**: Validates if the given string is a valid integer.
-- **Parameters**:
-    - `value`: The integer string to validate.
-    - `integerRequiredMessage`: Custom message when integer is required but not provided.
-- **Returns**: Error message if invalid, `null` if valid.
-
-### validateUrl
+| Parameter              | Type      | Default | Description                                                   |
+|------------------------|-----------|---------|---------------------------------------------------------------|
+| `value`                | `String?` | -       | Password to validate                                          |
+| `minLength`            | `int`     | 8       | Minimum length                                                |
+| `requireUppercase`     | `bool`    | true    | Require uppercase                                             |
+| `requireLowercase`     | `bool`    | true    | Require lowercase                                             |
+| `requireDigit`         | `bool`    | true    | Require digit                                                 |
+| `requireSpecialChar`   | `bool`    | true    | Require special char                                          |
+| `custom Message *args` | `String?` | -       | give a message if the validation fail on any of required ones |
+---
+### Name Validation
 
 ```dart
-String? validateUrl(String value, String? urlRequiredMessage, String? validUrlMessage);
+String? validateName(String? value, {
+  bool isRequired = true,
+  String? customRequiredMessage,
+  String? customInvalidMessage,
+  List<SupportedLanguage> multiLang = const [SupportedLanguage.english],
+});
 ```
 
-- **Description**: Validates if the given string is a properly formatted URL.
-- **Parameters**:
-    - `value`: The URL string to validate.
-    - `urlRequiredMessage`: Custom message when URL is required but not provided.
-    - `validUrlMessage`: Custom message when URL format is invalid.
-- **Returns**: Error message if invalid, `null` if valid.
+| Parameter               | Type                      | Default                         | Description                                         |
+|-------------------------|---------------------------|---------------------------------|-----------------------------------------------------|
+| `value`                 | `String?`                 | –                               | The name input to validate.                         |
+| `isRequired`            | `bool`                    | `true`                          | Whether the name field is required.                 |
+| `customRequiredMessage` | `String?`                 | `messages.nameRequired`         | Custom error message if the field is empty.         |
+| `customInvalidMessage`  | `String?`                 | `messages.nameMustBeAlphabetic` | Custom error message for invalid characters.        |
+| `multiLang`             | `List<SupportedLanguage>` | `[SupportedLanguage.english]`   | List of allowed languages for character validation. |
+---
+## Contributing
 
-### validateDate
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-```dart
-String? validateDate(String value, String? dateRequiredMessage, String? validDateMessage);
-```
+## License
 
-- **Description**: Validates if the given string is a valid date in YYYY-MM-DD format.
-- **Parameters**:
-    - `value`: The date string to validate.
-    - `dateRequiredMessage`: Custom message when date is required but not provided.
-    - `validDateMessage`: Custom message when date format is invalid.
-- **Returns**: Error message if invalid, `null` if valid.
-
-### validateCreditCard
-
-```dart
-String? validateCreditCard(String value, String? cardRequiredMessage, String? validCardMessage);
-```
-
-- **Description**: Validates if the given string is a valid credit card number.
-- **Parameters**:
-    - `value`: The credit card number string to validate.
-    - `cardRequiredMessage`: Custom message when credit card number is required but not provided.
-    - `validCardMessage`: Custom message when credit card number is invalid.
-- **Returns**: Error message if invalid, `null` if valid.
-
-### validateUsername
-
-```dart
-String? validateUsername(String value, String? usernameRequiredMessage,
-    String? validUsernameMessage);
-```
-
-- **Description**: Validates if the given string is a valid username.
-- **Parameters**:
-    - `value`: The username string to validate.
-    - `usernameRequiredMessage`: Custom message when username is required but not provided.
-    - `validUsernameMessage`: Custom message when username format is invalid.
-- **Returns**: Error message if invalid, `null` if valid.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 

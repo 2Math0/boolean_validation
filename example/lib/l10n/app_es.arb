@@ -32,6 +32,10 @@
   "@fullNameLabel": {
     "description": "Label for full name input field"
   },
+  "arabicFullNameLabel": "Nombre completo en árabe",
+  "@arabicFullNameLabel": {
+    "description": "Label for Arabic full name input field"
+  },
   "creditCardLabel": "Tarjeta de Crédito",
   "@creditCardLabel": {
     "description": "Label for credit card input field"
@@ -120,7 +124,7 @@
   "@emailFormatValidation": {
     "description": "Error message when email format is invalid"
   },
-  "emailDomainValidation": "El correo debe ser del dominio {domain}",
+  "emailDomainValidation": "El correo debe ser del dominio <domain>",
   "@emailDomainValidation": {
     "description": "Error message when email domain is invalid",
     "placeholders": {
@@ -145,6 +149,14 @@
   "@fullNameInvalid": {
     "description": "Error message when full name format is invalid"
   },
+  "arabicFullNameRequired": "Se requiere el nombre completo en \"árabe\"",
+  "@arabicFullNameRequired": {
+    "description": "Error message when Arabic full name field is empty"
+  },
+  "arabicFullNameInvalid": "Por favor, ingrese un nombre completo \"árabe\" válido",
+  "@arabicFullNameInvalid": {
+    "description": "Error message when Arabic full name format is invalid"
+  },
   "nameMustBeAlphabetic": "El nombre debe contener solo letras",
   "@nameMustBeAlphabetic": {
     "description": "Error message when name contains non-alphabetic characters"
@@ -153,7 +165,7 @@
   "@nameRequired": {
     "description": "Error message when name field is empty"
   },
-  "passwordMinLength": "La contraseña debe tener al menos {minLength} caracteres",
+  "passwordMinLength": "La contraseña debe tener al menos <minLength> caracteres",
   "@passwordMinLength": {
     "description": "Error message when password is too short",
     "placeholders": {

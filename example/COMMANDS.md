@@ -51,7 +51,7 @@ flutter pub run intl_utils:extract_to_arb --output-dir=lib/l10n lib/*.dart
 
 ```bash
 # Run the app in debug mode
-flutter run
+flutter run -d web
 
 # Run the app in release mode
 flutter run --release
@@ -72,30 +72,11 @@ flutter format .
 flutter analyze
 ```
 
-## Testing
-
-```bash
-# Run all tests
-flutter test
-
-# Run tests with coverage
-flutter test --coverage
-
-# Generate coverage report (requires lcov)
-genhtml coverage/lcov.info -o coverage/html
-```
-
 ## Building
 
 ```bash
-# Build APK
-flutter build apk
-
-# Build iOS
-flutter build ios
-
 # Build web
-flutter build web
+flutter build web --wasm
 ```
 
 ## Git Commands
@@ -123,5 +104,3 @@ Recommended extensions for better development experience:
 - Better Comments
 - Error Lens
 - Git Lens
-
-## Project Structure 

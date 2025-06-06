@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:boolean_validation/boolean_validation.dart';
 
-class AnimatedSearchableDropdown extends StatelessWidget {
+class AnimatedSearchableDropdown<T extends Object> extends StatelessWidget {
   final String label;
-  final String value;
-  final String displayValue;
-  final List<String> options;
-  final void Function(String?) onChanged;
-  final List<String> Function(String) onSearch;
+  final T? value;
+  final List<T> options;
+  final void Function(T?) onChanged;
+  final List<T> Function(String) onSearch;
+  final String Function(T) displayStringForOption;
   final String? errorText;
   final EdgeInsetsGeometry? margin;
 
@@ -15,10 +14,10 @@ class AnimatedSearchableDropdown extends StatelessWidget {
     Key? key,
     required this.label,
     required this.value,
-    required this.displayValue,
     required this.options,
     required this.onChanged,
     required this.onSearch,
+    required this.displayStringForOption,
     this.errorText,
     this.margin,
   }) : super(key: key);
@@ -28,14 +27,23 @@ class AnimatedSearchableDropdown extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       margin: margin ?? const EdgeInsets.symmetric(vertical: 8.0),
-      child: Autocomplete<String>(
-        initialValue: TextEditingValue(text: value),
+      child: Autocomplete<T>(
+        initialValue: TextEditingValue(
+          text: value != null ? displayStringForOption(value!) : '',
+        ),
+        displayStringForOption: displayStringForOption,
         optionsBuilder: (TextEditingValue textEditingValue) {
           return onSearch(textEditingValue.text);
         },
         onSelected: onChanged,
         fieldViewBuilder:
             (context, textEditingController, focusNode, onFieldSubmitted) {
+          // Update the controller if needed
+          if (value != null &&
+              textEditingController.text != displayStringForOption(value!)) {
+            textEditingController.text = displayStringForOption(value!);
+          }
+
           return TextFormField(
             controller: textEditingController,
             focusNode: focusNode,
@@ -76,21 +84,17 @@ class AnimatedSearchableDropdown extends StatelessWidget {
             child: Material(
               elevation: 4,
               child: ConstrainedBox(
-                constraints:
-                    const BoxConstraints(maxHeight: 200, maxWidth: 150),
+                constraints: const BoxConstraints(maxHeight: 200),
                 child: ListView.builder(
                   padding: EdgeInsets.zero,
-                  shrinkWrap: true,
                   itemCount: options.length,
-                  itemBuilder: (BuildContext context, int index) {
+                  itemBuilder: (context, index) {
                     final option = options.elementAt(index);
                     return InkWell(
-                      onTap: () {
-                        onSelected(option);
-                      },
-                      child: Container(
+                      onTap: () => onSelected(option),
+                      child: Padding(
                         padding: const EdgeInsets.all(16.0),
-                        child: Text(option),
+                        child: Text(displayStringForOption(option)),
                       ),
                     );
                   },

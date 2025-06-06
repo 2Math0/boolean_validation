@@ -1,3 +1,4 @@
+import 'package:boolean_validation/src/enum/supported_languages.dart';
 import 'package:boolean_validation/src/validation_groups/validation_common.dart';
 
 class DataTypeValidators extends ValidationCommon {
@@ -19,6 +20,52 @@ class DataTypeValidators extends ValidationCommon {
 
     if (value != null && !validationLogic.isInteger(value)) {
       return customInvalidMessage ?? messages.invalidNumber;
+    }
+    return null;
+  }
+
+  /// [Under_Development] <br/>
+  /// Validates if the input is a Decimal.
+  /// Returns an error message if invalid; otherwise, null.
+  String? validateDouble(
+    String? value, {
+    bool isRequired = true,
+    String? customRequiredMessage,
+    String? customInvalidMessage,
+  }) {
+    final requiredValidation = validateRequired(
+      value: value,
+      isRequired: isRequired,
+      customMessage: customRequiredMessage,
+      defaultMessage: messages.doubleRequired,
+    );
+    if (requiredValidation != null) return requiredValidation;
+
+    if (value != null && !validationLogic.isDouble(value)) {
+      return customInvalidMessage ?? messages.doubleRequired;
+    }
+    return null;
+  }
+
+  /// [Under_Development] <br/>
+  /// Validates if the input is a Positive Number.
+  /// Returns an error message if invalid; otherwise, null.
+  String? validatePositiveNum(
+    String? value, {
+    bool isRequired = true,
+    String? customRequiredMessage,
+    String? customInvalidMessage,
+  }) {
+    final requiredValidation = validateRequired(
+      value: value,
+      isRequired: isRequired,
+      customMessage: customRequiredMessage,
+      defaultMessage: messages.positiveNumRequired,
+    );
+    if (requiredValidation != null) return requiredValidation;
+
+    if (value != null && !validationLogic.isPositiveNum(value)) {
+      return customInvalidMessage ?? messages.positiveNumRequired;
     }
     return null;
   }
@@ -74,6 +121,7 @@ class DataTypeValidators extends ValidationCommon {
     bool isRequired = true,
     String? customRequiredMessage,
     String? customInvalidMessage,
+    List<SupportedLanguage> multiLang = const [SupportedLanguage.english],
   }) {
     final requiredValidation = validateRequired(
       value: value,
@@ -83,7 +131,7 @@ class DataTypeValidators extends ValidationCommon {
     );
     if (requiredValidation != null) return requiredValidation;
 
-    if (!validationLogic.isAlpha(value)) {
+    if (!validationLogic.isAlpha(value, multiLang: multiLang)) {
       return customInvalidMessage ?? messages.alphaInvalid;
     }
     return null;
@@ -91,12 +139,11 @@ class DataTypeValidators extends ValidationCommon {
 
   /// Validates a string to ensure it contains only alphanumeric characters.
   /// Returns an error message if invalid; otherwise, null.
-  String? validateAlphanumeric(
-    String? value, {
-    bool isRequired = true,
-    String? customRequiredMessage,
-    String? customInvalidMessage,
-  }) {
+  String? validateAlphanumeric(String? value,
+      {bool isRequired = true,
+      String? customRequiredMessage,
+      String? customInvalidMessage,
+      List<SupportedLanguage> multiLang = const [SupportedLanguage.english]}) {
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -105,7 +152,7 @@ class DataTypeValidators extends ValidationCommon {
     );
     if (requiredValidation != null) return requiredValidation;
 
-    if (!validationLogic.isAlphanumeric(value)) {
+    if (!validationLogic.isAlphanumeric(value, multiLang: multiLang)) {
       return customInvalidMessage ?? messages.alphaNumericInvalid;
     }
     return null;

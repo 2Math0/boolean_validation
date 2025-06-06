@@ -31,7 +31,7 @@ class RegexPatterns {
 
   /// Regular expression for validating dates in the format YYYY-MM-DD.
   /// This pattern ensures that the date follows the specified format.
-  static const String date = r'^\d{4}-\d{2}-\d{2}$';
+  static const String date = r'^\d{4}-\d{1,2}-\d{1,2}$';
 
   /// Regular expression for validating 16-digit credit card numbers.
   /// This pattern uses a basic validation rule to ensure the card number is 16 digits.
@@ -56,20 +56,38 @@ class RegexPatterns {
   /// Regular expression for validating alphanumeric strings.
   /// This pattern ensures that the string contains only letters and numbers.
   static const String alphanumeric = r'^[a-zA-Z0-9]+$';
+  static const String digits = r'^[0-9]+$';
 
   /// Regular expression for validating passwords.
   /// This pattern enforces a password to have at least 8 characters, including at least one uppercase letter, one digit, and one special character.
-  static const String password = r'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~_-]).{8,}$';
+  static const String password =
+      r'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~_-]).{8,}$';
 
   /// Regular expression for validating numbers.
   static const String numbers = r'\d';
 
   /// Regular expression for validating special characters.
-  static const String specialCharacters = r'[!@#\$&*~_-]';
+  // static final RegExp specialCharacters = RegExp(_specialCharacters);
+  static const String specialCharacters =
+      "[!@#\\\$%^&*()_+\\-=\\[\\]\\{\\}\\\\|;:',\".<>/?]";
 
   /// Regular expression for validating lower characters only
   static const String lowercaseLetters = r'[a-z]';
 
   /// Regular expression for validating upper characters only
   static const String uppercaseLetters = r'[A-Z]';
+
+  ///  Unsafe special characters — avoid allowing these in non-sanitized inputs.
+  /// These symbols can be used in:
+  /// - XSS attacks (`<`, `>`, `"`, `'`)
+  /// - Regex Denial of Service (ReDoS) (`*`, `+`, `?`, `{}`, `()`)
+  /// - Path or command injection (`\`, `/`, `` ` ``)
+  /// - Regex injection (`^`, `$`, `.`, `|`)
+  ///
+  /// Ref:
+  /// https://owasp.org/www-community/attacks/xss/
+  /// https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS
+  ///
+  static const String unsafeSymbols =
+      "[<>\\{\\}\\^\$\\|\\*\\\\/.\\?\\+\\'\\\"`]";
 }

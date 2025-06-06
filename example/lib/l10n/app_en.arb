@@ -12,6 +12,10 @@
   "@emailLabel": {
     "description": "Label for email input field"
   },
+  "email2MathLabel": "Email (2math.com)",
+  "@email2MathLabel": {
+    "description": "Label for email input field"
+  },
   "mobileLabel": "Mobile Number",
   "@mobileLabel": {
     "description": "Label for mobile number input field"
@@ -31,6 +35,10 @@
   "fullNameLabel": "Full Name",
   "@fullNameLabel": {
     "description": "Label for full name input field"
+  },
+  "arabicFullNameLabel": "Arabic Full Name",
+  "@arabicFullNameLabel": {
+    "description": "Label for Arabic full name input field"
   },
   "creditCardLabel": "Credit Card",
   "@creditCardLabel": {
@@ -120,7 +128,7 @@
   "@emailFormatValidation": {
     "description": "Error message when email format is invalid"
   },
-  "emailDomainValidation": "Email must be from {domain} domain",
+  "emailDomainValidation": "Email must be from <domain> domain",
   "@emailDomainValidation": {
     "description": "Error message when email domain is invalid",
     "placeholders": {
@@ -145,6 +153,14 @@
   "@fullNameInvalid": {
     "description": "Error message when full name format is invalid"
   },
+  "arabicFullNameRequired": "\"Arabic\" full name is required",
+  "@arabicFullNameRequired": {
+    "description": "Error message when Arabic full name field is empty"
+  },
+  "arabicFullNameInvalid": "Please enter a valid \"Arabic\" full name",
+  "@arabicFullNameInvalid": {
+    "description": "Error message when Arabic full name format is invalid"
+  },
   "nameMustBeAlphabetic": "Name must contain only letters",
   "@nameMustBeAlphabetic": {
     "description": "Error message when name contains non-alphabetic characters"
@@ -153,7 +169,7 @@
   "@nameRequired": {
     "description": "Error message when name field is empty"
   },
-  "passwordMinLength": "Password must be at least {minLength} characters",
+  "passwordMinLength": "Password must be at least <minLength> characters",
   "@passwordMinLength": {
     "description": "Error message when password is too short",
     "placeholders": {

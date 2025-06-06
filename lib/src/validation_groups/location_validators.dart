@@ -1,6 +1,6 @@
 import 'package:boolean_validation/src/validation_groups/validation_common.dart';
 
-class LocationValidators extends ValidationCommon {
+  class LocationValidators extends ValidationCommon {
   /// Validates latitude.
   /// Returns an error message if invalid; otherwise, null.
   String? validateLat(

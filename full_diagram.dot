@@ -1,0 +1,267 @@
+@startuml
+' General skin params for styling
+skinparam {
+shadowing false
+backgroundColor #ffffff
+  class {
+BackgroundColor #efefef
+    BorderColor #34495e
+    ArrowColor #2980b9
+    FontColor #2c3e50
+    FontName "Roboto"
+FontSize 16
+RoundCorner 12
+}
+package {
+BackgroundColor #edeFeF
+    BorderColor #34495e
+    FontColor #34495e
+  }
+note {
+BackgroundColor #d0f0f7
+    BorderColor #22a6b3
+    FontColor #22a6b3
+    FontName "monospace"
+FontSize 10
+RoundCorner 12
+}
+}
+
+' Define Colors for class stereotypes
+!define VALIDATOR_COLOR #3498db
+!define MESSAGE_COLOR #e67e22
+!define ENUM_COLOR #8e44ad
+!define ABSTRACT_COLOR #27ae60
+!define UTILITY_COLOR #c0392b
+
+' Legend of stereotypes for clarity
+skinparam class {
+stereotypeFontColor #555555
+  stereotypeFontSize 10
+}
+
+' ========== Utility / Constants ==========
+package "Utility & Constants" {
+class "MessageReplacementKeys" as MsgKeys << (K, UTILITY_COLOR) >> {
+{static} +String domain
+{static} +String minLength
+}
+class "RegexPatterns" << (U, UTILITY_COLOR) >> {
+{static} +String email
+{static} +String integer
+{static} +String digits
+{static} +String url
+{static} +String date
+{static} +String creditCard
+{static} +String username
+{static} +String latitude
+{static} +String longitude
+{static} +String alpha
+{static} +String alphanumeric
+{static} +String password
+{static} +String numbers
+{static} +String specialCharacters
+{static} +String lowercaseLetters
+{static} +String uppercaseLetters
+{static} +String unsafeSymbols
+{static} +String constrainedEmail()
+}
+
+
+class "ValidationLogic" << (U, UTILITY_COLOR) >> {
++bool isValidEmail()
++bool isValidConstrainedEmail()
++bool isValidName()
++bool isCorrectMobileNumber()
++bool isInteger()
++bool isValidUrl()
++bool isValidDate()
++bool isValidCreditCard()
+-bool _luhnCheck()
++bool isValidUsername()
++bool isValidLatLng()
++bool isValidLatitude()
++bool isValidLongitude()
++bool isRequiredField()
++bool isValidPassword()
++bool isPasswordLongEnough()
++bool containsUppercase()
++bool containsLowerCase()
++bool containsDigits()
++bool containsSpecialCharacter()
++bool isAlpha()
++bool isAlphanumeric()
+}
+}
+
+' ========== Messages ==========
+package "Validation Messages" {
+class "ValidationMessages" as VMessages << (M, MESSAGE_COLOR) >> {
+-ValidationMessageProvider? _provider
++bool useGenericRequiredMessage
++ValidationMessageProvider? provider
++static void setProvider()
++void copyWith()
++String getRequiredMessage()
++String formatMessage()
+-String _convertToString()
+}
+
+note right of VMessages
+Contains static default messages,\n
+customizable message provider,\n
+and message formatting utilities.\n
+Singleton pattern used for global access.
+end note
+
+abstract class "ValidationMessageProvider" as MessageProvider << (A, ABSTRACT_COLOR) >> {
++String? mobileNumberRequired
++String? invalidMobileNumber
++String? genericRequiredMessage
++String? creditCardRequired
++String? invalidCreditCard
++String? expirationDateRequired
++String? securityCodeRequired
++String? cardholderNameRequired
++String? invalidCardholderName
++String? emailRequired
++String? invalidEmail
++String? emailFormatValidation
+}
+
+class "_OverrideProvider" as OverrideProvider << (I, MESSAGE_COLOR) >> {
++String? mobileNumberRequired
++String? invalidMobileNumber
++String? genericRequiredMessage
++String? creditCardRequired
++String? invalidCreditCard
++String? expirationDateRequired
++String? securityCodeRequired
++String? cardholderNameRequired
++String? invalidCardholderName
++String? emailRequired
++String? invalidEmail
++String? emailFormatValidation
+}
+
+' Relationships
+MessageProvider <|-- OverrideProvider
+VMessages o-- MessageProvider
+VMessages o-- VMessages : "Singleton _instance"
+}
+
+' ========== Enums ==========
+package "Enums" {
+class "EmailDomain" as EmailDomain << (E, ENUM_COLOR) >> {
++String name
+--
+{static} +gmail
+{static} +yahoo
+{static} +hotmail
+{static} +outlook
+{static} +custom()
+}
+
+EmailDomain o-- EmailDomain : self-reference (custom factory)
+
+class "CountryPhonePattern" as CountryPhonePattern << (E, ENUM_COLOR) >> {
++String isoCode
++String dialCode
++String name
++String regex
+--
+{static} +List<CountryPhonePattern> values
+{static} +egypt
+{static} +usa
+{static} +canada
+{static} +india
+{static} +saudiArabia
+{static} +uk
+{static} +france
+{static} +germany
+{static} +italy
+{static} +brazil
+{static} +mexico
+{static} +china
+{static} +japan
+{static} +australia
+{static} +southAfrica
+{static} +russia
+{static} +turkey
+{static} +pakistan
+{static} +indonesia
+}
+
+class "SupportedLanguage" as SupportedLanguage << (E, ENUM_COLOR) >> {
++String pattern
+--
+{static} +english
+{static} +arabic
+{static} +german
+{static} +japanese
+{static} +chinese
+{static} +latinExtended
+{static} +cyrillic
+{static} +hebrew
+{static} +devanagari
+{static} +thai
+{static} +korean
+}
+}
+
+' ========== Validators ==========
+package "Validators" {
+class "Validators" as Validators << (V, VALIDATOR_COLOR) >> {
+{static} -Validators _instance
++UserInputValidators userInput
++LocationValidators location
++DataTypeValidators dataType
+}
+
+class "ValidationCommon" as ValidationCommon << (A, ABSTRACT_COLOR) >> {
++ValidationLogic validationLogic
++ValidationMessages messages
++String? validateRequired()
+}
+
+class "UserInputValidators" as UserInputValidators << (V, VALIDATOR_COLOR) >> {
++String? validateEmail()
++String? validateConstrainedEmail(EmailDomain)
++String? validateUsername()
++String? validateFullName()
++String? validateName()
++String? validatePassword()
++String? validateMobileNumber(CountryPhonePattern?)
++String? validateCreditCard()
+}
+
+class "LocationValidators" << (V, VALIDATOR_COLOR) >> {
++String? validateLat()
++String? validateLong()
+}
+
+class "DataTypeValidators" as DataTypeValidators << (V, VALIDATOR_COLOR) >> {
++String? validateInteger()
++String? validateDouble()
++String? validatePositiveNum()
++String? validateUrl()
++String? validateDate()
++String? validateAlpha(List<SupportedLanguage>)
++String? validateAlphanumeric(List<SupportedLanguage>)
+  }
+
+' Relationships
+Validators o-- Validators : singleton _instance
+Validators o-- UserInputValidators : userInput
+Validators o-- LocationValidators : location
+Validators o-- DataTypeValidators : dataType
+
+ValidationCommon o-- ValidationLogic
+ValidationCommon o-- VMessages
+
+UserInputValidators --|> ValidationCommon
+LocationValidators --|> ValidationCommon
+DataTypeValidators --|> ValidationCommon
+}
+
+@enduml

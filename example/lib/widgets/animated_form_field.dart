@@ -39,6 +39,7 @@ class AnimatedFormField extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
         controller: controller,
+        textDirection: Directionality.of(context),
         keyboardType: keyboardType,
         obscureText: obscureText,
         maxLines: maxLines,

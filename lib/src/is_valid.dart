@@ -1,6 +1,7 @@
-// validation_logic.dart
+import 'package:boolean_validation/src/enum/supported_languages.dart';
 import 'package:boolean_validation/src/regex/regex_mobile.dart';
 import 'package:boolean_validation/src/core/extensions/string_extension.dart';
+import 'enum/country_phone_codes.dart';
 import 'regex/regex_patterns.dart';
 import 'package:boolean_validation/src/enum/email_domains.dart';
 
@@ -20,17 +21,24 @@ mixin class ValidationLogic {
       return false;
     }
 
-    final domainPattern = RegExp(RegexPatterns.constrainedEmail(domain.domain));
+    final domainPattern = RegExp(RegexPatterns.constrainedEmail(domain.name));
     return domainPattern.hasMatch(value.trim());
   }
 
   /// Validates a name ensuring it only contains alphabets
-  bool isValidName(String? value) {
-    if (value == null || value.isEmpty) {
-      return false;
-    }
-    final pattern = RegExp(RegexPatterns.alpha);
-    return pattern.hasMatch(value);
+  bool isValidName(String? value,
+      {required List<SupportedLanguage> multiLang}) {
+    if (value == null || value.isEmpty) return false;
+
+    // Combine all character sets from the selected language patterns
+    final combinedCharSet = multiLang
+        .map((lang) => lang.pattern.charSet) // use your extension getter here
+        .join();
+
+    // Build a regex that matches only characters in the combined set, for the whole string
+    final pattern = RegExp('^[$combinedCharSet]+\$');
+
+    return pattern.hasMatch(value.trim());
   }
 
   /// Validates if a mobile number is correct.
@@ -47,9 +55,11 @@ mixin class ValidationLogic {
         value.replaceAll(RegExp(r'\D'), ''); // Remove non-numeric characters
 
     // Use country-specific regex if available, otherwise fall back to default regex
-    final RegExp pattern = RegExp(
-        MobileRegex.mobileNumberPatterns[countryCode.toUpperCase()] ??
+    final pattern = RegExp(
+        CountryPhonePattern.byIsoCode[countryCode.toUpperCase()]?.regex ??
+            CountryPhonePattern.byDialCode[countryCode.toUpperCase()]?.regex ??
             MobileRegex.mobileNumber);
+
     return pattern.hasMatch(normalizedNumber);
   }
 
@@ -58,6 +68,26 @@ mixin class ValidationLogic {
     try {
       int.parse(input ?? '');
       return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// Validates if the input string can be parsed as an integer.
+  bool isDouble(String? input) {
+    try {
+      double.parse(input ?? '');
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// Validates if Input is a Positive Number
+  bool isPositiveNum(String? input) {
+    try {
+      final number = num.parse(input ?? '');
+      return number > 0;
     } catch (e) {
       return false;
     }
@@ -75,13 +105,22 @@ mixin class ValidationLogic {
 
   /// Validates date in the format YYYY-MM-DD.
   bool isValidDate(String value) {
-    final pattern = RegExp(RegexPatterns.date);
-    if (!pattern.hasMatch(value.trim())) {
-      return false;
-    }
+    final trimmed = value.trim();
+    final regex = RegExp(RegexPatterns.date);
+
+    if (!regex.hasMatch(trimmed)) return false;
+
+    final parts = trimmed.split('-');
+    final year = int.tryParse(parts[0]);
+    final month = int.tryParse(parts[1]);
+    final day = int.tryParse(parts[2]);
+
+    if (year == null || month == null || day == null) return false;
+    if (month < 1 || month > 12) return false;
+
     try {
-      DateTime.parse(value.trim());
-      return true;
+      final date = DateTime(year, month, day);
+      return date.year == year && date.month == month && date.day == day;
     } catch (e) {
       return false;
     }
@@ -179,21 +218,38 @@ mixin class ValidationLogic {
     return specialCharPattern.hasMatch(password);
   }
 
-  /// Validates if the input string contains only alphabetic characters.
-  bool isAlpha(String? value) {
-    if (value == null || value.isEmpty) {
-      return false;
-    }
-    final pattern = RegExp(RegexPatterns.alpha);
+  /// Validates if the input string contains only alphabetic characters
+  /// matching **any** of the given languages. <br/>
+  /// Returns false if the input is null or empty.
+  bool isAlpha(String? value, {required List<SupportedLanguage> multiLang}) {
+    if (value == null || value.isEmpty) return false;
+
+    // Combine all character sets from the selected language patterns
+    final combinedCharSet = multiLang
+        .map((lang) => lang.pattern.charSet) // use your extension getter here
+        .join();
+
+    // Build a regex that matches only characters in the combined set, for the whole string
+    final pattern = RegExp('^[$combinedCharSet]+\$');
+
     return pattern.hasMatch(value.trim());
   }
 
   /// Validates if the input string contains only alphanumeric characters.
-  bool isAlphanumeric(String? value) {
-    if (value == null || value.isEmpty) {
-      return false;
-    }
-    final pattern = RegExp(RegexPatterns.alphanumeric);
+  bool isAlphanumeric(String? value,
+      {required List<SupportedLanguage> multiLang}) {
+    if (value == null || value.isEmpty) return false;
+
+    // Combine char sets from languages
+    final combinedCharSet =
+        multiLang.map((lang) => lang.pattern.charSet).join();
+
+    // Add digits char set extracted from RegexPatterns.digits
+    final digitsCharSet = RegexPatterns.digits.charSet;
+
+    // Build regex pattern with combined charset and digits
+    final pattern = RegExp('^[${combinedCharSet + digitsCharSet}]+\$');
+
     return pattern.hasMatch(value.trim());
   }
 }

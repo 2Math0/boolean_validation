@@ -45,7 +45,7 @@ void main() {
         messages.formatMessage(
             message: messages.emailDomainValidation,
             replacements: {
-              MessageReplacementKeys.domain: domain.domain,
+              MessageReplacementKeys.domain: domain.name,
             }),
       );
     });
