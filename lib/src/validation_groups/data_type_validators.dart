@@ -42,7 +42,7 @@ class DataTypeValidators extends ValidationCommon {
     if (requiredValidation != null) return requiredValidation;
 
     if (value != null && !validationLogic.isDouble(value)) {
-      return customInvalidMessage ?? messages.doubleRequired;
+      return customInvalidMessage ?? messages.invalidDouble;
     }
     return null;
   }
@@ -65,7 +65,7 @@ class DataTypeValidators extends ValidationCommon {
     if (requiredValidation != null) return requiredValidation;
 
     if (value != null && !validationLogic.isPositiveNum(value)) {
-      return customInvalidMessage ?? messages.positiveNumRequired;
+      return customInvalidMessage ?? messages.invalidPositiveNum;
     }
     return null;
   }
