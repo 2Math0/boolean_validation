@@ -255,10 +255,10 @@ mixin class ValidationLogic {
 
   // use this function to run many validators at same time
   bool runMultiValidators({
-    required List<bool Function()> validators,
+    required List<bool> validators,
   }) {
     for (final validator in validators) {
-      if (!validator()) {
+      if (!validator) {
         return false;
       }
     }

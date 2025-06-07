@@ -27,6 +27,7 @@ I basically build this Package so Devs can use
     - [Mobile Number Validation](#mobile-number-validation)
     - [Password Validation](#password-validation)
     - [Name Validation](#name-validation)
+    - [Run Many Validation Logic](#run-many-validation-logic)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -81,19 +82,19 @@ final validators = Validators();
 
 // Validate email
 TextFormField(
-  controller: TextEditingController(),
-  decoration: InputDecoration(
-    labelText: 'Email',
-    border: OutlineInputBorder(),
+    controller: TextEditingController(),
+    decoration: InputDecoration(
+        labelText: 'Email',
+        border: OutlineInputBorder(),
+      ),
+    keyboardType: TextInputType.emailAddress,
+    validator: (value) =>
+        _validators.userInput.validateEmail(value,
+            // in case of using arb as localization
+            customRequiredMessage: l10n.emailRequired,
+            customInvalidMessage:l10n.invalidEmail,
+           ),
     ),
-  keyboardType: TextInputType.emailAddress,
-  validator: (value) =>
-    _validators.userInput.validateEmail(value,
-    // in case of using arb as localization
-    customRequiredMessage: l10n.emailRequired,
-    customInvalidMessage:l10n.invalidEmail,
-  ),
- ),
 ```
 
 ## Available Validators
@@ -142,7 +143,9 @@ TextFormField(
 | `customRequiredMessage` | `String?` | Message when empty   |
 | `customInvalidMessage`  | `String?` | Message when invalid |
 | `domain`                | `String?` | Required domain      |
+
 ---
+
 ### Mobile Number Validation
 
 ```dart
@@ -161,7 +164,9 @@ String? validateMobileNumber(String? value,
 | `customRequiredMessage` | `String?` | Message when empty                                       |
 | `customInvalidMessage`  | `String?` | Message when invalid                                     |
 | `prefix`                | `String?` | Country code to validate from `CountryPhonePattern` enum |
+
 ---
+
 ### Password Validation
 
 ```dart
@@ -185,7 +190,9 @@ String? validateMobileNumber(String? value,
 | `requireDigit`         | `bool`    | true    | Require digit                                                 |
 | `requireSpecialChar`   | `bool`    | true    | Require special char                                          |
 | `custom Message *args` | `String?` | -       | give a message if the validation fail on any of required ones |
+
 ---
+
 ### Name Validation
 
 ```dart
@@ -204,7 +211,55 @@ String? validateName(String? value, {
 | `customRequiredMessage` | `String?`                 | `messages.nameRequired`         | Custom error message if the field is empty.         |
 | `customInvalidMessage`  | `String?`                 | `messages.nameMustBeAlphabetic` | Custom error message for invalid characters.        |
 | `multiLang`             | `List<SupportedLanguage>` | `[SupportedLanguage.english]`   | List of allowed languages for character validation. |
+
 ---
+
+### Run Many Validation Logic
+
+```dart
+bool runMultiValidators({
+  required List<bool Function()> validators,
+});
+```
+
+| Parameter    | Type                    | Default | Description                |
+|--------------|-------------------------|---------|----------------------------|
+| `validators` | `List<bool Function()>` | –       | List of boolean validators |
+
+#### Example
+```dart
+class ShowCaseForMixinValidator extends StatefulWidget {
+  const ShowCaseForMixinValidator({super.key});
+
+  @override
+  State<ShowCaseForMixinValidator> createState() =>
+          _ShowCaseForMixinValidatorState();
+}
+```
+> Notice the use of Mixin `ValidationLogic` with the `with` keyword to access all the methods directly
+```dart
+class _ShowCaseForMixinValidatorState extends State<ShowCaseForMixinValidator>
+        with ValidationLogic {
+  @override
+  void initState() {
+    super.initState();
+    var result = runMultiValidators(validators: [
+      isInteger('4'),
+      isPositiveNum('4'),
+    ]);
+    debugPrint("output result is $result");
+    // output result is true
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+```
+
+---
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.

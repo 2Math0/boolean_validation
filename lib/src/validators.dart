@@ -5,7 +5,7 @@ import 'package:boolean_validation/src/validation_groups/user_input_validators.d
 import 'core/common_libs.dart';
 
 /// A class that provides high-level validation methods for common user inputs.
-/// It uses the [ValidationLogic] mixin for actual validation logic.
+/// It uses the [ValidationLogic] mixin from validation logic layer.
 class Validators {
   static final Validators _instance = Validators._internal();
 
