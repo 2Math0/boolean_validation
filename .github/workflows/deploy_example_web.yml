@@ -37,6 +37,10 @@ jobs:
         run: flutter build web --wasm --release
         working-directory: example
 
+      - name: Fix base href for GitHub Pages
+        run: |
+          sed -i 's#<base href="/">#<base href="/boolean_validation/">#g' example/build/web/index.html
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
