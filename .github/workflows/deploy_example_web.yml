@@ -16,7 +16,8 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: stable
+          channel: 'stable'
+          architecture: x64
 
       - name: Enable Flutter web
         run: flutter config --enable-web
