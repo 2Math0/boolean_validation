@@ -12,6 +12,10 @@
   "@emailLabel": {
     "description": "Label for email input field"
   },
+  "email2MathLabel": "Correo (2math.com)",
+  "@email2MathLabel": {
+    "description": "Label for email input field"
+  },
   "mobileLabel": "Número de Móvil",
   "@mobileLabel": {
     "description": "Label for mobile number input field"
