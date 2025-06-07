@@ -33,8 +33,8 @@ jobs:
         run: flutter gen-l10n
         working-directory: example
 
-      - name: Build example WebAssembly release
-        run: flutter build web --wasm --release
+      - name: Build example web release
+        run: flutter build web --release
         working-directory: example
 
       - name: Fix base href for GitHub Pages
