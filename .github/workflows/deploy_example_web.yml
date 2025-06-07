@@ -20,14 +20,14 @@ jobs:
           architecture: x64
 
       - name: Enable Flutter web
-        run: flutter config --enable-wasm
+        run: flutter config --enable-web
 
       - name: Get dependencies for example
         run: flutter pub get
         working-directory: example
 
-      - name: Build example web release *(WebAssembly ;P )*
-        run: flutter build web --wasm --release
+      - name: Build example web release 
+        run: flutter build web --release
         working-directory: example
 
       - name: Deploy to GitHub Pages
