@@ -1,3 +1,34 @@
+## [1.0.0] - 2025-06-7
+
+- Separate the validation messages in another layer to ease localization and override
+- Add Validation for Mobile Number depending on country dial or iso code
+- Add Validation for alpha in 10 languages 
+- Add `double` and `positive number` validators
+- Add Github action for complete Example on WebAssembly with (.arb in localization)
+- Add String Extension for regex
+- add `runMultiValidators()` method in Validation Logic Mixin
+- Fix some bugs
+
+<hr/>
+
+## [0.1.0] - 2024-09-29
+
+### Added
+1) Add `constrained email validation` for specific providers like gmail, yahoo, etc.
+2) add more advanced `password validation` for complex stages if developers required them
+3) add `lat and long` validations
+4) add validation for `Full Name`, `First and Last Name`
+5) add Validations for `required fields`
+6) add `alpha` and `alpha numeric` validations
+
+<hr/>
+
+## [0.0.2] - 2024-09-24
+
+- support for version 3.3.2 in flutter
+
+<hr/>
+
 ## [0.0.1] - 2024-06-11
 
 ### Added
@@ -30,39 +61,9 @@
 
 <hr/>
 
-## [0.0.2] - 2024-09-24
-
-- support for version 3.3.2 in flutter
-
-<hr/>
-
-## [0.1.0] - 2024-09-29
-
-### Added
-1) Add `constrained email validation` for specific providers like gmail, yahoo, etc.
-2) add more advanced `password validation` for complex stages if developers required them
-3) add `lat and long` validations
-4) add validation for `Full Name`, `First and Last Name`
-5) add Validations for `required fields`
-6) add `alpha` and `alpha numeric` validations
-
-
-<hr/>
-
 ## [0.1.1] - 2024-09-29
 
 - changed the License To MPL
 - add description in pubspec yaml
 
 <hr/>
-
-## [1.0.0] - 2025-06-7
-
-- Separate the validation messages in another layer to ease localization and override
-- Add Validation for Mobile Number depending on country dial or iso code
-- Add Validation for alpha in 10 languages 
-- Add `double` and `positive number` validators
-- Add Github action for complete Example on WebAssembly with (.arb in localization)
-- Add String Extension for regex
-- add `runMultiValidators()` method in Validation Logic Mixin
-- Fix some bugs
