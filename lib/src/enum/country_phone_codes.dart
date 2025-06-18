@@ -2,11 +2,9 @@ import 'package:boolean_validation/boolean_validation.dart';
 
 /// Represents mobile number validation config for a country
 enum CountryPhonePattern {
-  egypt('EG', '20', 'Egypt', MobileRegex.egyptRegex),
   usa('US', '1', 'United States', MobileRegex.usaRegex),
   canada('CA', '1', 'Canada', MobileRegex.canadaRegex),
   india('IN', '91', 'India', MobileRegex.indiaRegex),
-  saudiArabia('SA', '966', 'Saudi Arabia', MobileRegex.saudiArabiaRegex),
   uk('UK', '44', 'United Kingdom', MobileRegex.ukRegex),
   france('FR', '33', 'France', MobileRegex.franceRegex),
   germany('DE', '49', 'Germany', MobileRegex.germanyRegex),
@@ -20,7 +18,32 @@ enum CountryPhonePattern {
   russia('RU', '7', 'Russia', MobileRegex.russiaRegex),
   turkey('TR', '90', 'Turkey', MobileRegex.turkeyRegex),
   pakistan('PK', '92', 'Pakistan', MobileRegex.pakistanRegex),
-  indonesia('ID', '62', 'Indonesia', MobileRegex.indonesiaRegex);
+  indonesia('ID', '62', 'Indonesia', MobileRegex.indonesiaRegex),
+
+  // Arabic Countries
+  egypt('EG', '20', 'Egypt', MobileRegex.egyptRegex),
+  saudiArabia('SA', '966', 'Saudi Arabia', MobileRegex.saudiArabiaRegex),
+  algeria('DZ', '213', 'Algeria', MobileRegex.algeriaRegex),
+  bahrain('BH', '973', 'Bahrain', MobileRegex.bahrainRegex),
+  comoros('KM', '269', 'Comoros', MobileRegex.comorosRegex),
+  djibouti('DJ', '253', 'Djibouti', MobileRegex.djiboutiRegex),
+  iraq('IQ', '964', 'Iraq', MobileRegex.iraqRegex),
+  jordan('JO', '962', 'Jordan', MobileRegex.jordanRegex),
+  kuwait('KW', '965', 'Kuwait', MobileRegex.kuwaitRegex),
+  lebanon('LB', '961', 'Lebanon', MobileRegex.lebanonRegex),
+  libya('LY', '218', 'Libya', MobileRegex.libyaRegex),
+  mauritania('MR', '222', 'Mauritania', MobileRegex.mauritaniaRegex),
+  morocco('MA', '212', 'Morocco', MobileRegex.moroccoRegex),
+  oman('OM', '968', 'Oman', MobileRegex.omanRegex),
+  palestine('PS', '970', 'Palestine', MobileRegex.palestineRegex),
+  qatar('QA', '974', 'Qatar', MobileRegex.qatarRegex),
+  somalia('SO', '252', 'Somalia', MobileRegex.somaliaRegex),
+  sudan('SD', '249', 'Sudan', MobileRegex.sudanRegex),
+  syria('SY', '963', 'Syria', MobileRegex.syriaRegex),
+  tunisia('TN', '216', 'Tunisia', MobileRegex.tunisiaRegex),
+  uae('AE', '971', 'United Arab Emirates', MobileRegex.uaeRegex),
+  yemen('YE', '967', 'Yemen', MobileRegex.yemenRegex),
+  ;
 
   final String isoCode;
   final String dialCode;
@@ -31,11 +54,9 @@ enum CountryPhonePattern {
 
   /// O(1), compile-time, fully traceable, keys in Country Two-letters
   static const Map<String, CountryPhonePattern> byIsoCode = {
-    'EG': egypt,
     'US': usa,
     'CA': canada,
     'IN': india,
-    'SA': saudiArabia,
     'UK': uk,
     'FR': france,
     'DE': germany,
@@ -50,14 +71,36 @@ enum CountryPhonePattern {
     'TR': turkey,
     'PK': pakistan,
     'ID': indonesia,
+
+    // Arabic Countries ISO Codes
+    'EG': egypt,
+    'SA': saudiArabia,
+    'DZ': algeria,
+    'BH': bahrain,
+    'KM': comoros,
+    'DJ': djibouti,
+    'IQ': iraq,
+    'JO': jordan,
+    'KW': kuwait,
+    'LB': lebanon,
+    'LY': libya,
+    'MR': mauritania,
+    'MA': morocco,
+    'OM': oman,
+    'PS': palestine,
+    'QA': qatar,
+    'SO': somalia,
+    'SD': sudan,
+    'SY': syria,
+    'TN': tunisia,
+    'AE': uae,
+    'YE': yemen,
   };
 
   /// O(1), compile-time, fully traceable, keys in country codes
   static const Map<String, CountryPhonePattern> byDialCode = {
-    '20': egypt,
     '1': usa,
     '91': india,
-    '966': saudiArabia,
     '44': uk,
     '33': france,
     '49': germany,
@@ -72,5 +115,29 @@ enum CountryPhonePattern {
     '90': turkey,
     '92': pakistan,
     '62': indonesia,
+
+    // Arabic Countries Dial Codes
+    '20': egypt,
+    '966': saudiArabia,
+    '213': algeria,
+    '973': bahrain,
+    '269': comoros,
+    '253': djibouti,
+    '964': iraq,
+    '962': jordan,
+    '965': kuwait,
+    '961': lebanon,
+    '218': libya,
+    '222': mauritania,
+    '212': morocco,
+    '968': oman,
+    '970': palestine,
+    '974': qatar,
+    '252': somalia,
+    '249': sudan,
+    '963': syria,
+    '216': tunisia,
+    '971': uae,
+    '967': yemen,
   };
 }

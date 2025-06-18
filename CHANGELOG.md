@@ -1,3 +1,8 @@
+## [1.0.1] - 2025-06-18
+- added more arabic countries [Algeria, Bahrain, Comoros, Djibouti, Iraq, Jordan, Kuwait, Lebanon, Libya, Mauritania, Morocco, Oman, Palestine, Qatar, Somalia, Sudan, Syria, Tunisia, UAE, and Yemen]
+- 
+
+
 ## [1.0.0] - 2025-06-7
 
 - Separate the validation messages in another layer to ease localization and override

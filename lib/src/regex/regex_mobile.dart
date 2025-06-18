@@ -7,8 +7,8 @@ extension MobileRegex on RegexPatterns {
       r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$)';
 
   /// Regex for Mobile Numbers for Different Countries
-  static const String egyptRegex =
-      r'^(?:10|11|12|15)\d{8}$'; // Egypt (11 digits)
+
+  // Existing patterns
   static const String usaRegex = r'^\d{10}$'; // USA (10 digits)
   static const String canadaRegex = r'^\d{10}$'; // Canada (10 digits)
   static const String indiaRegex =
@@ -40,6 +40,69 @@ extension MobileRegex on RegexPatterns {
       r'^(?:03\d{9})$'; // Pakistan (11 digits, starts with 03)
   static const String indonesiaRegex =
       r'^(?:08\d{9,10})$'; // Indonesia (10-11 digits)
+
+  /// Arabic Countries
+  // Egypt Regex (11 digits) must start with 10, 11, 12, or 15
+  static const String egyptRegex =
+      r'^(?:10|11|12|15)\d{8}$'; // Egypt (11 digits)
+
+  /// Algeria - 9 digits, starts with 5, 6, or 7
+  static const String algeriaRegex = r'^(?:[567]\d{8})$';
+
+  /// Bahrain - 8 digits, starts with 3
+  static const String bahrainRegex = r'^(?:3\d{7})$';
+
+  /// Comoros - 7 digits, starts with 3 or 7
+  static const String comorosRegex = r'^(?:[37]\d{6})$';
+
+  /// Djibouti - 8 digits, starts with 77
+  static const String djiboutiRegex = r'^(?:77\d{6})$';
+
+  /// Iraq - 10 digits, starts with 07
+  static const String iraqRegex = r'^(?:07\d{8})$';
+
+  /// Jordan - 9 digits, starts with 7
+  static const String jordanRegex = r'^(?:7[789]\d{7})$';
+
+  /// Kuwait - 8 digits, starts with 5, 6, or 9
+  static const String kuwaitRegex = r'^(?:[569]\d{7})$';
+
+  /// Lebanon - 8 digits, starts with 3, 7, or 8
+  static const String lebanonRegex = r'^(?:[378]\d{7})$';
+
+  /// Libya - 9 digits, starts with 9
+  static const String libyaRegex = r'^(?:9[12345]\d{7})$';
+
+  /// Mauritania - 8 digits, starts with 2, 3, 4, or 6
+  static const String mauritaniaRegex = r'^(?:[2346]\d{7})$';
+
+  /// Morocco - 9 digits, starts with 6 or 7
+  static const String moroccoRegex = r'^(?:[67]\d{8})$';
+
+  /// Oman - 8 digits, starts with 9
+  static const String omanRegex = r'^(?:9[0-9]\d{6})$';
+
+  /// Palestine - 9 digits, starts with 05
+  static const String palestineRegex = r'^(?:05[69]\d{7})$';
+
+  /// Qatar - 8 digits, starts with 3, 5, 6, or 7
+  static const String qatarRegex = r'^(?:[3567]\d{7})$';
+
+  /// Somalia - 9 digits, starts with 6
+  static const String somaliaRegex = r'^(?:6[12345]\d{7})$';
+
+  /// Sudan - 9 digits, starts with 9
+  static const String sudanRegex = r'^(?:9[012]\d{7})$';
+
+  /// Syria - 9 digits, starts with 9
+  static const String syriaRegex = r'^(?:9[3456789]\d{7})$';
+
+  /// Tunisia - 8 digits, starts with 2, 4, 5, or 9
+  static const String tunisiaRegex = r'^(?:[2459]\d{7})$';
+
+  /// United Arab Emirates - 9 digits, starts with 5
+  static const String uaeRegex = r'^(?:5[024-6]\d{7})$';
+
+  /// Yemen - 9 digits, starts with 7
+  static const String yemenRegex = r'^(?:7[0137]\d{7})$';
 }
-
-
