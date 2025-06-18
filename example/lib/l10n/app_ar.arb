@@ -9,7 +9,7 @@
     "description": "The title of the validation form"
   },
   "emailLabel": "البريد الإلكتروني (gmail.com)",
-  "email2MathLabel": "البريد الإلكتروني (2math.com)",
+  "email2MathLabel": "البريد الإلكتروني (twomath.com)",
   "@emailLabel": {
     "description": "Label for email input field"
   },
