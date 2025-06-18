@@ -2,8 +2,10 @@
 class RegexPatterns {
   /// Regular expression for validating email addresses.
   /// This pattern supports various email formats as per RFC 5322 specifications.
-  static const String email =
-      r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+  static const String email = r"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+"
+      r"(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+      r"(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+"
+      r"[a-zA-Z]{2,}$";
 
   /// Generates a regular expression for validating email addresses constrained to a specific domain.
   ///
@@ -13,9 +15,9 @@ class RegexPatterns {
   /// ```
   /// This will return a pattern that matches emails like "user@example.com".
   static String constrainedEmail(String domain) {
-    return r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@" +
-        RegExp.escape(domain) +
-        r'$';
+    return r"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+"
+    r"(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+    "${RegExp.escape(domain)}\$";
   }
 
   /// Regular expression for validating integers.
