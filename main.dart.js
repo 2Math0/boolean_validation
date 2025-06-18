@@ -36645,7 +36645,7 @@ return b},
 $S:71}
 A.zO.prototype={
 av(){var s=$.azf(),r=$.ak()
-return new A.Dd(new A.bj(null,t.am),s,new A.HU("2Math.com"),B.fR,A.an(["email",new A.cW(B.aJ,r),"email1",new A.cW(B.aJ,r),"mobile",new A.cW(B.aJ,r),"countryCode",new A.cW(B.aJ,r),"password",new A.cW(B.aJ,r),"username",new A.cW(B.aJ,r),"fullName",new A.cW(B.aJ,r),"arabic_fullName",new A.cW(B.aJ,r),"creditCard",new A.cW(B.aJ,r),"url",new A.cW(B.aJ,r),"date",new A.cW(B.aJ,r),"alpha",new A.cW(B.aJ,r),"alphanumeric",new A.cW(B.aJ,r),"latitude",new A.cW(B.aJ,r),"longitude",new A.cW(B.aJ,r)],t.N,t.QX))}}
+return new A.Dd(new A.bj(null,t.am),s,new A.HU("twomath.com"),B.fR,A.an(["email",new A.cW(B.aJ,r),"email1",new A.cW(B.aJ,r),"mobile",new A.cW(B.aJ,r),"countryCode",new A.cW(B.aJ,r),"password",new A.cW(B.aJ,r),"username",new A.cW(B.aJ,r),"fullName",new A.cW(B.aJ,r),"arabic_fullName",new A.cW(B.aJ,r),"creditCard",new A.cW(B.aJ,r),"url",new A.cW(B.aJ,r),"date",new A.cW(B.aJ,r),"alpha",new A.cW(B.aJ,r),"alphanumeric",new A.cW(B.aJ,r),"latitude",new A.cW(B.aJ,r),"longitude",new A.cW(B.aJ,r)],t.N,t.QX))}}
 A.Dd.prototype={
 ZO(a){var s=this.c.iX(t.zQ)
 if(s!=null)s.U8(new A.fW(a,null))
@@ -75638,7 +75638,7 @@ md(a){return!1}}
 A.EE.prototype={
 gG5(){return"\u0646\u0645\u0648\u0630\u062c \u0627\u0644\u062a\u062d\u0642\u0642"},
 gDO(){return"\u0627\u0644\u0628\u0631\u064a\u062f \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a (gmail.com)"},
-gDM(){return"\u0627\u0644\u0628\u0631\u064a\u062f \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a (2math.com)"},
+gDM(){return"\u0627\u0644\u0628\u0631\u064a\u062f \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a (twomath.com)"},
 gF0(){return"\u0631\u0642\u0645 \u0627\u0644\u062c\u0648\u0627\u0644"},
 gFf(){return"\u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631"},
 gG2(){return"\u0627\u0633\u0645 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645"},
@@ -75688,7 +75688,7 @@ gCq(){return"\u064a\u0645\u0643\u0646 \u0623\u0646 \u064a\u062d\u062a\u0648\u064
 A.EF.prototype={
 gG5(){return"Validation Form"},
 gDO(){return"Email (gmail.com)"},
-gDM(){return"Email (2math.com)"},
+gDM(){return"Email (twomath.com)"},
 gF0(){return"Mobile Number"},
 gFf(){return"Password"},
 gG2(){return"Username"},
@@ -75738,7 +75738,7 @@ gCq(){return"Only alphanumeric characters are allowed"}}
 A.EG.prototype={
 gG5(){return"Formulario de Validaci\xf3n"},
 gDO(){return"Correo (gmail.com)"},
-gDM(){return"Correo (2math.com)"},
+gDM(){return"Correo (twomath.com)"},
 gF0(){return"N\xfamero de M\xf3vil"},
 gFf(){return"Contrase\xf1a"},
 gG2(){return"Nombre de Usuario"},
