@@ -2,6 +2,9 @@ import '../../test_common_libs.dart';
 
 void main() {
   final Validators validators = Validators();
+  final ValidationMessages messages = ValidationMessages();
+  messages.copyWith(useGenericRequiredMessage: false);
+
 
   group('Integer Validation', () {
     test('Valid Integer', () {
@@ -14,21 +17,21 @@ void main() {
     test('Empty Integer - Required', () {
       expect(
         validators.dataType.validateInteger(''),
-        'Number is required',
+        messages.numberRequired,
       );
     });
 
     test('Invalid Integer Value', () {
       expect(
         validators.dataType.validateInteger('abc'), // Invalid integer
-        'Enter a valid number',
+        messages.invalidNumber,
       );
     });
 
     test('Null Integer - Required', () {
       expect(
         validators.dataType.validateInteger(null),
-        'Number is required',
+        messages.numberRequired,
       );
     });
 

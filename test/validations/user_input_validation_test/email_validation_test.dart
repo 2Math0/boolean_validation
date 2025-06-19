@@ -1,4 +1,3 @@
-
 import '../../test_common_libs.dart';
 
 void main() {
@@ -7,6 +6,7 @@ void main() {
   messages.copyWith(useGenericRequiredMessage: false);
 
   EmailDomain domain = EmailDomain.custom('domain.com');
+  EmailDomain numDomain = EmailDomain.custom('2Math.com');
 
   group('Email Validation', () {
     test('Valid Email', () {
@@ -54,6 +54,18 @@ void main() {
       expect(
         validators.userInput.validateConstrainedEmail('', domain: domain),
         messages.emailRequired,
+      );
+    });
+
+    test('Constrained Email', () {
+      expect(
+        validators.userInput.validateConstrainedEmail('hey@2math.com',
+            domain: numDomain),
+        messages.formatMessage(
+            message: messages.emailDomainValidation,
+            replacements: {
+              MessageReplacementKeys.domain: numDomain.name,
+            }),
       );
     });
   });

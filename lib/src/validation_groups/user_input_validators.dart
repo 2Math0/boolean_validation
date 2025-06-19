@@ -44,7 +44,8 @@ class UserInputValidators extends ValidationCommon {
     );
     if (emailValidation != null) return emailValidation;
 
-    if (!validationLogic.isValidConstrainedEmail(value, domain)) {
+    if (!validationLogic.isValidConstrainedEmail(
+        value?.toLowerCase(), domain)) {
       return messages.formatMessage(
           message: messages.emailDomainValidation,
           replacements: {

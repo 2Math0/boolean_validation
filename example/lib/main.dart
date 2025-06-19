@@ -77,14 +77,14 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
 
   final EmailDomain _selectedEmailDomain = EmailDomain.gmail;
   final EmailDomain _selectedEmailDomainCustom =
-      EmailDomain.custom('twomath.com');
+      EmailDomain.custom('2math.com');
 
   CountryPhonePattern _selectedCountryCode =
       CountryPhonePattern.usa; // Default to US
 
   final _controllers = {
     'email': TextEditingController(),
-    'email1': TextEditingController(),
+    'emailConstrained': TextEditingController(),
     'mobile': TextEditingController(),
     'countryCode': TextEditingController(),
     'password': TextEditingController(),
