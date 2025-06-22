@@ -1,8 +1,8 @@
 import '../test_common_libs.dart';
 
 void main() {
-  final UserInputValidators validators = Validators().userInput;
-  final ValidationMessages messages = ValidationMessages();
+  final validators = Validators().userInput;
+  final messages = ValidationMessages();
   messages.copyWith(useGenericRequiredMessage: false);
 
   group('Credit Card Validation', () {
@@ -37,7 +37,7 @@ void main() {
 
     // Additional test for custom required message
     test('Custom Required Message', () {
-      var customMsg = 'Please provide a credit card number';
+      const customMsg = 'Please provide a credit card number';
       expect(
         validators.validateCreditCard('', customRequiredMessage: customMsg),
         customMsg,

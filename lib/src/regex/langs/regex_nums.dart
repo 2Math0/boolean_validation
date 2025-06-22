@@ -2,7 +2,7 @@ import 'package:boolean_validation/src/regex_patterns.dart';
 
 extension NumLangRegex on RegexPatterns {
   /// Western (ASCII) digits 0–9
-  static const String westernNums = r'[0-9]';
+  static const String westernNums = '[0-9]';
 
   /// Arabic-Indic digits (٠١٢٣٤٥٦٧٨٩) — Unicode: 0660–0669
   static const String arabicNums = r'[\u0660-\u0669]';

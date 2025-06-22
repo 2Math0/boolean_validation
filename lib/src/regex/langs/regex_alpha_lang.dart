@@ -31,7 +31,8 @@ extension AlphaLangRegex on RegexPatterns {
   /// Combined Japanese letter regex including:
   /// - Hiragana: U+3041–U+3096
   /// - Katakana: U+30A0–U+30FF
-  /// - Kanji (CJK Unified Ideographs): U+3400–U+4DBF, U+4E00–U+9FFF, U+F900–U+FAFF
+  /// - Kanji (CJK Unified Ideographs):
+  /// U+3400–U+4DBF, U+4E00–U+9FFF, U+F900–U+FAFF
   static const String japaneseOnly =
       r'^[\u3041-\u3096\u30A0-\u30FF\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]+$';
 
@@ -39,7 +40,8 @@ extension AlphaLangRegex on RegexPatterns {
   /// Unicode range: 4E00–9FFF.
   static const String chineseOnly = r'^[\u4E00-\u9FFF]+$';
 
-  /// Latin Extended characters (for many European languages like Polish, Czech, Romanian).
+  /// Latin Extended characters
+  /// (for many European languages like Polish, Czech, Romanian).
   /// Unicode: 0100–024F.
   static const String latinExtended = r'^[\u0100-\u024F]+$';
 
@@ -114,8 +116,10 @@ extension AlphaLangRegex on RegexPatterns {
   /// (Myanmar script, excluding digits: U+1040–U+1049).
   static const String burmeseOnly = r'^[\u1000-\u103F\u1050-\u109F]+$';
 
-  /// Combined regex allowing only letter characters from all supported languages.
-  /// Useful for global input validation without allowing spaces, numbers, or punctuation.
+  /// Combined regex allowing
+  /// only letter characters from all supported languages.
+  /// Useful for global input validation
+  /// without allowing spaces, numbers, or punctuation.
   static final String multiLangCombined = '^('
       '${englishOnly.removeAnchors}|'
       '${arabicOnly.removeAnchors}|'

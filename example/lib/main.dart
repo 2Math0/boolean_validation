@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> {
         // Update validation messages when locale changes
         final l10n = AppLocalizations.of(context);
         if (l10n != null) {
-          ValidationMessages.setProvider(ARBValidationProvider(l10n));
+          ValidationMessages.provider = ARBValidationProvider(l10n);
         }
         return child!;
       },
@@ -76,11 +76,18 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
   final _validators = Validators();
 
   final EmailDomain _selectedEmailDomain = EmailDomain.gmail;
-  final EmailDomain _selectedEmailDomainCustom =
-      EmailDomain.custom('2math.com');
+
+  final String customMailKey = '2math';
+  final String customDomain = '2math.com';
 
   CountryPhonePattern _selectedCountryCode =
       CountryPhonePattern.usa; // Default to US
+
+  @override
+  void initState() {
+    super.initState();
+    EmailDomain.addCustomDomain(customMailKey, customDomain);
+  }
 
   final _controllers = {
     'email': TextEditingController(),
@@ -168,18 +175,19 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
               /// Example with custom messages for this specific field
               ///
               ///
-              AnimatedFormField(
-                label: l10n.email2MathLabel,
-                controller: _controllers['emailConstrained']!,
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) =>
-                    _validators.userInput.validateConstrainedEmail(
-                  value,
-                  domain: _selectedEmailDomainCustom,
-                  customRequiredMessage: l10n.emailRequired,
-                  customInvalidMessage: l10n.invalidEmail,
+              if (EmailDomain.getDomain(customMailKey) != null)
+                AnimatedFormField(
+                  label: l10n.email2MathLabel,
+                  controller: _controllers['emailConstrained']!,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) =>
+                      _validators.userInput.validateConstrainedEmail(
+                    value,
+                    domain: EmailDomain.getDomain(customMailKey)!,
+                    customRequiredMessage: l10n.emailRequired,
+                    customInvalidMessage: l10n.invalidEmail,
+                  ),
                 ),
-              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: IntrinsicHeight(

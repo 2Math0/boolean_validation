@@ -1,8 +1,8 @@
 import '../../test_common_libs.dart';
 
 void main() {
-  final Validators validators = Validators();
-  final ValidationMessages messages = ValidationMessages();
+  final validators = Validators();
+  final messages = ValidationMessages();
   messages.copyWith(useGenericRequiredMessage: false);
 
   group('Latitude Validation', () {
@@ -36,7 +36,7 @@ void main() {
 
     // Additional test for custom required message
     test('Custom Required Message', () {
-      var customMsg = 'Please provide latitude';
+      const customMsg = 'Please provide latitude';
       expect(
         validators.location.validateLat(null, customRequiredMessage: customMsg),
         customMsg,

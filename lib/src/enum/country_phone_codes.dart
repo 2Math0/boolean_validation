@@ -45,12 +45,12 @@ enum CountryPhonePattern {
   yemen('YE', '967', 'Yemen', MobileRegex.yemenRegex),
   ;
 
+  const CountryPhonePattern(this.isoCode, this.dialCode, this.name, this.regex);
+
   final String isoCode;
   final String dialCode;
   final String name;
   final String regex;
-
-  const CountryPhonePattern(this.isoCode, this.dialCode, this.name, this.regex);
 
   /// O(1), compile-time, fully traceable, keys in Country Two-letters
   static const Map<String, CountryPhonePattern> byIsoCode = {

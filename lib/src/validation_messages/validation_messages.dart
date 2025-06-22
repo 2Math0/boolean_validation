@@ -1,11 +1,13 @@
 import 'package:boolean_validation/src/validation_messages/message_replacements_keys.dart';
 
-import 'messages_provider.dart';
+import 'package:boolean_validation/src/validation_messages/messages_provider.dart';
 
-/// A centralized class for managing validation error messages with flexible localization support.
+/// A centralized class for managing validation error messages
+/// with flexible localization support.
 ///
 /// This class provides default English messages and allows to override them
-/// using any localization system through the [ValidationMessageProvider] interface.
+/// using any localization system
+/// through the [ValidationMessageProvider] interface.
 /// It supports both static configuration and dynamic localization.
 ///
 /// Usage Examples:
@@ -31,6 +33,19 @@ import 'messages_provider.dart';
 /// ```
 ///
 class ValidationMessages {
+  /// Factory constructor to provide access to the singleton instance.
+  ///
+  /// Usage:
+  /// ```dart
+  /// final messages = ValidationMessages();
+  /// ```
+  factory ValidationMessages() {
+    return _instance;
+  }
+
+  // Private constructor to enforce singleton pattern.
+  ValidationMessages._internal();
+
   /// Current localization provider
   static ValidationMessageProvider? _provider;
 
@@ -38,14 +53,9 @@ class ValidationMessages {
   ///
   /// Example:
   /// ```dart
-  /// ValidationMessages.setProvider(MyCustomProvider());
+  /// ValidationMessages.provider = MyCustomProvider();
   /// ```
-  static void setProvider(ValidationMessageProvider? provider) {
-    _provider = provider;
-  }
-
-  /// Gets the current localization provider
-  static ValidationMessageProvider? get provider => _provider;
+  static ValidationMessageProvider? provider;
 
   // Default English messages (fallbacks)
   static const String _defaultMobileNumberRequired =
@@ -74,14 +84,16 @@ class ValidationMessages {
       'Email must be a <${MessageReplacementKeys.domain}> address.';
   static const String _defaultUsernameRequired = 'Username is required';
   static const String _defaultUsernameInvalid =
-      'Username must be 4-20 characters long and can include letters, numbers, and underscores';
+      'Username must be 4-20 characters long and can '
+      'include letters, numbers, and underscores';
   static const String _defaultFullNameRequired = 'Full name is required.';
   static const String _defaultFullNameInvalid = 'Please enter your full name';
   static const String _defaultNameMustBeAlphabetic =
       'Name must contain only alphabets.';
   static const String _defaultNameRequired = 'Name is Required';
   static const String _defaultPasswordMinLength =
-      'Password must be at least <${MessageReplacementKeys.minLength}> characters long.';
+      'Password must be at least <${MessageReplacementKeys.minLength}> '
+      'characters long.';
   static const String _defaultPasswordUppercase =
       'Password must contain at least one uppercase letter.';
   static const String _defaultPasswordLowercase =
@@ -89,7 +101,7 @@ class ValidationMessages {
   static const String _defaultPasswordDigit =
       'Password must contain at least one digit.';
   static const String _defaultPasswordSpecialChar =
-      'Password must contain at least one special character (!@#\$&*~).';
+      r'Password must contain at least one special character (!@#$&*~).';
   static const String _defaultLatitudeRequired = 'Latitude is required';
   static const String _defaultInvalidLatitude = 'invalid latitude value';
   static const String _defaultLongitudeRequired = 'Longitude is required';
@@ -229,28 +241,17 @@ class ValidationMessages {
   String get alphaNumericInvalid =>
       _provider?.alphaNumericInvalid ?? _defaultAlphaNumericInvalid;
 
-  /// Global flag to determine whether to use the generic required message for all inputs.
+  /// Global flag to determine whether
+  /// to use the generic required message for all inputs.
   bool useGenericRequiredMessage = true;
 
   // Singleton instance of the class.
   static final ValidationMessages _instance = ValidationMessages._internal();
 
-  /// Factory constructor to provide access to the singleton instance.
-  ///
-  /// Usage:
-  /// ```dart
-  /// final messages = ValidationMessages();
-  /// ```
-  factory ValidationMessages() {
-    return _instance;
-  }
-
-  // Private constructor to enforce singleton pattern.
-  ValidationMessages._internal();
-
   /// Overrides specific validation messages while keeping others unchanged.
   ///
-  /// This method is useful for customizing messages globally or for localization.
+  /// This method is useful for
+  /// customizing messages globally or for localization.
   /// Note: If a provider is set, it will be used instead of these overrides.
   ///
   /// Example:
@@ -356,15 +357,18 @@ class ValidationMessages {
         useGenericRequiredMessage ?? this.useGenericRequiredMessage;
   }
 
-  /// Returns the appropriate required message based on the global configuration and custom message.
+  /// Returns the appropriate required message
+  /// based on the global configuration and custom message.
   ///
   /// Parameters:
   /// - [customMessage]: A custom message provided by the developer.
-  /// - [defaultSpecificMessage]: The default message for the specific input (e.g., [mobileNumberRequired]).
+  /// - [defaultSpecificMessage]: The default message
+  /// for the specific input (e.g., [mobileNumberRequired]).
   ///
   /// Returns:
   /// - The custom message if provided.
-  /// - The generic [genericRequiredMessage] message if [useGenericRequiredMessage] is `true`.
+  /// - The generic [genericRequiredMessage] message if
+  /// [useGenericRequiredMessage] is `true`.
   /// - The default specific message if [useGenericRequiredMessage] is `false`.
   String getRequiredMessage({
     String? customMessage,
@@ -391,10 +395,10 @@ class ValidationMessages {
   }) {
     if (replacements.isEmpty) return message;
 
-    String formattedMessage = message;
+    var formattedMessage = message;
 
     replacements.forEach((key, value) {
-      String replacementValue = _convertToString(value);
+      final replacementValue = _convertToString(value);
       formattedMessage =
           formattedMessage.replaceAll('<$key>', replacementValue);
     });
@@ -404,7 +408,8 @@ class ValidationMessages {
 
   /// Converts different types of values to strings safely.
   ///
-  /// - Enums: Converts `Enum.value` to a readable string (e.g., `EmailDomain.google → "google"`).
+  /// - Enums: Converts `Enum.value` to a readable string
+  /// (e.g., `EmailDomain.google → "google"`).
   /// - Other Objects: Uses `toString()`, handling null values as empty strings.
   /// - Numbers, Strings, Booleans: Converted as expected.
   String _convertToString(dynamic value) {
@@ -416,6 +421,51 @@ class ValidationMessages {
 
 /// Internal provider for copyWith overrides
 class _OverrideProvider implements ValidationMessageProvider {
+  const _OverrideProvider({
+    this.mobileNumberRequired,
+    this.invalidMobileNumber,
+    this.creditCardRequired,
+    this.invalidCreditCard,
+    this.expirationDateRequired,
+    this.securityCodeRequired,
+    this.cardholderNameRequired,
+    this.invalidCardholderName,
+    this.emailRequired,
+    this.invalidEmail,
+    this.emailFormatValidation,
+    this.emailDomainValidation,
+    this.usernameRequired,
+    this.usernameInvalid,
+    this.fullNameRequired,
+    this.fullNameInvalid,
+    this.nameMustBeAlphabetic,
+    this.nameRequired,
+    this.passwordMinLength,
+    this.passwordUppercase,
+    this.passwordLowercase,
+    this.passwordDigit,
+    this.passwordSpecialChar,
+    this.latitudeRequired,
+    this.invalidLatitude,
+    this.longitudeRequired,
+    this.invalidLongitude,
+    this.numberRequired,
+    this.doubleRequired,
+    this.positiveNumRequired,
+    this.invalidNumber,
+    this.invalidDoubleNumber,
+    this.invalidPositiveNumber,
+    this.urlRequired,
+    this.invalidUrl,
+    this.dateRequired,
+    this.invalidDate,
+    this.alphaRequired,
+    this.alphaInvalid,
+    this.alphaNumericRequired,
+    this.alphaNumericInvalid,
+    this.genericRequiredMessage,
+  });
+
   @override
   final String? mobileNumberRequired;
   @override
@@ -501,49 +551,4 @@ class _OverrideProvider implements ValidationMessageProvider {
 
   @override
   final String? alphaNumericInvalid;
-
-  const _OverrideProvider({
-    this.mobileNumberRequired,
-    this.invalidMobileNumber,
-    this.creditCardRequired,
-    this.invalidCreditCard,
-    this.expirationDateRequired,
-    this.securityCodeRequired,
-    this.cardholderNameRequired,
-    this.invalidCardholderName,
-    this.emailRequired,
-    this.invalidEmail,
-    this.emailFormatValidation,
-    this.emailDomainValidation,
-    this.usernameRequired,
-    this.usernameInvalid,
-    this.fullNameRequired,
-    this.fullNameInvalid,
-    this.nameMustBeAlphabetic,
-    this.nameRequired,
-    this.passwordMinLength,
-    this.passwordUppercase,
-    this.passwordLowercase,
-    this.passwordDigit,
-    this.passwordSpecialChar,
-    this.latitudeRequired,
-    this.invalidLatitude,
-    this.longitudeRequired,
-    this.invalidLongitude,
-    this.numberRequired,
-    this.doubleRequired,
-    this.positiveNumRequired,
-    this.invalidNumber,
-    this.invalidDoubleNumber,
-    this.invalidPositiveNumber,
-    this.urlRequired,
-    this.invalidUrl,
-    this.dateRequired,
-    this.invalidDate,
-    this.alphaRequired,
-    this.alphaInvalid,
-    this.alphaNumericRequired,
-    this.alphaNumericInvalid,
-    this.genericRequiredMessage,
-  });
 }

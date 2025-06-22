@@ -4,7 +4,7 @@ void main() {
   group('SUPPORTED_LANGUAGE_UTILITIES', () {
     group('REGEX_BUILDER_FUNCTIONALITY', () {
       test('ALPHA_ONLY_REGEX_ENGLISH', () {
-        final regex = SupportedLanguage.english.buildRegex(includeAlpha: true);
+        final regex = SupportedLanguage.english.buildRegex();
         final regExp = RegExp(regex);
 
         expect(regExp.hasMatch('Thomas'), true);
@@ -14,7 +14,6 @@ void main() {
 
       test('ALPHA_NUM_REGEX_ENGLISH', () {
         final regex = SupportedLanguage.english.buildRegex(
-          includeAlpha: true,
           includeNum: true,
         );
         final regExp = RegExp(regex);
@@ -22,12 +21,11 @@ void main() {
         expect(regExp.hasMatch('Thomas'), true);
         expect(regExp.hasMatch('123'), true);
         expect(regExp.hasMatch('2Math0'), true);
-        expect(regExp.hasMatch('@#\$'), false);
+        expect(regExp.hasMatch(r'@#$'), false);
       });
 
       test('ALPHA_PUNCTUATION_REGEX_ENGLISH', () {
         final regex = SupportedLanguage.english.buildRegex(
-          includeAlpha: true,
           includePunctuation: true,
         );
         final regExp = RegExp(regex);
@@ -49,7 +47,7 @@ void main() {
       });
 
       test('ARABIC_ALPHA_REGEX', () {
-        final regex = SupportedLanguage.arabic.buildRegex(includeAlpha: true);
+        final regex = SupportedLanguage.arabic.buildRegex();
         final regExp = RegExp(regex);
 
         expect(regExp.hasMatch('توماس'), true);
@@ -59,7 +57,6 @@ void main() {
 
       test('ARABIC_ALPHA_NUM_REGEX', () {
         final regex = SupportedLanguage.arabic.buildRegex(
-          includeAlpha: true,
           includeNum: true,
         );
         final regExp = RegExp(regex);
@@ -71,7 +68,7 @@ void main() {
       });
 
       test('JAPANESE_COMPLEX_REGEX', () {
-        final regex = SupportedLanguage.japanese.buildRegex(includeAlpha: true);
+        final regex = SupportedLanguage.japanese.buildRegex();
         final regExp = RegExp(regex);
 
         expect(regExp.hasMatch('たろう'), true); // Hiragana
@@ -82,10 +79,8 @@ void main() {
 
       test('EMPTY_REGEX_THROWS_ERROR', () {
         expect(
-              () => SupportedLanguage.english.buildRegex(
+          () => SupportedLanguage.english.buildRegex(
             includeAlpha: false,
-            includeNum: false,
-            includePunctuation: false,
           ),
           throwsArgumentError,
         );
@@ -99,7 +94,7 @@ void main() {
           orGroups: [
             [
               SupportedLanguage.english.alphaPattern,
-              SupportedLanguage.arabic.alphaPattern
+              SupportedLanguage.arabic.alphaPattern,
             ],
             [SupportedLanguage.english.digitPattern],
           ],
@@ -132,7 +127,7 @@ void main() {
           orGroups: [
             [
               SupportedLanguage.english.alphaPattern,
-              SupportedLanguage.arabic.alphaPattern
+              SupportedLanguage.arabic.alphaPattern,
             ],
           ],
           andGroups: [
@@ -156,7 +151,7 @@ void main() {
         expect(regExp.hasMatch('2Math0'), true);
         expect(regExp.hasMatch('Thomas'), true);
         expect(regExp.hasMatch('123'), true);
-        expect(regExp.hasMatch('@#\$'), false);
+        expect(regExp.hasMatch(r'@#$'), false);
       });
 
       test('ALPHA_PUNCTUATION_PROPERTY', () {
@@ -193,7 +188,7 @@ void main() {
       });
 
       test('NULL_PUNCTUATION_HANDLING', () {
-        final lang = SupportedLanguage.latinExtended; // Has null punctuation
+        const lang = SupportedLanguage.latinExtended; // Has null punctuation
         expect(lang.alphaPunctuation, null);
         expect(lang.digitPunctuation, null);
         expect(lang.punctuationPattern, null);

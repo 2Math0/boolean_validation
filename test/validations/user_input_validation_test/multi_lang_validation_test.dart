@@ -1,8 +1,8 @@
 import '../../test_common_libs.dart';
 
 void main() {
-  final Validators validators = Validators();
-  final ValidationMessages messages = ValidationMessages();
+  final validators = Validators();
+  final messages = ValidationMessages();
   messages.copyWith(useGenericRequiredMessage: false);
 
   group('NAME_VALIDATION_CORE', () {
@@ -449,7 +449,7 @@ void main() {
       test('MULTIPLE_INVALID_PUNCTUATION', () {
         expect(
           validators.userInput.validateName(
-            'Thomas#\$%Smith',
+            r'Thomas#$%Smith',
             multiLang: [SupportedLanguage.english],
           ),
           messages.nameMustBeAlphabetic,
@@ -457,7 +457,6 @@ void main() {
       });
     });
   });
-
 
   group('EDGE_CASES_AND_BOUNDARY_CONDITIONS', () {
     test('VERY_LONG_NAME', () {

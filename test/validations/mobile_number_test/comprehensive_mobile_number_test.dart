@@ -1,8 +1,8 @@
 import '../../test_common_libs.dart';
 
 void main() {
-  final UserInputValidators validators = Validators().userInput;
-  final ValidationMessages messages = ValidationMessages();
+  final validators = Validators().userInput;
+  final messages = ValidationMessages();
   messages.copyWith(useGenericRequiredMessage: false);
 
   group('Mobile Number Validation - Comprehensive Test Suite', () {
@@ -69,7 +69,7 @@ void main() {
 
       test('Invalid format - special characters only', () {
         expect(
-          validators.validateMobileNumber('!@#\$%^&*()'),
+          validators.validateMobileNumber(r'!@#$%^&*()'),
           messages.invalidMobileNumber,
         );
       });
@@ -83,8 +83,10 @@ void main() {
       test('Custom required message', () {
         const customMsg = 'Mobile number is mandatory';
         expect(
-          validators.validateMobileNumber(null,
-              customRequiredMessage: customMsg),
+          validators.validateMobileNumber(
+            null,
+            customRequiredMessage: customMsg,
+          ),
           customMsg,
         );
       });
@@ -92,8 +94,10 @@ void main() {
       test('Custom invalid message', () {
         const customMsg = 'Please enter a valid mobile number';
         expect(
-          validators.validateMobileNumber('invalid',
-              customInvalidMessage: customMsg),
+          validators.validateMobileNumber(
+            'invalid',
+            customInvalidMessage: customMsg,
+          ),
           customMsg,
         );
       });
@@ -134,32 +138,40 @@ void main() {
       group('USA & Canada (+1)', () {
         test('Valid USA number with dial code', () {
           expect(
-            validators.validateMobileNumber('2125551234',
-                prefix: CountryPhonePattern.usa.dialCode),
+            validators.validateMobileNumber(
+              '2125551234',
+              prefix: CountryPhonePattern.usa.dialCode,
+            ),
             null,
           );
         });
 
         test('Valid Canada number with dial code', () {
           expect(
-            validators.validateMobileNumber('4165551234',
-                prefix: CountryPhonePattern.canada.dialCode),
+            validators.validateMobileNumber(
+              '4165551234',
+              prefix: CountryPhonePattern.canada.dialCode,
+            ),
             null,
           );
         });
 
         test('Valid USA number with ISO code', () {
           expect(
-            validators.validateMobileNumber('2125551234',
-                prefix: CountryPhonePattern.usa.isoCode),
+            validators.validateMobileNumber(
+              '2125551234',
+              prefix: CountryPhonePattern.usa.isoCode,
+            ),
             null,
           );
         });
 
         test('Invalid USA number - too short', () {
           expect(
-            validators.validateMobileNumber('212555',
-                prefix: CountryPhonePattern.usa.dialCode),
+            validators.validateMobileNumber(
+              '212555',
+              prefix: CountryPhonePattern.usa.dialCode,
+            ),
             messages.invalidMobileNumber,
           );
         });
@@ -169,24 +181,30 @@ void main() {
       group('India (+91)', () {
         test('Valid India number with dial code', () {
           expect(
-            validators.validateMobileNumber('9876543210',
-                prefix: CountryPhonePattern.india.dialCode),
+            validators.validateMobileNumber(
+              '9876543210',
+              prefix: CountryPhonePattern.india.dialCode,
+            ),
             null,
           );
         });
 
         test('Valid India number with ISO code', () {
           expect(
-            validators.validateMobileNumber('9876543210',
-                prefix: CountryPhonePattern.india.isoCode),
+            validators.validateMobileNumber(
+              '9876543210',
+              prefix: CountryPhonePattern.india.isoCode,
+            ),
             null,
           );
         });
 
         test('Invalid India number - wrong starting digit', () {
           expect(
-            validators.validateMobileNumber('1876543210',
-                prefix: CountryPhonePattern.india.dialCode),
+            validators.validateMobileNumber(
+              '1876543210',
+              prefix: CountryPhonePattern.india.dialCode,
+            ),
             messages.invalidMobileNumber,
           );
         });
@@ -196,24 +214,30 @@ void main() {
       group('UK (+44)', () {
         test('Valid UK number with dial code', () {
           expect(
-            validators.validateMobileNumber('7700900123',
-                prefix: CountryPhonePattern.uk.dialCode),
+            validators.validateMobileNumber(
+              '7700900123',
+              prefix: CountryPhonePattern.uk.dialCode,
+            ),
             null,
           );
         });
 
         test('Valid UK number with ISO code', () {
           expect(
-            validators.validateMobileNumber('7700900123',
-                prefix: CountryPhonePattern.uk.isoCode),
+            validators.validateMobileNumber(
+              '7700900123',
+              prefix: CountryPhonePattern.uk.isoCode,
+            ),
             null,
           );
         });
 
         test('Invalid UK number - wrong format', () {
           expect(
-            validators.validateMobileNumber('1700900123',
-                prefix: CountryPhonePattern.uk.dialCode),
+            validators.validateMobileNumber(
+              '1700900123',
+              prefix: CountryPhonePattern.uk.dialCode,
+            ),
             messages.invalidMobileNumber,
           );
         });
@@ -223,16 +247,20 @@ void main() {
       group('China (+86)', () {
         test('Valid China number with dial code', () {
           expect(
-            validators.validateMobileNumber('13800138000',
-                prefix: CountryPhonePattern.china.dialCode),
+            validators.validateMobileNumber(
+              '13800138000',
+              prefix: CountryPhonePattern.china.dialCode,
+            ),
             null,
           );
         });
 
         test('Valid China number with ISO code', () {
           expect(
-            validators.validateMobileNumber('13800138000',
-                prefix: CountryPhonePattern.china.isoCode),
+            validators.validateMobileNumber(
+              '13800138000',
+              prefix: CountryPhonePattern.china.isoCode,
+            ),
             null,
           );
         });
@@ -248,24 +276,30 @@ void main() {
       group('Egypt (+20)', () {
         test('Valid Egyptian number with dial code', () {
           expect(
-            validators.validateMobileNumber('1234567890',
-                prefix: CountryPhonePattern.egypt.dialCode),
+            validators.validateMobileNumber(
+              '1234567890',
+              prefix: CountryPhonePattern.egypt.dialCode,
+            ),
             null,
           );
         });
 
         test('Valid Egyptian number with ISO code', () {
           expect(
-            validators.validateMobileNumber('1234567890',
-                prefix: CountryPhonePattern.egypt.isoCode),
+            validators.validateMobileNumber(
+              '1234567890',
+              prefix: CountryPhonePattern.egypt.isoCode,
+            ),
             null,
           );
         });
 
         test('Valid Egyptian mobile with dial code - without leading 0', () {
           expect(
-            validators.validateMobileNumber('1234567890',
-                prefix: CountryPhonePattern.egypt.dialCode),
+            validators.validateMobileNumber(
+              '1234567890',
+              prefix: CountryPhonePattern.egypt.dialCode,
+            ),
             null,
           );
         });
@@ -273,16 +307,20 @@ void main() {
         test('Invalid Egyptian mobile with dial code - should not start with 0',
             () {
           expect(
-            validators.validateMobileNumber('01234567890',
-                prefix: CountryPhonePattern.egypt.dialCode),
+            validators.validateMobileNumber(
+              '01234567890',
+              prefix: CountryPhonePattern.egypt.dialCode,
+            ),
             messages.invalidMobileNumber,
           );
         });
 
         test('Invalid Egyptian number - wrong length', () {
           expect(
-            validators.validateMobileNumber('123456',
-                prefix: CountryPhonePattern.egypt.dialCode),
+            validators.validateMobileNumber(
+              '123456',
+              prefix: CountryPhonePattern.egypt.dialCode,
+            ),
             messages.invalidMobileNumber,
           );
         });
@@ -313,16 +351,20 @@ void main() {
       group('Saudi Arabia (+966)', () {
         test('Valid Saudi number with dial code', () {
           expect(
-            validators.validateMobileNumber('111234567',
-                prefix: CountryPhonePattern.saudiArabia.dialCode),
+            validators.validateMobileNumber(
+              '111234567',
+              prefix: CountryPhonePattern.saudiArabia.dialCode,
+            ),
             null,
           );
         });
 
         test('Valid Saudi number with ISO code', () {
           expect(
-            validators.validateMobileNumber('517513175',
-                prefix: CountryPhonePattern.saudiArabia.isoCode),
+            validators.validateMobileNumber(
+              '517513175',
+              prefix: CountryPhonePattern.saudiArabia.isoCode,
+            ),
             null,
           );
         });
@@ -339,16 +381,20 @@ void main() {
       group('UAE (+971)', () {
         test('Valid UAE number with dial code', () {
           expect(
-            validators.validateMobileNumber('501234567',
-                prefix: CountryPhonePattern.uae.dialCode),
+            validators.validateMobileNumber(
+              '501234567',
+              prefix: CountryPhonePattern.uae.dialCode,
+            ),
             null,
           );
         });
 
         test('Valid UAE number with ISO code', () {
           expect(
-            validators.validateMobileNumber('501234567',
-                prefix: CountryPhonePattern.uae.isoCode),
+            validators.validateMobileNumber(
+              '501234567',
+              prefix: CountryPhonePattern.uae.isoCode,
+            ),
             null,
           );
         });
@@ -364,56 +410,70 @@ void main() {
       // Other Arabic Countries - Sample tests
       test('Valid Morocco number', () {
         expect(
-          validators.validateMobileNumber('612345678',
-              prefix: CountryPhonePattern.morocco.dialCode),
+          validators.validateMobileNumber(
+            '612345678',
+            prefix: CountryPhonePattern.morocco.dialCode,
+          ),
           null,
         );
       });
 
       test('Valid Jordan number', () {
         expect(
-          validators.validateMobileNumber('791234567',
-              prefix: CountryPhonePattern.jordan.dialCode),
+          validators.validateMobileNumber(
+            '791234567',
+            prefix: CountryPhonePattern.jordan.dialCode,
+          ),
           null,
         );
       });
 
       test('Valid Lebanon number', () {
         expect(
-          validators.validateMobileNumber('71123456',
-              prefix: CountryPhonePattern.lebanon.dialCode),
+          validators.validateMobileNumber(
+            '71123456',
+            prefix: CountryPhonePattern.lebanon.dialCode,
+          ),
           null,
         );
       });
 
       test('Valid Kuwait number', () {
         expect(
-          validators.validateMobileNumber('51234567',
-              prefix: CountryPhonePattern.kuwait.dialCode),
+          validators.validateMobileNumber(
+            '51234567',
+            prefix: CountryPhonePattern.kuwait.dialCode,
+          ),
           null,
         );
       });
 
       test('Valid Qatar number', () {
         expect(
-          validators.validateMobileNumber('51234567',
-              prefix: CountryPhonePattern.qatar.dialCode),
+          validators.validateMobileNumber(
+            '51234567',
+            prefix: CountryPhonePattern.qatar.dialCode,
+          ),
           null,
         );
       });
 
       test('Valid Bahrain number', () {
         expect(
-          validators.validateMobileNumber('36123456',
-              prefix: CountryPhonePattern.bahrain.dialCode),
+          validators.validateMobileNumber(
+            '36123456',
+            prefix: CountryPhonePattern.bahrain.dialCode,
+          ),
           null,
         );
       });
 
       test('Valid Oman number', () {
         expect(
-          validators.validateMobileNumber('91234567',
-              prefix: CountryPhonePattern.oman.dialCode),
+          validators.validateMobileNumber(
+            '91234567',
+            prefix: CountryPhonePattern.oman.dialCode,
+          ),
           null,
         );
       });
@@ -426,48 +486,60 @@ void main() {
     group('Other Countries Sample Tests', () {
       test('Valid France number', () {
         expect(
-          validators.validateMobileNumber('754156587',
-              prefix: CountryPhonePattern.france.dialCode),
+          validators.validateMobileNumber(
+            '754156587',
+            prefix: CountryPhonePattern.france.dialCode,
+          ),
           null,
         );
       });
 
       test('Valid Germany number', () {
         expect(
-          validators.validateMobileNumber('1512345678',
-              prefix: CountryPhonePattern.germany.dialCode),
+          validators.validateMobileNumber(
+            '1512345678',
+            prefix: CountryPhonePattern.germany.dialCode,
+          ),
           null,
         );
       });
 
       test('Valid Brazil number', () {
         expect(
-          validators.validateMobileNumber('11987654321',
-              prefix: CountryPhonePattern.brazil.dialCode),
+          validators.validateMobileNumber(
+            '11987654321',
+            prefix: CountryPhonePattern.brazil.dialCode,
+          ),
           null,
         );
       });
 
       test('Valid Japan number', () {
         expect(
-          validators.validateMobileNumber('9012345678',
-              prefix: CountryPhonePattern.japan.dialCode),
+          validators.validateMobileNumber(
+            '9012345678',
+            prefix: CountryPhonePattern.japan.dialCode,
+          ),
           null,
         );
       });
 
       test('Valid Australia number', () {
         expect(
-          validators.validateMobileNumber('412345678',
-              prefix: CountryPhonePattern.australia.dialCode),
+          validators.validateMobileNumber(
+            '412345678',
+            prefix: CountryPhonePattern.australia.dialCode,
+          ),
           null,
         );
       });
 
       test('Valid Russia number', () {
         expect(
-          validators.validateMobileNumber('9161234567',
-              prefix: CountryPhonePattern.russia.dialCode),
+          validators.validateMobileNumber(
+            '9161234567',
+            prefix: CountryPhonePattern.russia.dialCode,
+          ),
           null,
         );
       });
@@ -563,7 +635,7 @@ void main() {
 
       test('Invalid prefix - null', () {
         expect(
-          validators.validateMobileNumber('1234567890', prefix: null),
+          validators.validateMobileNumber('1234567890'),
           null, // Should validate without prefix
         );
       });
@@ -577,16 +649,20 @@ void main() {
 
       test('Wrong prefix for number format', () {
         expect(
-          validators.validateMobileNumber('1234567890',
-              prefix: CountryPhonePattern.china.dialCode),
+          validators.validateMobileNumber(
+            '1234567890',
+            prefix: CountryPhonePattern.china.dialCode,
+          ),
           messages.invalidMobileNumber,
         );
       });
 
       test('Correct prefix with correct format', () {
         expect(
-          validators.validateMobileNumber('1234567890',
-              prefix: CountryPhonePattern.egypt.dialCode),
+          validators.validateMobileNumber(
+            '1234567890',
+            prefix: CountryPhonePattern.egypt.dialCode,
+          ),
           null,
         );
       });
@@ -660,26 +736,34 @@ void main() {
 
       test('Invalid number below minimum length (${minLength - 1} digits)', () {
         final input = '1' * (minLength - 1);
-        expect(validators.validateMobileNumber(input),
-            messages.invalidMobileNumber);
+        expect(
+          validators.validateMobileNumber(input),
+          messages.invalidMobileNumber,
+        );
       });
 
       test('Invalid number above maximum length (${maxLength + 1} digits)', () {
         final input = '1' * (maxLength + 1);
-        expect(validators.validateMobileNumber(input),
-            messages.invalidMobileNumber);
+        expect(
+          validators.validateMobileNumber(input),
+          messages.invalidMobileNumber,
+        );
       });
 
       test('Exactly one digit short of valid (7 digits)', () {
-        final input = '1234567'; // 7 digits
-        expect(validators.validateMobileNumber(input),
-            messages.invalidMobileNumber);
+        const input = '1234567'; // 7 digits
+        expect(
+          validators.validateMobileNumber(input),
+          messages.invalidMobileNumber,
+        );
       });
 
       test('Exactly one digit over valid (16 digits)', () {
-        final input = '1234567890123456'; // 16 digits
-        expect(validators.validateMobileNumber(input),
-            messages.invalidMobileNumber);
+        const input = '1234567890123456'; // 16 digits
+        expect(
+          validators.validateMobileNumber(input),
+          messages.invalidMobileNumber,
+        );
       });
     });
 
@@ -724,7 +808,6 @@ void main() {
         expect(
           validators.validateMobileNumber(
             '1234567890',
-            isRequired: true,
             prefix: CountryPhonePattern.egypt.dialCode,
             customRequiredMessage: 'Custom required',
             customInvalidMessage: 'Custom invalid',
@@ -737,7 +820,6 @@ void main() {
         expect(
           validators.validateMobileNumber(
             'invalid',
-            isRequired: true,
             prefix: CountryPhonePattern.egypt.dialCode,
             customRequiredMessage: 'Custom required',
             customInvalidMessage: 'Custom invalid',

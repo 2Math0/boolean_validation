@@ -1,8 +1,8 @@
 import '../../test_common_libs.dart';
 
 void main() {
-  final UserInputValidators validators = Validators().userInput;
-  final ValidationMessages messages = ValidationMessages();
+  final validators = Validators().userInput;
+  final messages = ValidationMessages();
   messages.copyWith(useGenericRequiredMessage: false);
 
   group('Name Validation', () {
@@ -37,7 +37,7 @@ void main() {
 
     // Additional test for custom required message
     test('Custom Required Message', () {
-      const String nameMsg = 'Please provide your name';
+      const nameMsg = 'Please provide your name';
       expect(
         validators.validateName('', customRequiredMessage: nameMsg),
         nameMsg,
@@ -46,7 +46,7 @@ void main() {
 
     // Additional test for custom invalid message
     test('Custom Invalid Message', () {
-      const String invalidMsg = 'Invalid name format';
+      const invalidMsg = 'Invalid name format';
       expect(
         validators.validateName('TwoMath0', customInvalidMessage: invalidMsg),
         invalidMsg,
@@ -102,10 +102,13 @@ void main() {
 
     test('Multi-lang (English + Arabic) - Mixed valid', () {
       expect(
-        validators.validateName('Thomasتوماس', multiLang: [
-          SupportedLanguage.english,
-          SupportedLanguage.arabic,
-        ]),
+        validators.validateName(
+          'Thomasتوماس',
+          multiLang: [
+            SupportedLanguage.english,
+            SupportedLanguage.arabic,
+          ],
+        ),
         isNull,
       );
     });
@@ -142,8 +145,10 @@ void main() {
 
     test('MultiLang - Valid name', () {
       expect(
-        validators.validateName('דוד김민수АндрейThomasتوماس',
-            multiLang: SupportedLanguage.values),
+        validators.validateName(
+          'דוד김민수АндрейThomasتوماس',
+          multiLang: SupportedLanguage.values,
+        ),
         isNull,
       );
     });

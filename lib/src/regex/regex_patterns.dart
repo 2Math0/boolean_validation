@@ -1,13 +1,16 @@
-/// A class that contains various regular expressions used for validation purposes.
+/// A class that contains various regular expressions
+/// used for validation purposes.
 class RegexPatterns {
   /// Regular expression for validating email addresses.
-  /// This pattern supports various email formats as per RFC 5322 specifications.
+  /// This pattern supports various email formats
+  /// as per RFC 5322 specifications.
   static const String email = r"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+"
       r"(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-      r"(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+"
-      r"[a-zA-Z]{2,}$";
+      r'(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+'
+      r'[a-zA-Z]{2,}$';
 
-  /// Generates a regular expression for validating email addresses constrained to a specific domain.
+  /// Generates a regular expression for validating email addresses constrained
+  /// to a specific domain.
   ///
   /// Example:
   /// ```dart
@@ -17,7 +20,7 @@ class RegexPatterns {
   static String constrainedEmail(String domain) {
     return r"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+"
         r"(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-        "${RegExp.escape(domain)}\$";
+        '${RegExp.escape(domain)}\$';
   }
 
   /// Regular expression for validating integers.
@@ -27,7 +30,9 @@ class RegexPatterns {
   /// Regular expression for validating URLs.
   /// This pattern supports HTTP and HTTPS protocols.
   @Deprecated(
-      "Uri.parse() is being used instead of regex as this regex cause performance issues")
+    'Uri.parse() is being used instead of regex'
+    ' as this regex cause performance issues',
+  )
   static const String url =
       r'^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$';
 
@@ -36,11 +41,13 @@ class RegexPatterns {
   static const String date = r'^\d{4}-\d{1,2}-\d{1,2}$';
 
   /// Regular expression for validating 16-digit credit card numbers.
-  /// This pattern uses a basic validation rule to ensure the card number is 16 digits.
+  /// This pattern uses a basic validation rule
+  /// to ensure the card number is 16 digits.
   static const String creditCard = r'^[0-9]{16}$';
 
   /// Regular expression for validating usernames.
-  /// This pattern allows letters, numbers, and underscores with a length between 4 to 20 characters.
+  /// This pattern allows letters, numbers,
+  /// and underscores with a length between 4 to 20 characters.
   static const String username = r'^[a-zA-Z0-9_]{4,20}$';
 
   /// Regular expression for validating latitude values.
@@ -52,7 +59,8 @@ class RegexPatterns {
   static const String longitude = r'^-?(1[0-7]?\d(\.\d+)?|180(\.0+)?)$';
 
   /// Regular expression for validating alphabetical strings.
-  /// This pattern ensures that the string contains only alphabets (uppercase and lowercase).
+  /// This pattern ensures that the string contains
+  /// only alphabets (uppercase and lowercase).
   static const String alpha = r'^[a-zA-Z]+$';
 
   /// Regular expression for validating alphanumeric strings.
@@ -61,7 +69,9 @@ class RegexPatterns {
   static const String digits = r'^[0-9]+$';
 
   /// Regular expression for validating passwords.
-  /// This pattern enforces a password to have at least 8 characters, including at least one uppercase letter, one digit, and one special character.
+  /// This pattern enforces a password to have at least 8 characters,
+  /// including at least one uppercase letter, one digit,
+  /// and one special character.
   static const String password =
       r'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~_-]).{8,}$';
 
@@ -74,10 +84,10 @@ class RegexPatterns {
       "[!@#\\\$%^&*()_+\\-=\\[\\]\\{\\}\\\\|;:',\".<>/?]";
 
   /// Regular expression for validating lower characters only
-  static const String lowercaseLetters = r'[a-z]';
+  static const String lowercaseLetters = '[a-z]';
 
   /// Regular expression for validating upper characters only
-  static const String uppercaseLetters = r'[A-Z]';
+  static const String uppercaseLetters = '[A-Z]';
 
   ///  Unsafe special characters — avoid allowing these in non-sanitized inputs.
   /// These symbols can be used in:
@@ -93,18 +103,24 @@ class RegexPatterns {
   static const String unsafeSymbols =
       "[<>\\{\\}\\^\$\\|\\*\\\\/.\\?\\+\\'\\\"`]";
 
-  /// # Builds a flexible and anchored regex pattern using groups of OR and AND conditions.
+  /// # Builds a flexible and anchored regex pattern
+  /// using groups of OR and AND conditions.
   ///
-  /// - [orGroups]: A list of groups, where each group is treated as an OR condition.
+  /// - [orGroups]: A list of groups,
+  /// where each group is treated as an OR condition.
   ///   The entire group becomes a single lookahead: `(?=.*(a|b|c))`.
   ///
-  /// - [andGroups]: A list of groups, where each item is enforced using a lookahead.
+  /// - [andGroups]: A list of groups,
+  /// where each item is enforced using a lookahead.
   ///   Each pattern must be present somewhere in the string: `(?=.*a)(?=.*b)`.
   ///
-  /// - [matchAllIfEmpty]: If true and no groups are provided, the pattern will match any input (`^.*$`).
-  ///   If false (default), an empty config will produce a regex that matches nothing (`^(?!)$`).
+  /// - [matchAllIfEmpty]: If true and no groups are provided,
+  /// the pattern will match any input (`^.*$`).
+  ///   If false (default), an empty config will produce
+  ///   a regex that matches nothing (`^(?!)$`).
   ///
-  /// All input patterns are sanitized to remove any leading `^` or trailing `$` anchors,
+  /// All input patterns are sanitized
+  /// to remove any leading `^` or trailing `$` anchors,
   /// ensuring safe composition within lookaheads and groups.
   ///
   /// Returns a full anchored regex string: `^...$`
@@ -160,8 +176,9 @@ class RegexPatterns {
 
     if (orExpressions.isNotEmpty && andExpressions.isNotEmpty) {
       // Mix of OR and AND: group ORs inside a non-capturing group with ANDs
-      buffer.write('(?:${orExpressions.join('|')})');
-      buffer.write(andExpressions.join());
+      buffer
+        ..write('(?:${orExpressions.join('|')})')
+        ..write(andExpressions.join());
     } else if (orExpressions.isNotEmpty) {
       // Only ORs
       buffer.write('(?:${orExpressions.join('|')})');
@@ -170,7 +187,7 @@ class RegexPatterns {
       buffer.write(andExpressions.join());
     }
 
-    buffer.write('.*\$');
+    buffer.write(r'.*$');
     return buffer.toString();
   }
 

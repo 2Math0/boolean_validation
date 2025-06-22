@@ -1,6 +1,6 @@
 import 'package:boolean_validation/src/core/extensions/string_extension.dart';
-import 'package:boolean_validation/src/regex/langs/regex_nums.dart';
 import 'package:boolean_validation/src/regex/langs/regex_alpha_lang.dart';
+import 'package:boolean_validation/src/regex/langs/regex_nums.dart';
 import 'package:boolean_validation/src/regex/langs/regex_punctuation.dart';
 import 'package:boolean_validation/src/regex/langs/regex_script_component.dart';
 
@@ -23,7 +23,6 @@ enum SupportedLanguage {
   latinExtended(
     AlphaLangRegex.latinExtended,
     NumLangRegex.westernNums,
-    null,
   ),
   cyrillic(
     AlphaLangRegex.cyrillicOnly,
@@ -83,17 +82,14 @@ enum SupportedLanguage {
   amharic(
     AlphaLangRegex.amharicOnly,
     NumLangRegex.westernNums,
-    null,
   ),
   armenian(
     AlphaLangRegex.armenianOnly,
     NumLangRegex.westernNums,
-    null,
   ),
   georgian(
     AlphaLangRegex.georgianOnly,
     NumLangRegex.westernNums,
-    null,
   ),
   greek(
     AlphaLangRegex.greekOnly,
@@ -145,11 +141,6 @@ enum SupportedLanguage {
   ),
   ;
 
-  final String alphaPattern;
-  final String digitPattern;
-  final String? punctuationPattern;
-  final List<String> extraPatterns;
-
   const SupportedLanguage(
     this.alphaPattern,
     this.digitPattern, [
@@ -157,25 +148,32 @@ enum SupportedLanguage {
     this.extraPatterns = const [],
   ]);
 
+  final String alphaPattern;
+  final String digitPattern;
+  final String? punctuationPattern;
+  final List<String> extraPatterns;
+
   /// Access the alpha-numeric regex associated with this language.
-  String get alphaNum => buildRegex(includeAlpha: true, includeNum: true);
+  String get alphaNum => buildRegex(includeNum: true);
 
   /// Combined letter + punctuation regex
-  String? get alphaPunctuation => punctuationPattern == null
-      ? null
-      : buildRegex(includeAlpha: true, includePunctuation: true);
+  String? get alphaPunctuation =>
+      punctuationPattern == null ? null : buildRegex(includePunctuation: true);
 
   /// Combined digit + punctuation regex
   String? get digitPunctuation => punctuationPattern == null
       ? null
       : buildRegex(
-          includeAlpha: false, includeNum: true, includePunctuation: true);
+          includeAlpha: false,
+          includeNum: true,
+          includePunctuation: true,
+        );
 
   /// Combined letter + digit + punctuation regex
   String get fullPattern => buildRegex(
-      includeAlpha: true,
-      includeNum: true,
-      includePunctuation: punctuationPattern != null);
+        includeNum: true,
+        includePunctuation: punctuationPattern != null,
+      );
 }
 
 extension SupportedLanguageRegexBuilder on SupportedLanguage {
@@ -197,7 +195,8 @@ extension SupportedLanguageRegexBuilder on SupportedLanguage {
 
     if (parts.isEmpty) {
       throw ArgumentError(
-          'At least one of alpha, num, or punctuation must be included.');
+        'At least one of alpha, num, or punctuation must be included.',
+      );
     }
 
     return '^(${parts.join('|')})+\$';

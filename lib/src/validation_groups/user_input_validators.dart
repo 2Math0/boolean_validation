@@ -1,8 +1,8 @@
+import 'package:boolean_validation/src/core/extensions/string_extension.dart';
 import 'package:boolean_validation/src/enum/email_domains.dart';
 import 'package:boolean_validation/src/enum/supported_languages.dart';
 import 'package:boolean_validation/src/validation_groups/validation_common.dart';
 import 'package:boolean_validation/src/validation_messages/message_replacements_keys.dart';
-import 'package:boolean_validation/src/core/extensions/string_extension.dart';
 
 class UserInputValidators extends ValidationCommon {
   /// Validates an email input.
@@ -39,7 +39,7 @@ class UserInputValidators extends ValidationCommon {
     String? customInvalidMessage,
   }) {
     if (value.nullOrEmpty && isRequired == false) return null;
-    var emailValidation = validateEmail(
+    final emailValidation = validateEmail(
       value,
       isRequired: isRequired,
       customInvalidMessage: customInvalidMessage,
@@ -48,12 +48,15 @@ class UserInputValidators extends ValidationCommon {
     if (emailValidation != null) return emailValidation;
 
     if (!validationLogic.isValidConstrainedEmail(
-        value?.toLowerCase(), domain)) {
+      value?.toLowerCase(),
+      domain,
+    )) {
       return messages.formatMessage(
-          message: messages.emailDomainValidation,
-          replacements: {
-            MessageReplacementKeys.domain: domain.name,
-          });
+        message: messages.emailDomainValidation,
+        replacements: {
+          MessageReplacementKeys.domain: domain.domainName,
+        },
+      );
     }
 
     return null;
@@ -87,7 +90,8 @@ class UserInputValidators extends ValidationCommon {
   /// - [isRequired]: If true, the field must not be empty.
   /// - [customRequiredMessage]: Custom error message for empty input.
   /// - [customInvalidMessage]: Custom error message for format issues.
-  /// - [nameLength]: Minimum number of name parts required (e.g., 2 for first + last).
+  /// - [nameLength]: Minimum number of name parts
+  /// required (e.g., 2 for first + last).
   /// - [multiLang]: Supported language alphabets.
   String? validateFullName(
     String? value, {
@@ -121,9 +125,9 @@ class UserInputValidators extends ValidationCommon {
       return customInvalidMessage ?? messages.fullNameInvalid;
     }
 
-    for (var part in parts) {
+    for (final part in parts) {
       final cleanedPart =
-          part.replaceAll(RegExp(r"[-']"), ''); // Allow apostrophes and hyphens
+          part.replaceAll(RegExp("[-']"), ''); // Allow apostrophes and hyphens
       if (!validationLogic.isAlpha(cleanedPart, multiLang: multiLang)) {
         return customInvalidMessage ?? messages.nameMustBeAlphabetic;
       }
@@ -167,13 +171,15 @@ class UserInputValidators extends ValidationCommon {
     bool requireSpecialChar = true,
     String? customSpecialCharMessage,
   }) {
-    List<String> errors = [];
+    final errors = <String>[];
 
     if (value == null || value.length < minLength) {
-      errors.add(messages.formatMessage(
-        message: messages.passwordMinLength,
-        replacements: {MessageReplacementKeys.minLength: minLength},
-      ));
+      errors.add(
+        messages.formatMessage(
+          message: messages.passwordMinLength,
+          replacements: {MessageReplacementKeys.minLength: minLength},
+        ),
+      );
     }
     if (requireUppercase && !validationLogic.containsLowerCase(value!)) {
       errors.add(customUppercaseMessage ?? messages.passwordLowercase);

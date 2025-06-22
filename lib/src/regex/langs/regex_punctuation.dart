@@ -7,7 +7,8 @@ extension PunctuationLangRegex on RegexPatterns {
       "[!\"#\$%&'()*+,-./:;<=>?@[\\]^_`{|}~]+\$";
 
   /// Arabic punctuation marks.
-  /// Includes Arabic comma, semicolon, question mark, decimal separators, and end marks.
+  /// Includes Arabic comma, semicolon, question mark,
+  /// decimal separators, and end marks.
   static const String arabicPunctuation =
       r'^[\u060C\u061B\u061F\u066A-\u066D\u06D4]+$';
 
@@ -15,7 +16,8 @@ extension PunctuationLangRegex on RegexPatterns {
   static const String germanPunctuation = englishPunctuation;
 
   /// Cyrillic punctuation.
-  /// Covers general punctuation and supplemental punctuation used with Cyrillic scripts.
+  /// Covers general punctuation and
+  /// supplemental punctuation used with Cyrillic scripts.
   static const String cyrillicPunctuation = r'^[\u2010-\u205E\u2E00-\u2E7F]+$';
 
   /// Hebrew punctuation.

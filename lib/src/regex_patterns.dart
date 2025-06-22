@@ -1,11 +1,14 @@
-/// A class that contains various regular expressions used for validation purposes.
+/// A class that contains various regular expressions
+/// used for validation purposes.
 class RegexPatterns {
   /// Regular expression for validating email addresses.
-  /// This pattern supports various email formats as per RFC 5322 specifications.
+  /// This pattern supports various email formats
+  /// as per RFC 5322 specifications.
   static const String email =
       r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
 
-  /// Generates a regular expression for validating email addresses constrained to a specific domain.
+  /// Generates a regular expression for validating email
+  /// addresses constrained to a specific domain.
   ///
   /// Example:
   /// ```dart
@@ -19,11 +22,13 @@ class RegexPatterns {
   }
 
   /// Regular expression for validating names.
-  /// This pattern ensures that the name contains only alphabets (uppercase and lowercase).
+  /// This pattern ensures that the name contains only alphabets
+  /// (uppercase and lowercase).
   static const String name = r'^[a-zA-Z]+$';
 
   /// Regular expression for validating mobile numbers.
-  /// This pattern supports various formats of mobile numbers including international formats.
+  /// This pattern supports various formats of mobile numbers
+  /// including international formats.
   static const String mobileNumber =
       r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$)';
 
@@ -41,11 +46,13 @@ class RegexPatterns {
   static const String date = r'^\d{4}-\d{2}-\d{2}$';
 
   /// Regular expression for validating 16-digit credit card numbers.
-  /// This pattern uses a basic validation rule to ensure the card number is 16 digits.
+  /// This pattern uses a basic validation rule
+  /// to ensure the card number is 16 digits.
   static const String creditCard = r'^[0-9]{16}$';
 
   /// Regular expression for validating usernames.
-  /// This pattern allows letters, numbers, and underscores with a length between 4 to 20 characters.
+  /// This pattern allows letters, numbers,
+  /// and underscores with a length between 4 to 20 characters.
   static const String username = r'^[a-zA-Z0-9_]{4,20}$';
 
   /// Regular expression for validating latitude values.
@@ -57,7 +64,8 @@ class RegexPatterns {
   static const String longitude = r'^-?(1[0-7]?\d(\.\d+)?|180(\.0+)?)$';
 
   /// Regular expression for validating alphabetical strings.
-  /// This pattern ensures that the string contains only alphabets (uppercase and lowercase).
+  /// This pattern ensures
+  /// that the string contains only alphabets (uppercase and lowercase).
   static const String alpha = r'^[a-zA-Z]+$';
 
   /// Regular expression for validating alphanumeric strings.
@@ -65,6 +73,8 @@ class RegexPatterns {
   static const String alphanumeric = r'^[a-zA-Z0-9]+$';
 
   /// Regular expression for validating passwords.
-  /// This pattern enforces a password to have at least 8 characters, including at least one uppercase letter, one digit, and one special character.
+  /// This pattern enforces a password to have at least 8 characters,
+  /// including at least one uppercase letter, one digit,
+  /// and one special character.
   static const String password = r'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~]).{8,}$';
 }

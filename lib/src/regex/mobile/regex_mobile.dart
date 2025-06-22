@@ -2,7 +2,8 @@ import 'package:boolean_validation/src/regex/regex_patterns.dart';
 
 extension MobileRegex on RegexPatterns {
   /// Regular expression for validating mobile numbers.
-  /// This pattern supports various formats of mobile numbers including international formats.
+  /// This pattern supports various formats
+  /// of mobile numbers including international formats.
   static const String mobileNumber =
       r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$)';
 
@@ -19,7 +20,8 @@ extension MobileRegex on RegexPatterns {
   /// Regex to validate Saudi Arabian phone numbers in international format.
   ///
   /// Supports:
-  /// - Mobile numbers (e.g., STC, Mobily, Zain): starts with `9665` and followed by 8 digits.
+  /// - Mobile numbers (e.g., STC, Mobily, Zain):
+  /// starts with `9665` and followed by 8 digits.
   /// - Landline numbers: starts with `9661` and followed by 7 digits.
   /// - Toll-free numbers: starts with `966800` and followed by 6 or 7 digits.
   /// - Service/unified numbers: starts with `9669200` and followed by 5 digits.

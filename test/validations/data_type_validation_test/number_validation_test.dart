@@ -1,8 +1,8 @@
 import '../../test_common_libs.dart';
 
 void main() {
-  final DataTypeValidators validators = Validators().dataType;
-  final ValidationMessages messages = ValidationMessages();
+  final validators = Validators().dataType;
+  final messages = ValidationMessages();
   messages.copyWith(useGenericRequiredMessage: false);
 
   group('Integer Validation', () {
@@ -36,7 +36,7 @@ void main() {
 
     // Additional test for custom required message
     test('Custom Required Message', () {
-      var numberMsg = 'Please provide a number';
+      const numberMsg = 'Please provide a number';
       expect(
         validators.validateInteger(null, customRequiredMessage: numberMsg),
         numberMsg,
@@ -74,7 +74,7 @@ void main() {
     });
 
     test('Custom Required Message', () {
-      final msg = 'Required value';
+      const msg = 'Required value';
       expect(
         validators.validateDouble(null, customRequiredMessage: msg),
         msg,
@@ -82,7 +82,7 @@ void main() {
     });
 
     test('Custom Invalid Message', () {
-      final msg = 'Double required';
+      const msg = 'Double required';
       expect(
         validators.validateDouble('bad-input', customInvalidMessage: msg),
         msg,
@@ -142,24 +142,30 @@ void main() {
 
     test('Custom Invalid Message', () {
       expect(
-        validators.validatePositiveNum('abc',
-            customInvalidMessage: 'Not a valid number'),
+        validators.validatePositiveNum(
+          'abc',
+          customInvalidMessage: 'Not a valid number',
+        ),
         'Not a valid number',
       );
     });
 
     test('Custom Required Message', () {
       expect(
-        validators.validatePositiveNum(null,
-            customRequiredMessage: 'This field is required'),
+        validators.validatePositiveNum(
+          null,
+          customRequiredMessage: 'This field is required',
+        ),
         'This field is required',
       );
     });
 
     test('Custom Must Be Positive Message', () {
       expect(
-        validators.validatePositiveNum('-5',
-            customInvalidMessage: 'Should be above zero'),
+        validators.validatePositiveNum(
+          '-5',
+          customInvalidMessage: 'Should be above zero',
+        ),
         'Should be above zero',
       );
     });

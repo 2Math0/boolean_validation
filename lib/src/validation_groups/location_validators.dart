@@ -1,5 +1,5 @@
-import 'package:boolean_validation/src/validation_groups/validation_common.dart';
 import 'package:boolean_validation/src/core/extensions/string_extension.dart';
+import 'package:boolean_validation/src/validation_groups/validation_common.dart';
 
 class LocationValidators extends ValidationCommon {
   /// Validates latitude.

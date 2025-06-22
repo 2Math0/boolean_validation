@@ -1,8 +1,8 @@
 import '../../test_common_libs.dart';
 
 void main() {
-  final Validators validators = Validators();
-  final ValidationMessages messages = ValidationMessages();
+  final validators = Validators();
+  final messages = ValidationMessages();
   messages.copyWith(useGenericRequiredMessage: false);
 
   group('Alphanumeric Validation', () {
@@ -38,8 +38,10 @@ void main() {
     // Additional test for custom required message
     test('Custom Required Message', () {
       expect(
-        validators.dataType.validateAlphanumeric('',
-            customRequiredMessage: 'Please provide a value'),
+        validators.dataType.validateAlphanumeric(
+          '',
+          customRequiredMessage: 'Please provide a value',
+        ),
         'Please provide a value',
       );
     });

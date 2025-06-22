@@ -44,7 +44,7 @@ class ARBValidationProvider implements ValidationMessageProvider {
 
   @override
   String? get emailDomainValidation =>
-      _localizations.emailDomainValidation(EmailDomain.outlook.name);
+      _localizations.emailDomainValidation(EmailDomain.outlook.domainName);
 
   @override
   String? get usernameRequired => _localizations.usernameRequired;

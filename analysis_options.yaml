@@ -1,4 +1,48 @@
-include: package:flutter_lints/flutter.yaml
+include: package:very_good_analysis/analysis_options.yaml
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "build/**"
+    - ".dart_tool/**"
+    - "example/**"
+    - "test/**"
+
+linter:
+  rules:
+    prefer_single_quotes: true
+    avoid_print: true
+    avoid_redundant_argument_values: true
+    public_member_api_docs: false
+
+dart_code_metrics:
+  extends:
+    - recommended
+
+  metrics:
+    cyclomatic-complexity: 20
+    lines-of-code: 120
+    number-of-parameters: 4
+    maximum-nesting-level: 4
+    source-lines-of-code: 50
+    technical-debt: 20
+
+  rules:
+    - prefer-trailing-comma
+    - avoid-nested-conditional-expressions
+    - avoid-throw-in-catch-block
+    - avoid-wrapping-in-padding
+    - no-boolean-literal-compare
+    - avoid-returning-widgets
+    - avoid-border-radius-all
+    - prefer-correct-type-name
+    - no-equal-arguments
+    - member-ordering
+
+  anti-patterns:
+    - long-method
+    - long-parameter-list
+
+  metrics-exclude:
+    - test/**
