@@ -5,21 +5,22 @@ extension AlphaLangRegex on RegexPatterns {
   /// English letters (uppercase and lowercase only).
   static const String englishOnly = r'^[a-zA-Z]+$';
 
-  /// Arabic letters only (Unicode: 0600–06FF).
-  static const String arabicOnly = r'^[\u0600-\u06FF]+$';
+  /// Arabic letters only, excluding Arabic-Indic digits (U+0660–U+0669).
+  /// Unicode range: 0600–065F, 0670–06FF.
+  static const String arabicOnly = r'^[\u0600-\u065F\u0670-\u06FF]+$';
 
-  /// German letters including umlauts (ä, ö, ü) and ß (Unicode: 00C0–00FF).
+  /// German letters including umlauts and ß (Latin Extended-A).
+  /// Still includes a-z, A-Z plus U+00C0–U+00FF.
   static const String germanOnly = r'^[a-zA-Z\u00C0-\u00FF]+$';
 
   /// Japanese Hiragana characters.
   /// Unicode range: U+3041–U+3096.
   static const String japaneseHiragana = r'^[\u3041-\u3096]+$';
 
-  /// Japanese Katakana characters (Full-width).
-  /// Unicode range: U+30A0–U+30FF.
+  /// Japanese Katakana (full-width).
   static const String japaneseKatakana = r'^[\u30A0-\u30FF]+$';
 
-  /// Japanese Kanji characters (CJK Unified Ideographs).
+  /// Japanese Kanji (Unified Ideographs + extensions + compatibility).
   /// Unicode ranges:
   /// - CJK Extension A: U+3400–U+4DBF
   /// - Common Kanji: U+4E00–U+9FFF
@@ -50,44 +51,44 @@ extension AlphaLangRegex on RegexPatterns {
   /// Unicode range: AC00–D7AF.
   static const String koreanOnly = r'^[\uAC00-\uD7AF]+$';
 
-  /// Hebrew script only.
-  /// Unicode range: 0590–05FF.
-  static const String hebrewOnly = r'^[\u0590-\u05FF]+$';
+  /// Hebrew script (letters only).
+  /// Avoiding niqqud and punctuation.
+  static const String hebrewOnly = r'^[\u05D0-\u05EA]+$';
 
-  /// Devanagari script (used in Hindi, Marathi, Nepali).
-  /// Unicode: 0900–097F.
-  static const String devanagariOnly = r'^[\u0900-\u097F]+$';
+  /// Devanagari script (used in Hindi, Marathi).
+  /// Excludes digits (U+0966–U+096F).
+  static const String devanagariOnly = r'^[\u0900-\u0965\u0970-\u097F]+$';
 
-  /// Thai script only.
-  /// Unicode range: 0E00–0E7F.
-  static const String thaiOnly = r'^[\u0E00-\u0E7F]+$';
+  /// Thai letters only
+  /// (excluding digits: U+0E50–U+0E59).
+  static const String thaiOnly =
+      r'^[\u0E01-\u0E2E\u0E30-\u0E3A\u0E40-\u0E4C\u0E4E-\u0E5B]+$';
 
-  /// Malayalam script (used in Kerala, India).
-  /// Unicode: 0D00–0D7F.
-  static const String malayalamOnly = r'^[\u0D00-\u0D7F]+$';
+  /// Malayalam letters (U+0D00–U+0D7F)
+  /// excluding numerals (U+0D66–0D6F).
+  static const String malayalamOnly = r'^[\u0D00-\u0D65\u0D70-\u0D7F]+$';
 
-  /// Tamil script (used in India and Sri Lanka).
+  /// Tamil letters excluding digits (U+0BE6–U+0BEF).
   /// Unicode: 0B80–0BFF.
-  static const String tamilOnly = r'^[\u0B80-\u0BFF]+$';
+  static const String tamilOnly = r'^[\u0B80-\u0BE5\u0BF0-\u0BFF]+$';
 
-  /// Telugu script (South India).
-  /// Unicode: 0C00–0C7F.
-  static const String teluguOnly = r'^[\u0C00-\u0C7F]+$';
+  /// Telugu letters
+  /// excluding digits (U+0C66–U+0C6F).
+  static const String teluguOnly = r'^[\u0C00-\u0C65\u0C70-\u0C7F]+$';
 
-  /// Bengali script.
-  /// Unicode: 0980–09FF.
-  static const String bengaliOnly = r'^[\u0980-\u09FF]+$';
+  /// Bengali letters only
+  /// (U+0980–U+09FF, excluding U+09E6–09EF).
+  static const String bengaliOnly = r'^[\u0980-\u09E5\u09F0-\u09FF]+$';
 
-  /// Gujarati script.
-  /// Unicode: 0A80–0AFF.
-  static const String gujaratiOnly = r'^[\u0A80-\u0AFF]+$';
+  /// Gujarati letters only
+  /// (excluding U+0AE6–0AEF digits).
+  static const String gujaratiOnly = r'^[\u0A80-\u0AE5\u0AF0-\u0AFF]+$';
 
-  /// Punjabi (Gurmukhi script).
-  /// Unicode: 0A00–0A7F.
-  static const String punjabiOnly = r'^[\u0A00-\u0A7F]+$';
+  /// Punjabi
+  /// (Gurmukhi letters only, excluding U+0A66–0A6F).
+  static const String punjabiOnly = r'^[\u0A00-\u0A65\u0A70-\u0A7F]+$';
 
-  /// Amharic (Ethiopian script).
-  /// Unicode: 1200–137F.
+  /// Amharic (Ethiopic script).
   static const String amharicOnly = r'^[\u1200-\u137F]+$';
 
   /// Armenian script.
@@ -98,21 +99,20 @@ extension AlphaLangRegex on RegexPatterns {
   /// Unicode: 10A0–10FF.
   static const String georgianOnly = r'^[\u10A0-\u10FF]+$';
 
-  /// Greek alphabet.
-  /// Unicode: 0370–03FF.
+  /// Greek letters only.
   static const String greekOnly = r'^[\u0370-\u03FF]+$';
 
-  /// Khmer script (Cambodia).
-  /// Unicode: 1780–17FF.
-  static const String khmerOnly = r'^[\u1780-\u17FF]+$';
+  /// Khmer script
+  /// (excluding digits: U+17E0–U+17E9).
+  static const String khmerOnly = r'^[\u1780-\u17DF\u17F0-\u17FF]+$';
 
-  /// Lao script.
-  /// Unicode: 0E80–0EFF.
-  static const String laoOnly = r'^[\u0E80-\u0EFF]+$';
+  /// Lao script
+  /// (excluding digits: U+0ED0–U+0ED9).
+  static const String laoOnly = r'^[\u0E80-\u0ECF\u0EDA-\u0EFF]+$';
 
-  /// Burmese (Myanmar script).
-  /// Unicode: 1000–109F.
-  static const String burmeseOnly = r'^[\u1000-\u109F]+$';
+  /// Burmese
+  /// (Myanmar script, excluding digits: U+1040–U+1049).
+  static const String burmeseOnly = r'^[\u1000-\u103F\u1050-\u109F]+$';
 
   /// Combined regex allowing only letter characters from all supported languages.
   /// Useful for global input validation without allowing spaces, numbers, or punctuation.

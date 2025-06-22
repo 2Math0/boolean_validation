@@ -9,8 +9,10 @@ I basically build this Package so Devs can use
 5. Customizable "required" messages globally or per field type.
 6. Field-specific messages that override the default ones when needed.
 7. Support for validating email addresses with specific domain rules.
-8. Phone number validation tailored for 19 supported countries.
-9. Validate alphabetic characters for 10 languages, allowing checks against one or multiple selected
+8. Phone number validation tailored for **35+** supported countries, _all Arabic Countries
+   included_.
+9. Validate alphabetic characters for **25+** languages, allowing checks against one or multiple
+   selected
    languages (e.g., English and Arabic).
 
 ## Table of Contents
@@ -227,19 +229,23 @@ bool runMultiValidators({
 | `validators` | `List<bool Function()>` | –       | List of boolean validators |
 
 #### Example
+
 ```dart
 class ShowCaseForMixinValidator extends StatefulWidget {
   const ShowCaseForMixinValidator({super.key});
 
   @override
   State<ShowCaseForMixinValidator> createState() =>
-          _ShowCaseForMixinValidatorState();
+      _ShowCaseForMixinValidatorState();
 }
 ```
-> Notice the use of Mixin `ValidationLogic` with the `with` keyword to access all the methods directly
+
+> Notice the use of Mixin `ValidationLogic` with the `with` keyword to access all the methods
+> directly
+
 ```dart
 class _ShowCaseForMixinValidatorState extends State<ShowCaseForMixinValidator>
-        with ValidationLogic {
+    with ValidationLogic {
   @override
   void initState() {
     super.initState();
