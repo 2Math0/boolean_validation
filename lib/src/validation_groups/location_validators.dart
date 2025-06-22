@@ -1,6 +1,7 @@
 import 'package:boolean_validation/src/validation_groups/validation_common.dart';
+import 'package:boolean_validation/src/core/extensions/string_extension.dart';
 
-  class LocationValidators extends ValidationCommon {
+class LocationValidators extends ValidationCommon {
   /// Validates latitude.
   /// Returns an error message if invalid; otherwise, null.
   String? validateLat(
@@ -9,6 +10,7 @@ import 'package:boolean_validation/src/validation_groups/validation_common.dart'
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
+    if (value.nullOrEmpty() && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -31,6 +33,7 @@ import 'package:boolean_validation/src/validation_groups/validation_common.dart'
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
+    if (value.nullOrEmpty() && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,

@@ -2,6 +2,8 @@ import 'package:boolean_validation/src/enum/email_domains.dart';
 import 'package:boolean_validation/src/enum/supported_languages.dart';
 import 'package:boolean_validation/src/validation_groups/validation_common.dart';
 import 'package:boolean_validation/src/validation_messages/message_replacements_keys.dart';
+import 'package:boolean_validation/src/core/extensions/string_extension.dart';
+
 
 class UserInputValidators extends ValidationCommon {
   /// Validates an email input.
@@ -12,6 +14,7 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
+    if (value.nullOrEmpty() && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -36,6 +39,7 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
+    if (value.nullOrEmpty() && isRequired == false) return null;
     var emailValidation = validateEmail(
       value,
       isRequired: isRequired,
@@ -64,6 +68,7 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
+    if (value.nullOrEmpty() && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -72,7 +77,7 @@ class UserInputValidators extends ValidationCommon {
     );
     if (requiredValidation != null) return requiredValidation;
 
-    if (!validationLogic.isValidUsername(value!)) {
+    if (value != null && !validationLogic.isValidUsername(value)) {
       return customInvalidMessage ?? messages.usernameInvalid;
     }
     return null;
@@ -91,6 +96,7 @@ class UserInputValidators extends ValidationCommon {
     int nameLength = 2,
     List<SupportedLanguage> multiLang = const [SupportedLanguage.english],
   }) {
+    if (value.nullOrEmpty() && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -98,7 +104,6 @@ class UserInputValidators extends ValidationCommon {
       defaultMessage: messages.fullNameRequired,
     );
     if (requiredValidation != null) return requiredValidation;
-
     final parts = value!.split(' ');
     if (parts.length < nameLength) {
       return customInvalidMessage ?? messages.fullNameInvalid;
@@ -121,6 +126,7 @@ class UserInputValidators extends ValidationCommon {
     String? customInvalidMessage,
     List<SupportedLanguage> multiLang = const [SupportedLanguage.english],
   }) {
+    if (value.nullOrEmpty() && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -129,7 +135,7 @@ class UserInputValidators extends ValidationCommon {
     );
     if (requiredValidation != null) return requiredValidation;
 
-    if (!validationLogic.isValidName(value!, multiLang: multiLang)) {
+    if (!validationLogic.isValidName(value, multiLang: multiLang)) {
       return customInvalidMessage ?? messages.nameMustBeAlphabetic;
     }
     return null;
@@ -182,6 +188,7 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
+    if (value.nullOrEmpty() && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -190,7 +197,7 @@ class UserInputValidators extends ValidationCommon {
     );
     if (requiredValidation != null) return requiredValidation;
 
-    if (!validationLogic.isCorrectMobileNumber(value!, prefix)) {
+    if (!validationLogic.isCorrectMobileNumber(value, prefix)) {
       return customInvalidMessage ?? messages.invalidMobileNumber;
     }
     return null;
@@ -204,6 +211,7 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
+    if (value.nullOrEmpty() && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -213,7 +221,7 @@ class UserInputValidators extends ValidationCommon {
 
     if (requiredValidation != null) return requiredValidation;
 
-    if (!validationLogic.isValidCreditCard(value!)) {
+    if (value != null && !validationLogic.isValidCreditCard(value)) {
       return customInvalidMessage ?? messages.invalidCreditCard;
     }
     return null;

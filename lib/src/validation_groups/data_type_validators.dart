@@ -1,5 +1,6 @@
-import 'package:boolean_validation/src/enum/supported_languages.dart';
 import 'package:boolean_validation/src/validation_groups/validation_common.dart';
+import 'package:boolean_validation/src/enum/supported_languages.dart';
+import '../core/common_libs.dart';
 
 class DataTypeValidators extends ValidationCommon {
   /// Validates if the input is an integer.
@@ -10,6 +11,7 @@ class DataTypeValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
+    if (value.nullOrEmpty() && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -33,6 +35,7 @@ class DataTypeValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
+    if (value.nullOrEmpty() && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -56,6 +59,7 @@ class DataTypeValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
+    if (value.nullOrEmpty() && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -78,6 +82,7 @@ class DataTypeValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
+    if (value.nullOrEmpty() && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -100,6 +105,7 @@ class DataTypeValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
+    if (value.nullOrEmpty() && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -123,6 +129,7 @@ class DataTypeValidators extends ValidationCommon {
     String? customInvalidMessage,
     List<SupportedLanguage> multiLang = const [SupportedLanguage.english],
   }) {
+    if (value.nullOrEmpty() && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -144,6 +151,7 @@ class DataTypeValidators extends ValidationCommon {
       String? customRequiredMessage,
       String? customInvalidMessage,
       List<SupportedLanguage> multiLang = const [SupportedLanguage.english]}) {
+    if (value.nullOrEmpty() && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,

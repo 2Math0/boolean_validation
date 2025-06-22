@@ -1,6 +1,8 @@
+import 'package:boolean_validation/src/core/extensions/boolean_extension.dart';
 import 'package:boolean_validation/src/enum/supported_languages.dart';
 import 'package:boolean_validation/src/regex/regex_mobile.dart';
 import 'package:boolean_validation/src/core/extensions/string_extension.dart';
+import 'package:flutter/cupertino.dart';
 import 'enum/country_phone_codes.dart';
 import 'regex/regex_patterns.dart';
 import 'package:boolean_validation/src/enum/email_domains.dart';
@@ -50,15 +52,17 @@ mixin class ValidationLogic {
     if (value == null || value.isEmpty) return false;
 
     // Ensure prefix is formatted correctly
-    final String countryCode = prefix?.replaceAll('+', '') ?? '';
-    final String normalizedNumber =
-        value.replaceAll(RegExp(r'\D'), ''); // Remove non-numeric characters
+    final String countryCode = prefix?.replaceFirst(RegExp(r'^\+'), '') ?? '';
+
+    final String normalizedNumber = value
+        .replaceFirst(RegExp(r'^\+'), '') // remove leading +
+        .replaceAll(RegExp(r'[-()\s]'), ''); // remove -, (, ), and whitespace
 
     // Use country-specific regex if available, otherwise fall back to default regex
     final pattern = RegExp(
         CountryPhonePattern.byIsoCode[countryCode.toUpperCase()]?.regex ??
-            CountryPhonePattern.byDialCode[countryCode.toUpperCase()]?.regex ??
-            MobileRegex.mobileNumber);
+            CountryPhonePattern.byDialCode[countryCode]?.regex ??
+            MobileRegex.mobileNumberWithoutLeadingPlus);
 
     return pattern.hasMatch(normalizedNumber);
   }

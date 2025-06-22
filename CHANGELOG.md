@@ -1,6 +1,6 @@
 ## [1.0.1] - 2025-06-18
-- added more arabic countries [Algeria, Bahrain, Comoros, Djibouti, Iraq, Jordan, Kuwait, Lebanon, Libya, Mauritania, Morocco, Oman, Palestine, Qatar, Somalia, Sudan, Syria, Tunisia, UAE, and Yemen]
-- 
+- Added more arabic countries [Algeria, Bahrain, Comoros, Djibouti, Iraq, Jordan, Kuwait, Lebanon, Libya, Mauritania, Morocco, Oman, Palestine, Qatar, Somalia, Sudan, Syria, Tunisia, UAE, and Yemen]
+- Handle null inputs
 
 
 ## [1.0.0] - 2025-06-7

@@ -170,7 +170,7 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
               ///
               AnimatedFormField(
                 label: l10n.email2MathLabel,
-                controller: _controllers['email1']!,
+                controller: _controllers['emailConstrained']!,
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) =>
                     _validators.userInput.validateConstrainedEmail(
