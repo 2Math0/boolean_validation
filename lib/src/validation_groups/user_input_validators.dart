@@ -82,11 +82,13 @@ class UserInputValidators extends ValidationCommon {
     return null;
   }
 
-  /// Validates a full name (first and last).
-  /// Returns an error message if invalid; otherwise, null.
-  /// Validates a full name.
-  /// Returns an error message if invalid; otherwise, null.
-  /// [nameLength] the required length of the Full Name
+  /// Validates a full name (e.g., first and last name).
+  ///
+  /// - [isRequired]: If true, the field must not be empty.
+  /// - [customRequiredMessage]: Custom error message for empty input.
+  /// - [customInvalidMessage]: Custom error message for format issues.
+  /// - [nameLength]: Minimum number of name parts required (e.g., 2 for first + last).
+  /// - [multiLang]: Supported language alphabets.
   String? validateFullName(
     String? value, {
     bool isRequired = true,
@@ -96,6 +98,7 @@ class UserInputValidators extends ValidationCommon {
     List<SupportedLanguage> multiLang = const [SupportedLanguage.english],
   }) {
     if (value.nullOrEmpty && isRequired == false) return null;
+
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -103,13 +106,25 @@ class UserInputValidators extends ValidationCommon {
       defaultMessage: messages.fullNameRequired,
     );
     if (requiredValidation != null) return requiredValidation;
-    final parts = value!.split(' ');
+
+    final trimmed = value!;
+    if (trimmed != trimmed.trim()) {
+      return customInvalidMessage ?? messages.nameMustBeAlphabetic;
+    }
+    if (trimmed.contains(RegExp(r'\s{2,}'))) {
+      return customInvalidMessage ?? messages.nameMustBeAlphabetic;
+    }
+
+    // Split by single space
+    final parts = trimmed.split(' ');
     if (parts.length < nameLength) {
       return customInvalidMessage ?? messages.fullNameInvalid;
     }
 
     for (var part in parts) {
-      if (!validationLogic.isAlpha(part, multiLang: multiLang)) {
+      final cleanedPart =
+          part.replaceAll(RegExp(r"[-']"), ''); // Allow apostrophes and hyphens
+      if (!validationLogic.isAlpha(cleanedPart, multiLang: multiLang)) {
         return customInvalidMessage ?? messages.nameMustBeAlphabetic;
       }
     }

@@ -93,58 +93,100 @@ class RegexPatterns {
   static const String unsafeSymbols =
       "[<>\\{\\}\\^\$\\|\\*\\\\/.\\?\\+\\'\\\"`]";
 
-  /// # Builds a complex regex expression using groups of OR and AND patterns.
+  /// # Builds a flexible and anchored regex pattern using groups of OR and AND conditions.
   ///
-  /// - [orGroups]: Each inner list is joined as an OR expression: `(a|b|c)`
-  /// - [andGroups]: Each inner list is joined with lookahead assertions: `(?=.*a)(?=.*b)`
+  /// - [orGroups]: A list of groups, where each group is treated as an OR condition.
+  ///   The entire group becomes a single lookahead: `(?=.*(a|b|c))`.
   ///
-  /// This function supports only `String` regex patterns (either raw or standard),
-  /// and automatically strips any leading `^` or trailing `$` anchors from them.
+  /// - [andGroups]: A list of groups, where each item is enforced using a lookahead.
+  ///   Each pattern must be present somewhere in the string: `(?=.*a)(?=.*b)`.
+  ///
+  /// - [matchAllIfEmpty]: If true and no groups are provided, the pattern will match any input (`^.*$`).
+  ///   If false (default), an empty config will produce a regex that matches nothing (`^(?!)$`).
+  ///
+  /// All input patterns are sanitized to remove any leading `^` or trailing `$` anchors,
+  /// ensuring safe composition within lookaheads and groups.
   ///
   /// Returns a full anchored regex string: `^...$`
   ///
   /// ## Example:
   /// ```dart
-  /// final pattern = RegexPatterns().buildComplexRegex(
+  /// final pattern = buildFastRegex(
   ///   orGroups: [
-  ///     [RegexPatterns.lowercaseLetters, RegexPatterns.uppercaseLetters, RegexPatterns.digits],
-  ///     [r'foo', r'bar']
+  ///     [r'[a-z]', r'[A-Z]', r'[0-9]'],   // any letter or digit
+  ///     [r'foo', r'bar']                  // OR contains "foo" or "bar"
   ///   ],
   ///   andGroups: [
-  ///     [RegexPatterns.integer, RegexPatterns.alpha],
-  ///     [r'xyz', r'token']
+  ///     [r'[+-]?\d+'],                    // must contain integer
+  ///     [r'[a-zA-Z]+'],                   // must contain at least one letter
+  ///     [r'xyz', r'token'],               // both "xyz" and "token" must appear
   ///   ],
   /// );
   ///
-  /// // Result:
-  /// // ^([a-z]|[A-Z]|[0-9])(foo|bar)(?=.*^[+-]?\d+$)(?=.*^[a-zA-Z]+$)(?=.*xyz)(?=.*token)$
+  /// final regex = RegExp(pattern);
+  /// print(regex.hasMatch('foo123xyzTOKEN')); // true
   /// ```
-  String buildComplexRegex({
+  ///
+  /// Example result:
+  /// ```
+  /// ^(?=.*(?:[a-z]|[A-Z]|[0-9]))(?=.*(?:foo|bar))(?=.*[+-]?\d+)(?=.*[a-zA-Z]+)(?=.*xyz)(?=.*token).*$
+  /// ```
+  String buildFlexibleRegex({
     List<List<String>> orGroups = const [],
     List<List<String>> andGroups = const [],
+    bool matchAllIfEmpty = false,
   }) {
-    /// Removes ^ and $ anchors from a regex pattern string.
-    String sanitize(String pattern) =>
-        pattern.replaceAll(RegExp(r'^\^|\$+$'), '');
+    if (orGroups.isEmpty && andGroups.isEmpty) {
+      return matchAllIfEmpty ? r'^.*$' : r'^(?!)$';
+    }
 
-    /// Converts a group of patterns into an OR expression: (a|b|c)
-    String orGroup(List<String> group) => '(${group.map(sanitize).join('|')})';
+    final orExpressions = <String>[];
+    final andExpressions = <String>[];
 
-    /// Converts a group of patterns into an AND expression: (?=.*a)(?=.*b)
-    String andGroup(List<String> group) =>
-        group.map((g) => '(?=.*${sanitize(g)})').join();
+    // Collect OR lookaheads
+    for (final group in orGroups) {
+      if (group.isNotEmpty) {
+        final joined = group.map(sanitize).join('|');
+        orExpressions.add('(?=.*(?:$joined))');
+      }
+    }
+
+    // Collect AND lookaheads
+    for (final group in andGroups) {
+      andExpressions.addAll(buildAndLookaheads(group));
+    }
 
     final buffer = StringBuffer('^');
 
-    for (final group in orGroups) {
-      buffer.write(orGroup(group));
+    if (orExpressions.isNotEmpty && andExpressions.isNotEmpty) {
+      // Mix of OR and AND: group ORs inside a non-capturing group with ANDs
+      buffer.write('(?:${orExpressions.join('|')})');
+      buffer.write(andExpressions.join());
+    } else if (orExpressions.isNotEmpty) {
+      // Only ORs
+      buffer.write('(?:${orExpressions.join('|')})');
+    } else {
+      // Only ANDs
+      buffer.write(andExpressions.join());
     }
 
-    for (final group in andGroups) {
-      buffer.write(andGroup(group));
-    }
-
-    buffer.write(r'$');
+    buffer.write('.*\$');
     return buffer.toString();
+  }
+
+  /// Sanitizes a pattern by removing leading ^ and trailing $
+  String sanitize(String pattern) =>
+      pattern.replaceAll(RegExp(r'^\^|\$+$'), '');
+
+  /// Builds a single lookahead for an OR group: (?=.*(a|b|c))
+  String? buildOrLookahead(List<String> group) {
+    if (group.isEmpty) return null;
+    final joined = group.map(sanitize).join('|');
+    return '(?=.*(?:$joined))';
+  }
+
+  /// Builds multiple lookaheads for an AND group: (?=.*a)(?=.*b)
+  List<String> buildAndLookaheads(List<String> group) {
+    return group.map((pattern) => '(?=.*${sanitize(pattern)})').toList();
   }
 }

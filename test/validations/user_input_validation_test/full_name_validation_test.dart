@@ -8,7 +8,7 @@ void main() {
   group('Full Name Validation', () {
     test('Valid Full Name', () {
       expect(
-        validators.userInput.validateFullName('John Doe'),
+        validators.userInput.validateFullName('Thomas Samy'),
         null,
       );
     });
