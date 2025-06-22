@@ -13,7 +13,7 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (value.nullOrEmpty() && isRequired == false) return null;
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -38,7 +38,7 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (value.nullOrEmpty() && isRequired == false) return null;
+    if (value.nullOrEmpty && isRequired == false) return null;
     var emailValidation = validateEmail(
       value,
       isRequired: isRequired,
@@ -67,7 +67,7 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (value.nullOrEmpty() && isRequired == false) return null;
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -95,7 +95,7 @@ class UserInputValidators extends ValidationCommon {
     int nameLength = 2,
     List<SupportedLanguage> multiLang = const [SupportedLanguage.english],
   }) {
-    if (value.nullOrEmpty() && isRequired == false) return null;
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -125,7 +125,7 @@ class UserInputValidators extends ValidationCommon {
     String? customInvalidMessage,
     List<SupportedLanguage> multiLang = const [SupportedLanguage.english],
   }) {
-    if (value.nullOrEmpty() && isRequired == false) return null;
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -187,7 +187,7 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (value.nullOrEmpty() && isRequired == false) return null;
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -210,7 +210,7 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (value.nullOrEmpty() && isRequired == false) return null;
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,

@@ -11,7 +11,7 @@ class DataTypeValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (value.nullOrEmpty() && isRequired == false) return null;
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -35,7 +35,7 @@ class DataTypeValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (value.nullOrEmpty() && isRequired == false) return null;
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -59,7 +59,7 @@ class DataTypeValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (value.nullOrEmpty() && isRequired == false) return null;
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -82,7 +82,7 @@ class DataTypeValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (value.nullOrEmpty() && isRequired == false) return null;
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -105,7 +105,7 @@ class DataTypeValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (value.nullOrEmpty() && isRequired == false) return null;
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -129,7 +129,7 @@ class DataTypeValidators extends ValidationCommon {
     String? customInvalidMessage,
     List<SupportedLanguage> multiLang = const [SupportedLanguage.english],
   }) {
-    if (value.nullOrEmpty() && isRequired == false) return null;
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -151,7 +151,7 @@ class DataTypeValidators extends ValidationCommon {
       String? customRequiredMessage,
       String? customInvalidMessage,
       List<SupportedLanguage> multiLang = const [SupportedLanguage.english]}) {
-    if (value.nullOrEmpty() && isRequired == false) return null;
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,

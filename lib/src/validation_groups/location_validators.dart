@@ -10,7 +10,7 @@ class LocationValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (value.nullOrEmpty() && isRequired == false) return null;
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -33,7 +33,7 @@ class LocationValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    if (value.nullOrEmpty() && isRequired == false) return null;
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,

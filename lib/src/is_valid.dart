@@ -1,5 +1,5 @@
 import 'package:boolean_validation/src/enum/supported_languages.dart';
-import 'package:boolean_validation/src/regex/regex_mobile.dart';
+import 'package:boolean_validation/src/regex/mobile/regex_mobile.dart';
 import 'package:boolean_validation/src/core/extensions/string_extension.dart';
 import 'enum/country_phone_codes.dart';
 import 'regex/regex_patterns.dart';
@@ -32,7 +32,8 @@ mixin class ValidationLogic {
 
     // Combine all character sets from the selected language patterns
     final combinedCharSet = multiLang
-        .map((lang) => lang.pattern.charSet) // use your extension getter here
+        .map((lang) =>
+            lang.alphaPattern.charSet) // use your extension getter here
         .join();
 
     // Build a regex that matches only characters in the combined set, for the whole string
@@ -183,7 +184,7 @@ mixin class ValidationLogic {
 
   /// Validates that the value is non-null and non-empty (for required fields).
   bool isRequiredField(String? value) {
-    return value.notNullOrEmpty();
+    return value.notNullOrEmpty;
   }
 
   /// Validates if the password meets basic complexity requirements.
@@ -228,7 +229,8 @@ mixin class ValidationLogic {
 
     // Combine all character sets from the selected language patterns
     final combinedCharSet = multiLang
-        .map((lang) => lang.pattern.charSet) // use your extension getter here
+        .map((lang) =>
+            lang.alphaPattern.charSet) // use your extension getter here
         .join();
 
     // Build a regex that matches only characters in the combined set, for the whole string
@@ -244,7 +246,7 @@ mixin class ValidationLogic {
 
     // Combine char sets from languages
     final combinedCharSet =
-        multiLang.map((lang) => lang.pattern.charSet).join();
+        multiLang.map((lang) => lang.alphaPattern.charSet).join();
 
     // Add digits char set extracted from RegexPatterns.digits
     final digitsCharSet = RegexPatterns.digits.charSet;

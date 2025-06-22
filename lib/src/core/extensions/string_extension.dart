@@ -4,7 +4,7 @@ extension NullString on String? {
   /// **not** `null`
   ///
   /// and **not** Empty after `trim()`
-  bool notNullOrEmpty() => this != null && this!.trim().isNotEmpty;
+  bool get notNullOrEmpty => this != null && this!.trim().isNotEmpty;
 
   /// find if `String?` is
   ///
@@ -13,12 +13,12 @@ extension NullString on String? {
   /// OR
   ///
   /// Empty after `trim()`
-  bool nullOrEmpty() => this == null || this!.trim().isEmpty;
+  bool get nullOrEmpty => this == null || this!.trim().isEmpty;
 }
 
 extension RegexPatternHelpers on String {
   /// Returns the regex string without starting `^` and ending `$` anchors.
-  String removeAnchors() => replaceAll(RegExp(r'^\^|\$$'), '');
+  String get removeAnchors => replaceAll(RegExp(r'^\^|\$$'), '');
 
   /// Extracts the character set inside square brackets [] and removes anchors and quantifiers (+).
   /// Example: r'^[a-zA-Z]+$' => 'a-zA-Z'

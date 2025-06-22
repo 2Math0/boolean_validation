@@ -92,4 +92,59 @@ class RegexPatterns {
   ///
   static const String unsafeSymbols =
       "[<>\\{\\}\\^\$\\|\\*\\\\/.\\?\\+\\'\\\"`]";
+
+  /// # Builds a complex regex expression using groups of OR and AND patterns.
+  ///
+  /// - [orGroups]: Each inner list is joined as an OR expression: `(a|b|c)`
+  /// - [andGroups]: Each inner list is joined with lookahead assertions: `(?=.*a)(?=.*b)`
+  ///
+  /// This function supports only `String` regex patterns (either raw or standard),
+  /// and automatically strips any leading `^` or trailing `$` anchors from them.
+  ///
+  /// Returns a full anchored regex string: `^...$`
+  ///
+  /// ## Example:
+  /// ```dart
+  /// final pattern = RegexPatterns().buildComplexRegex(
+  ///   orGroups: [
+  ///     [RegexPatterns.lowercaseLetters, RegexPatterns.uppercaseLetters, RegexPatterns.digits],
+  ///     [r'foo', r'bar']
+  ///   ],
+  ///   andGroups: [
+  ///     [RegexPatterns.integer, RegexPatterns.alpha],
+  ///     [r'xyz', r'token']
+  ///   ],
+  /// );
+  ///
+  /// // Result:
+  /// // ^([a-z]|[A-Z]|[0-9])(foo|bar)(?=.*^[+-]?\d+$)(?=.*^[a-zA-Z]+$)(?=.*xyz)(?=.*token)$
+  /// ```
+  String buildComplexRegex({
+    List<List<String>> orGroups = const [],
+    List<List<String>> andGroups = const [],
+  }) {
+    /// Removes ^ and $ anchors from a regex pattern string.
+    String sanitize(String pattern) =>
+        pattern.replaceAll(RegExp(r'^\^|\$+$'), '');
+
+    /// Converts a group of patterns into an OR expression: (a|b|c)
+    String orGroup(List<String> group) => '(${group.map(sanitize).join('|')})';
+
+    /// Converts a group of patterns into an AND expression: (?=.*a)(?=.*b)
+    String andGroup(List<String> group) =>
+        group.map((g) => '(?=.*${sanitize(g)})').join();
+
+    final buffer = StringBuffer('^');
+
+    for (final group in orGroups) {
+      buffer.write(orGroup(group));
+    }
+
+    for (final group in andGroups) {
+      buffer.write(andGroup(group));
+    }
+
+    buffer.write(r'$');
+    return buffer.toString();
+  }
 }

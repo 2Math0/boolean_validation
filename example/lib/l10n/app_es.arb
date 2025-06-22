@@ -12,7 +12,7 @@
   "@emailLabel": {
     "description": "Label for email input field"
   },
-  "email2MathLabel": "Correo (twomath.com)",
+  "email2MathLabel": "Correo (2math.com)",
   "@email2MathLabel": {
     "description": "Label for email input field"
   },
@@ -288,4 +288,4 @@
   "invalidTaxId": "Formato de ID de impuestos inválido",
   "socialHandleRequired": "El identificador de redes sociales es requerido",
   "invalidSocialHandle": "Formato de identificador de redes sociales inválido"
-} 
+}

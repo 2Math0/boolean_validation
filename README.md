@@ -70,7 +70,7 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  boolean_validation: ^1.0.0
+  boolean_validation: ^1.1.0
 ```
 
 Basic usage:
