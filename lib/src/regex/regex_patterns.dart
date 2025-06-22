@@ -16,8 +16,8 @@ class RegexPatterns {
   /// This will return a pattern that matches emails like "user@example.com".
   static String constrainedEmail(String domain) {
     return r"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+"
-    r"(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-    "${RegExp.escape(domain)}\$";
+        r"(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+        "${RegExp.escape(domain)}\$";
   }
 
   /// Regular expression for validating integers.

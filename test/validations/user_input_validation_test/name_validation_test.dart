@@ -142,7 +142,8 @@ void main() {
 
     test('MultiLang - Valid name', () {
       expect(
-        validators.validateName('דוד김민수АндрейThomasتوماس', multiLang: SupportedLanguage.values),
+        validators.validateName('דוד김민수АндрейThomasتوماس',
+            multiLang: SupportedLanguage.values),
         isNull,
       );
     });

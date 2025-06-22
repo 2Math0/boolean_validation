@@ -59,8 +59,8 @@ void main() {
 
     test('Constrained Email', () {
       expect(
-        validators.userInput.validateConstrainedEmail('hey@2math.com',
-            domain: numDomain),
+        validators.userInput
+            .validateConstrainedEmail('hey@2math.com', domain: numDomain),
         messages.formatMessage(
             message: messages.emailDomainValidation,
             replacements: {

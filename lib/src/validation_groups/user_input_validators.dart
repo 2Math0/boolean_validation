@@ -4,7 +4,6 @@ import 'package:boolean_validation/src/validation_groups/validation_common.dart'
 import 'package:boolean_validation/src/validation_messages/message_replacements_keys.dart';
 import 'package:boolean_validation/src/core/extensions/string_extension.dart';
 
-
 class UserInputValidators extends ValidationCommon {
   /// Validates an email input.
   /// Returns an error message if invalid; otherwise, null.

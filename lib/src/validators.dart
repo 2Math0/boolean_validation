@@ -9,7 +9,6 @@ import 'core/common_libs.dart';
 class Validators {
   static final Validators _instance = Validators._internal();
 
-
   factory Validators() {
     return _instance;
   }
@@ -19,5 +18,4 @@ class Validators {
   final UserInputValidators userInput = UserInputValidators();
   final LocationValidators location = LocationValidators();
   final DataTypeValidators dataType = DataTypeValidators();
-
 }

@@ -1,8 +1,6 @@
-import 'package:boolean_validation/src/core/extensions/boolean_extension.dart';
 import 'package:boolean_validation/src/enum/supported_languages.dart';
 import 'package:boolean_validation/src/regex/regex_mobile.dart';
 import 'package:boolean_validation/src/core/extensions/string_extension.dart';
-import 'package:flutter/cupertino.dart';
 import 'enum/country_phone_codes.dart';
 import 'regex/regex_patterns.dart';
 import 'package:boolean_validation/src/enum/email_domains.dart';

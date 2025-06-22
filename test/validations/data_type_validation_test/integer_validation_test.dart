@@ -5,7 +5,6 @@ void main() {
   final ValidationMessages messages = ValidationMessages();
   messages.copyWith(useGenericRequiredMessage: false);
 
-
   group('Integer Validation', () {
     test('Valid Integer', () {
       expect(
