@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'mermaid/*.mmd'
+      - 'inject_mermaid.sh'
+      - '.github/workflows/inject-mermaid.yml'
 
 jobs:
   inject-mermaid:

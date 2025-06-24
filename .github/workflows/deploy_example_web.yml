@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - '.github/workflows/deploy_example_web.yml'
 
 jobs:
   build-and-deploy:

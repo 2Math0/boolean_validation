@@ -3,6 +3,11 @@ on:
   pull_request:
     branches:
       - master
+  push:
+    paths:
+      - 'lib/**'
+      - 'test/**'
+      - '.github/workflows/ci.yml'
 
 jobs:
   flutter_test:
