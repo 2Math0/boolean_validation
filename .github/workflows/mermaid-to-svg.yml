@@ -37,6 +37,10 @@ jobs:
           -p puppeteer-config.json \
           -c mermaid-config.json
 
+      - name: Remove white background from SVG
+        run: |
+          sed -i 's/background-color: white;//g' doc/simplified_arch.svg
+
       - name: Commit SVG
         run: |
           git config user.name "github-actions[bot]"
