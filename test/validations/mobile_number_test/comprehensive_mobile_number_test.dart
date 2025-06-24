@@ -2,7 +2,8 @@ import '../../test_common_libs.dart';
 
 void main() {
   final validators = Validators().userInput;
-ValidationMessages.copyWith(useGenericRequiredMessage: false); final messages = ValidationMessages();
+  ValidationMessages.copyWith(useGenericRequiredMessage: false);
+  final messages = ValidationMessages();
 
   group('Mobile Number Validation - Comprehensive Test Suite', () {
     // ============================================================================

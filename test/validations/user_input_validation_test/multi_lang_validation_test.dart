@@ -2,7 +2,8 @@ import '../../test_common_libs.dart';
 
 void main() {
   final validators = Validators();
-ValidationMessages.copyWith(useGenericRequiredMessage: false); final messages = ValidationMessages();
+  ValidationMessages.copyWith(useGenericRequiredMessage: false);
+  final messages = ValidationMessages();
 
   group('NAME_VALIDATION_CORE', () {
     group('SINGLE_NAME_BASIC_VALIDATION', () {

@@ -2,7 +2,10 @@ import '../../test_common_libs.dart';
 
 void main() {
   final validators = Validators().dataType;
-ValidationMessages.copyWith(useGenericRequiredMessage: false); ValidationMessages.copyWith(useGenericRequiredMessage: false); final messages = ValidationMessages(); ValidationMessages();
+  ValidationMessages.copyWith(useGenericRequiredMessage: false);
+  ValidationMessages.copyWith(useGenericRequiredMessage: false);
+  final messages = ValidationMessages();
+  ValidationMessages();
 
   group('Integer Validation', () {
     test('Valid Integer', () {
