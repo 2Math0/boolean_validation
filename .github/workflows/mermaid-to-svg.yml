@@ -43,7 +43,8 @@ jobs:
       - name: Create README_pub.md for pub.dev
         run: |
           cp README.md README_pub.md
-          sed -i '/<!--MERMAID_START-->/,<!--MERMAID_END-->/c\<img src="doc/full_diagram.svg" alt="Architecture Diagram" />' README_pub.md
+          sed -i '/<!--MERMAID_START-->/,/<!--MERMAID_END-->/c\
+          <img src="doc/full_diagram.svg" alt="Architecture Diagram" />' README_pub.md
 
       - name: Commit README_pub.md
         run: |
