@@ -5,6 +5,7 @@ on:
     branches:
       - master
     paths:
+      - 'README.md'
       - 'mermaid/*.mmd'
       - 'inject_mermaid.sh'
       - '.github/workflows/mermaid-to-svg.yml'
