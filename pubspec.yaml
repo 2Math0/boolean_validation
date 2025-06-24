@@ -10,6 +10,7 @@ keywords:
   - flutter
 documentation: https://2Math0.github.io/boolean_validation/
 example: https://github.com/2Math0/boolean_validation/tree/master/example
+readme: README_pub.md
 
 environment:
   sdk: '>=3.0.0 <4.0.0'

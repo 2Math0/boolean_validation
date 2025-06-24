@@ -1,0 +1,34 @@
+name: Inject Mermaid Diagram
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  inject-mermaid:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Pull latest before committing
+        run: git pull origin master --rebase
+
+      - name: Set up environment
+        run: |
+          sudo apt update
+          sudo apt install -y bash
+
+      - name: Inject Mermaid into README
+        run: |
+          chmod +x ./inject_mermaid.sh
+          ./inject_mermaid.sh
+
+      - name: Commit updated README
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "chore: Inject updated Mermaid diagram into README.md" || echo "No changes to commit"
+          git push

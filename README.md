@@ -1,137 +1,177 @@
 # Boolean Validation
 
-I basically build this Package so Devs can use
+A powerful and flexible Flutter validation library designed to simplify form validation, provide clear user feedback, and support internationalization out of the box.
 
-1. A complete set of regex patterns for common validation needs.
-2. Handy shorthand methods to simplify built-in `TextFormField` validation.
-3. `isValid` methods for easy `bool` checks in any context.
-4. Built-in validation messages with override and localization support.
-5. Customizable "required" messages globally or per field type.
-6. Field-specific messages that override the default ones when needed.
-7. Support for validating email addresses with specific domain rules.
-8. Phone number validation tailored for **35+** supported countries, _all Arabic Countries
-   included_.
-9. Validate alphabetic characters for **25+** languages, allowing checks against one or multiple
-   selected
-   languages (e.g., English and Arabic).
+## I basically build this Package so Devs can use
+
+1. **Comprehensive Validators**: A rich set of built-in validators for common use cases like emails, passwords, phone numbers, names, URLs, and more.
+2. **Easy Integration**: Use validators directly within `TextFormField` or get a simple `bool` result using `isValid` methods for any validation logic.
+3. **Customizable Messages**: Easily override default validation messages globally, per-validator, or for specific fields.
+4. **Internationalization (i18n)**: Built-in support for localization. Default messages are provided in English, with the ability to add and use your own translations.
+5. **Multi-language Character Support**: Validate names and text in over **25** languages.
+6. **Advanced Phone Number Validation**: Supports validation for **35+** country codes.
+7. **Custom Logic**: Chain multiple validation rules together for complex scenarios.
 
 ## Table of Contents
 
-- [Some Visual References](#some-visual-references)
-    - [Overview Graph](#overview-graph)
-    - [Full Detailed Graph](#fully-detailed)
-- [Get Ready](#get-ready)
-- [Available Validators](#available-validators)
-    - [User Input Validators](#User-Input-Validators)
-    - [Data Type Validators](#Data-Type-validators)
-- [Some Complex Examples](#some-complex-examples)
-    - [Email Constrained Domain Validation](#email-constrained-domain-validation)
-    - [Mobile Number Validation](#mobile-number-validation)
-    - [Password Validation](#password-validation)
-    - [Name Validation](#name-validation)
-    - [Run Many Validation Logic](#run-many-validation-logic)
-- [Contributing](#contributing)
-- [License](#license)
+- [Boolean Validation](#boolean-validation)
+  - [I basically build this Package so Devs can use](#i-basically-build-this-package-so-devs-can-use)
+  - [Table of Contents](#table-of-contents)
+  - [Getting Started](#getting-started)
+    - [Installation](#installation)
+    - [Basic Usage](#basic-usage)
+      - [1. Inside a `TextFormField`](#1-inside-a-textformfield)
+      - [2. Direct `isValid` Checks](#2-direct-isvalid-checks)
+  - [Customization](#customization)
+    - [Global Custom Messages](#global-custom-messages)
+    - [Per-Field Custom Messages](#per-field-custom-messages)
+  - [Available Validators](#available-validators)
+    - [User Input Validators](#user-input-validators)
+    - [Data Type Validators](#data-type-validators)
+    - [Location Validators](#location-validators)
+  - [Advanced Usage \& Parameters](#advanced-usage--parameters)
+    - [Email (Constrained Domain)](#email-constrained-domain)
+    - [Mobile Number](#mobile-number)
+    - [Password](#password)
+    - [Name](#name)
+    - [Chaining Validators](#chaining-validators)
+  - [Example App](#example-app)
+  - [Visual Architecture](#visual-architecture)
+  - [Contributing](#contributing)
+  - [License](#license)
 
-## Some Visual References
+## Getting Started
 
-### Overview Graph
+### Installation
 
-```mermaid
-graph TD
-    A[boolean_validation] --> B[Validators Class]
-    A[boolean_validation] --> F[Validation Messages]
-    B --> C[UserInputValidators]
-    B --> D[DataTypeValidators]
-    B --> E[LocationValidators]
-    C --> C1[validateEmail]
-    C --> C2[validateConstrainedEmail]
-    C --> C3[validateUsername]
-    C --> C4[validateFullName]
-    C --> C5[validateName]
-    C --> C6[validatePassword]
-    C --> C7[validateCreditCard]
-    D --> D1[validateInteger]
-    D --> D2[validateDouble]
-    D --> D3[validatePositiveNum]
-    D --> D4[validateUrl]
-    D --> D5[validateDate]
-    D --> D6[validateAlpha]
-    D --> D7[validateAlphanumeric]
-    E --> E1[validateLat]
-    E --> E2[validateLong]
-```
-
-### Fully Detailed:
-
-![Architecture Diagram](./full_diagram.png)
-
-## Get Ready
-
-Add to your `pubspec.yaml`:
+Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
   boolean_validation: ^1.1.0
 ```
 
-Basic usage:
+Then, run `flutter pub get` in your terminal.
+
+### Basic Usage
+
+Import the package and use the `Validators` singleton to access all validation methods.
+
+#### 1. Inside a `TextFormField`
+
+```dart
+import 'package:boolean_validation/boolean_validation.dart';
+import 'package:flutter/material.dart';
+
+final validators = Validators(); // Access the singleton instance
+
+class MyForm extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      decoration: InputDecoration(labelText: 'Email'),
+      validator: (value) => validators.userInput.validateEmail(value),
+    );
+  }
+}
+```
+
+#### 2. Direct `isValid` Checks
+
+For logic outside of forms, every `validate...` method has a corresponding `is...Valid` method.
 
 ```dart
 import 'package:boolean_validation/boolean_validation.dart';
 
-final validators = Validators();
+class WrapperClass with ValidationLogic {
+  final validators = Validators();
 
-// Validate email
-TextFormField(
-    controller: TextEditingController(),
-    decoration: InputDecoration(
-        labelText: 'Email',
-        border: OutlineInputBorder(),
-      ),
-    keyboardType: TextInputType.emailAddress,
-    validator: (value) =>
-        _validators.userInput.validateEmail(value,
-            // in case of using arb as localization
-            customRequiredMessage: l10n.emailRequired,
-            customInvalidMessage:l10n.invalidEmail,
-           ),
-    ),
+// The `isValid` singleton gives you direct access to boolean checks
+  if(isValidEmail('someEmail')) {
+  print('Email is valid!');
+  }
+
+// You can also use the boolean extensions on String
+  if (isValidPassword('password')) {
+  print('Password is strong enough!');
+  }
+}
 ```
+
+## Customization
+
+### Global Custom Messages
+
+Override messages globally when your app starts.
+
+```dart
+import 'package:boolean_validation/boolean_validation.dart';
+
+void main() {
+  final messages = ValidationMessages();
+  messages.setRequiredMessage('This field cannot be empty!');
+  messages.setEmailMessage('Please enter a valid email address.');
+  runApp(MyApp());
+}
+```
+
+### Per-Field Custom Messages
+
+Provide a custom message directly in the validator method to override any global setting.
+
+```dart
+TextFormField(
+  validator: (value) => validators.userInput.validateEmail(
+    value,
+    customInvalidMessage: 'That doesn\'t look like an email address.',
+    customRequiredMessage: 'We need your email!',
+  ),
+)
+```
+
+For a complete guide on setting up internationalization with ARB files, please see the `example` application.
 
 ## Available Validators
 
 ### User Input Validators
 
-| Validator                  | Description                                                                            | Example                                                                                                                                                                                |
-|----------------------------|----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `validateEmail`            | Email format                                                                           | `validateEmail('test@example.com')`                                                                                                                                                    |
-| `validateConstrainedEmail` | Email format depending on specific domain validation                                   | `validateConstrainedEmail('test@2math.op', domain: EmailDomain.custom('2math.op')`                                                                                                     |
-| `validateMobileNumber`     | Mobile number validation depending on country (iso or code)                            | `validateMobileNumber('1201234567', prefix: CountryPhonePattern.egypt.dialCode)`                                                                                                       |
-| `validateCreditCard`       | Credit card validation                                                                 | • Luhn algorithm<br>• Card type detection<br>• Format validation                                                                                                                       |
-| `validatePassword`         | Password strength validation  includes all characters, you can change that if you need | • Length requirements<br>• Character type requirements<br>• Complexity rules                                                                                                           |
-| `validateUsername`         | Username format validation                                                             | • Length requirements<br>• Character restrictions<br>• Format validation                                                                                                               |
-| `validateFullName`         | at least first and last names                                                          | • Words Count requirements<br>• Alpha **Language** Characters' restrictions<br>• Format validation                                                                                     |
-| `validateName`             | it must be a legit name                                                                | ```validateName(isRequired = true, customRequiredMessage = "required Name",customInvalidMessage= "Invalid Name", multiLang = [SupportedLanguage.arabic,SupportedLanguage.english,]}``` |
+| Validator                  | Description                                                                                             |
+|----------------------------|---------------------------------------------------------------------------------------------------------|
+| `validateEmail`            | Validates standard email formats.                                                                       |
+| `validateConstrainedEmail` | Validates an email against a specific domain.                                                           |
+| `validateMobileNumber`     | Validates a mobile number based on a country's pattern.                                                 |
+| `validateCreditCard`       | Validates credit card numbers using the Luhn algorithm.                                                 |
+| `validatePassword`         | Checks for password strength (length, uppercase, digits, special characters).                           |
+| `validateUsername`         | Validates usernames based on length and allowed characters.                                             |
+| `validateFullName`         | Ensures the input contains at least two alphabetic words.                                               |
+| `validateName`             | Ensures the input contains a single alphabetic word.                                                    |
 
 ### Data Type Validators
 
-| Validator              | Description                            | Features                             |
-|------------------------|----------------------------------------|--------------------------------------|
-| `validateUrl`          | URL format validation                  | `validateUrl('https://example.com')` |
-| `validateDate`         | Date format validation (YYYY-MM-DD)    | `validateDate('2020-4-20')`          |
-| `validateInteger`      | validate on Integer Numbers            | `validateInteger(123)`               |
-| `validateDouble`       | validate on Double (Decimal) Numbers   | `validateDouble(3.47)`               |
-| `validatePositiveNum`  | validate on Positive Numbers           | `validatePositiveNum(12)`            |
-| `validateAlpha`        | validate on Alpha characters (letters) | `validateAlpha("Thomas")`            |
-| `validateAlphanumeric` | validate on characters with numbers    | `validateAlphanumeric(2Math)`        |
+| Validator              | Description                                                          |
+|------------------------|----------------------------------------------------------------------|
+| `validateUrl`          | Validates URL formats.                                               |
+| `validateDate`         | Validates date strings in `YYYY-MM-DD` format.                       |
+| `validateInteger`      | Checks if the input is a valid integer.                              |
+| `validateDouble`       | Checks if the input is a valid double/decimal number.                |
+| `validatePositiveNum`  | Checks if the input is a number greater than zero.                   |
+| `validateAlpha`        | Checks if the string contains only alphabetic characters.            |
+| `validateAlphanumeric` | Checks if the string contains only alphanumeric characters.          |
 
-## Some Complex Examples
+### Location Validators
 
-### Email Constrained Domain Validation
+| Validator       | Description                                        |
+|-----------------|----------------------------------------------------|
+| `validateLat`   | Validates a geographic latitude value (-90 to 90). |
+| `validateLong`  | Validates a geographic longitude value (-180 to 180).|
+
+## Advanced Usage & Parameters
+
+### Email (Constrained Domain)
 
 ```dart
-  String? validateConstrainedEmail(String? value, {
+String? validateConstrainedEmail(String? value, {
   required EmailDomain domain,
   bool isRequired = true,
   String? customRequiredMessage,
@@ -139,40 +179,39 @@ TextFormField(
 });
 ```
 
-| Parameter               | Type      | Description          |
-|-------------------------|-----------|----------------------|
-| `value`                 | `String?` | Email to validate    |
-| `customRequiredMessage` | `String?` | Message when empty   |
-| `customInvalidMessage`  | `String?` | Message when invalid |
-| `domain`                | `String?` | Required domain      |
+| Parameter               | Type          | Description                                    |
+|-------------------------|---------------|------------------------------------------------|
+| `value`                 | `String?`     | Email to validate                              |
+| `domain`                | `EmailDomain` | Required domain (e.g., `EmailDomain.gmail()`)  |
+| `customRequiredMessage` | `String?`     | Custom message if the field is empty.          |
+| `customInvalidMessage`  | `String?`     | Custom message if the email format is invalid. |
 
 ---
 
-### Mobile Number Validation
+### Mobile Number
 
 ```dart
-String? validateMobileNumber(String? value,
-    {
-      bool isRequired = true,
-      String? customRequiredMessage,
-      String? customInvalidMessage,
-      String? prefix,
-    });
+String? validateMobileNumber(String? value, {
+  bool isRequired = true,
+  String? customRequiredMessage,
+  String? customInvalidMessage,
+  String? prefix,
+});
 ```
 
-| Parameter               | Type      | Description                                              |
-|-------------------------|-----------|----------------------------------------------------------|
-| `value`                 | `String?` | Mobile number to validate                                |
-| `customRequiredMessage` | `String?` | Message when empty                                       |
-| `customInvalidMessage`  | `String?` | Message when invalid                                     |
-| `prefix`                | `String?` | Country code to validate from `CountryPhonePattern` enum |
+| Parameter               | Type      | Description                                                    |
+|-------------------------|-----------|----------------------------------------------------------------|
+| `value`                 | `String?` | Mobile number to validate                                      |
+| `prefix`                | `String?` | Country code to validate against (`CountryPhonePattern` enum)  |
+| `customRequiredMessage` | `String?` | Custom message when empty.                                     |
+| `customInvalidMessage`  | `String?` | Custom message when invalid.                                   |
 
 ---
 
-### Password Validation
+### Password
 
 ```dart
- String? validatePassword(String? value, {
+String? validatePassword(String? value, {
   int minLength = 8,
   bool requireUppercase = true,
   String? customUppercaseMessage,
@@ -183,19 +222,18 @@ String? validateMobileNumber(String? value,
 });
 ```
 
-| Parameter              | Type      | Default | Description                                                   |
-|------------------------|-----------|---------|---------------------------------------------------------------|
-| `value`                | `String?` | -       | Password to validate                                          |
-| `minLength`            | `int`     | 8       | Minimum length                                                |
-| `requireUppercase`     | `bool`    | true    | Require uppercase                                             |
-| `requireLowercase`     | `bool`    | true    | Require lowercase                                             |
-| `requireDigit`         | `bool`    | true    | Require digit                                                 |
-| `requireSpecialChar`   | `bool`    | true    | Require special char                                          |
-| `custom Message *args` | `String?` | -       | give a message if the validation fail on any of required ones |
+| Parameter                  | Type      | Default | Description                                           |
+|----------------------------|-----------|---------|-------------------------------------------------------|
+| `value`                    | `String?` | -       | Password to validate                                  |
+| `minLength`                | `int`     | 8       | Minimum required length.                              |
+| `requireUppercase`         | `bool`    | true    | If an uppercase letter is required.                   |
+| `requireDigit`             | `bool`    | true    | If a digit is required.                               |
+| `requireSpecialChar`       | `bool`    | true    | If a special character is required.                   |
+| `custom...Message`         | `String?` | -       | Custom message for a specific failed validation rule. |
 
 ---
 
-### Name Validation
+### Name
 
 ```dart
 String? validateName(String? value, {
@@ -209,68 +247,122 @@ String? validateName(String? value, {
 | Parameter               | Type                      | Default                         | Description                                         |
 |-------------------------|---------------------------|---------------------------------|-----------------------------------------------------|
 | `value`                 | `String?`                 | –                               | The name input to validate.                         |
-| `isRequired`            | `bool`                    | `true`                          | Whether the name field is required.                 |
+| `multiLang`             | `List<SupportedLanguage>` | `[SupportedLanguage.english]`   | List of allowed languages for character validation. |
 | `customRequiredMessage` | `String?`                 | `messages.nameRequired`         | Custom error message if the field is empty.         |
 | `customInvalidMessage`  | `String?`                 | `messages.nameMustBeAlphabetic` | Custom error message for invalid characters.        |
-| `multiLang`             | `List<SupportedLanguage>` | `[SupportedLanguage.english]`   | List of allowed languages for character validation. |
 
 ---
 
-### Run Many Validation Logic
+### Chaining Validators
+
+Use `runMultiValidators` for complex scenarios where multiple conditions must be met.
 
 ```dart
-bool runMultiValidators({
-  required List<bool Function()> validators,
-});
-```
+String? validateCustomField(String? value) {
+  final success = isValid.runMultiValidators(
+    validators: [
+      () => isValid.notEmpty(value),
+      () => isValid.email(value, domain: EmailDomain.custom('2math.io')),
+    ],
+  );
 
-| Parameter    | Type                    | Default | Description                |
-|--------------|-------------------------|---------|----------------------------|
-| `validators` | `List<bool Function()>` | –       | List of boolean validators |
-
-#### Example
-
-```dart
-class ShowCaseForMixinValidator extends StatefulWidget {
-  const ShowCaseForMixinValidator({super.key});
-
-  @override
-  State<ShowCaseForMixinValidator> createState() =>
-      _ShowCaseForMixinValidatorState();
+  if (!success) {
+    return 'Must be a valid email ending in @2math.io';
+  }
+  return null;
 }
 ```
 
-> Notice the use of Mixin `ValidationLogic` with the `with` keyword to access all the methods
-> directly
+## Example App
 
-```dart
-class _ShowCaseForMixinValidatorState extends State<ShowCaseForMixinValidator>
-    with ValidationLogic {
-  @override
-  void initState() {
-    super.initState();
-    var result = runMultiValidators(validators: [
-      isInteger('4'),
-      isPositiveNum('4'),
-    ]);
-    debugPrint("output result is $result");
-    // output result is true
-  }
+This repository includes a [comprehensive example application](./example) and [live example](https://2math0.github.io/boolean_validation/) that demonstrates all major features of the library, including a complete validation form, i18n setup, a language switcher, and a searchable country code dropdown.
 
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
+## Visual Architecture
+
+Note: The diagram below is a static image for compatibility with `pub.dev`.
+<br/>
+
+![Auto Docs](https://img.shields.io/badge/docs-auto--generated-blueviolet)
+<!--MERMAID_START-->
+```mermaid
+graph TD
+%% Main Components
+    BV[boolean_validation]
+    VM[Validation Messages]
+    UV[User Input Validators]
+    DV[Data Type Validators]
+    LV[Location Validators]
+
+%% Regex and Pattern Groups
+    RP[Regex Patterns]
+    MP[Mobile Patterns]
+    LP[Language Patterns]
+
+%% Message Groups
+    GM[Global Messages]
+    UM[User Input Messages]
+    DM[Data Type Messages]
+    LM[Location Messages]
+
+%% Main Structure
+    BV --> VM
+    BV --> Validators
+    Validators --> UV
+    Validators --> DV
+    Validators --> LV
+
+%% Regex Layer
+    RP --> MP
+    RP --> LP
+
+%% Messages Layer
+    VM --> GM
+    VM --> UM
+    VM --> DM
+    VM --> LM
+
+%% Validator Connections
+    UV -->|"Uses"| RP
+    UV -->|"Uses"| MP
+    UV -->|"Uses"| LP
+
+%% Validator Groups with Examples
+    UV -->|"Email\nPassword\nMobile\nName\nCredit Card"| Forms
+    DV -->|"Numbers\nDates\nURLs\nAlpha"| Forms
+    LV -->|"Latitude\nLongitude"| Forms
+
+%% Pattern Details
+    MP -->|"35+ Countries"| MobileValidation
+    LP -->|"25+ Languages"| AlphaValidation
+
+%% Message Usage
+    UM -.-> UV
+    DM -.-> DV
+    LM -.-> LV
+    GM -.-> Forms
+
+%% Material-style coloring
+classDef default fill:#FFFFFF,stroke:#D1D5DB,stroke-width:1.2px,color:#111827,font-size:16px;
+classDef main fill:#E0F2FE,stroke:#38BDF8,stroke-width:1.2px,color:#0C4A6E,font-weight:bold;
+classDef validators fill:#DCFCE7,stroke:#4ADE80,stroke-width:1.2px,color:#166534,font-weight:bold;
+classDef patterns fill:#FEF9C3,stroke:#FACC15,stroke-width:1.2px,color:#92400E,font-weight:normal;
+classDef messages fill:#F5E8FF,stroke:#C084FC,stroke-width:1.2px,color:#6B21A8,font-style:italic;
+classDef enums fill:#F1F5F9,stroke:#94A3B8,stroke-width:1.2px,color:#1E293B,font-weight:normal;
+
+class BV,Validators main;
+class UV,DV,LV validators;
+class RP,MP,LP patterns;
+class VM,GM,UM,DM,LM messages;
 ```
+<!--MERMAID_END-->
 
----
+A full, detailed diagram of the package architecture can be found here:
+![Architecture Diagram](doc/full_diagram.svg)
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! If you find a bug or have a feature request, please open an issue. If you want to contribute code, please open a pull request.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
