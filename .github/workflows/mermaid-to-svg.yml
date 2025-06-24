@@ -30,7 +30,7 @@ jobs:
         run: |
           mkdir -p doc
           mmdc -i mermaid/simplified_arch.mmd \
-               -o doc/full_diagram.svg \
+               -o doc/simplified_arch.svg \
                -p puppeteer-config.json
 
       - name: Commit SVG
