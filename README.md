@@ -328,7 +328,7 @@ graph TD
     UV -->|"Uses"| LP
 
 %% Validator Groups with Examples
-    UV -->|"Email\nPassword\nMobile\nName\nCredit Card"| Forms
+    UV -->|"EmailPassword\nMobile\nName\nCredit Card"| Forms
     DV -->|"Numbers\nDates\nURLs\nAlpha"| Forms
     LV -->|"Latitude\nLongitude"| Forms
 
