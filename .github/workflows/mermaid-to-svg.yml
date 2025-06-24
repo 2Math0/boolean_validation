@@ -6,6 +6,7 @@ on:
       - 'README.md'
       - 'mermaid/*.mmd'
       - 'inject_mermaid.sh'
+      - '.github/workflows/mermaid-to-svg.yml'
   workflow_dispatch:
 
 jobs:
