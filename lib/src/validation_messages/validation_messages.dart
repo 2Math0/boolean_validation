@@ -47,14 +47,6 @@ class ValidationMessages {
   ValidationMessages._internal();
 
   /// Current localization provider
-  static ValidationMessageProvider? _provider;
-
-  /// Sets a custom localization provider.
-  ///
-  /// Example:
-  /// ```dart
-  /// ValidationMessages.provider = MyCustomProvider();
-  /// ```
   static ValidationMessageProvider? provider;
 
   // Default English messages (fallbacks)
@@ -127,119 +119,118 @@ class ValidationMessages {
 
   // Validation message getters (with provider fallback)
   String get mobileNumberRequired =>
-      _provider?.mobileNumberRequired ?? _defaultMobileNumberRequired;
+      provider?.mobileNumberRequired ?? _defaultMobileNumberRequired;
 
   String get genericRequiredMessage =>
-      _provider?.genericRequiredMessage ?? _defaultGenericRequiredMessage;
+      provider?.genericRequiredMessage ?? _defaultGenericRequiredMessage;
 
   String get invalidMobileNumber =>
-      _provider?.invalidMobileNumber ?? _defaultInvalidMobileNumber;
+      provider?.invalidMobileNumber ?? _defaultInvalidMobileNumber;
 
   String get creditCardRequired =>
-      _provider?.creditCardRequired ?? _defaultCreditCardRequired;
+      provider?.creditCardRequired ?? _defaultCreditCardRequired;
 
   String get invalidCreditCard =>
-      _provider?.invalidCreditCard ?? _defaultInvalidCreditCard;
+      provider?.invalidCreditCard ?? _defaultInvalidCreditCard;
 
   String get expirationDateRequired =>
-      _provider?.expirationDateRequired ?? _defaultExpirationDateRequired;
+      provider?.expirationDateRequired ?? _defaultExpirationDateRequired;
 
   String get securityCodeRequired =>
-      _provider?.securityCodeRequired ?? _defaultSecurityCodeRequired;
+      provider?.securityCodeRequired ?? _defaultSecurityCodeRequired;
 
   String get cardholderNameRequired =>
-      _provider?.cardholderNameRequired ?? _defaultCardholderNameRequired;
+      provider?.cardholderNameRequired ?? _defaultCardholderNameRequired;
 
   String get invalidCardholderName =>
-      _provider?.invalidCardholderName ?? _defaultInvalidCardholderName;
+      provider?.invalidCardholderName ?? _defaultInvalidCardholderName;
 
-  String get emailRequired => _provider?.emailRequired ?? _defaultEmailRequired;
+  String get emailRequired => provider?.emailRequired ?? _defaultEmailRequired;
 
-  String get invalidEmail => _provider?.invalidEmail ?? _defaultInvalidEmail;
+  String get invalidEmail => provider?.invalidEmail ?? _defaultInvalidEmail;
 
   String get emailFormatValidation =>
-      _provider?.emailFormatValidation ?? _defaultEmailFormatValidation;
+      provider?.emailFormatValidation ?? _defaultEmailFormatValidation;
 
   String get emailDomainValidation =>
-      _provider?.emailDomainValidation ?? _defaultEmailDomainValidation;
+      provider?.emailDomainValidation ?? _defaultEmailDomainValidation;
 
   String get usernameRequired =>
-      _provider?.usernameRequired ?? _defaultUsernameRequired;
+      provider?.usernameRequired ?? _defaultUsernameRequired;
 
   String get usernameInvalid =>
-      _provider?.usernameInvalid ?? _defaultUsernameInvalid;
+      provider?.usernameInvalid ?? _defaultUsernameInvalid;
 
   String get fullNameRequired =>
-      _provider?.fullNameRequired ?? _defaultFullNameRequired;
+      provider?.fullNameRequired ?? _defaultFullNameRequired;
 
   String get fullNameInvalid =>
-      _provider?.fullNameInvalid ?? _defaultFullNameInvalid;
+      provider?.fullNameInvalid ?? _defaultFullNameInvalid;
 
   String get nameMustBeAlphabetic =>
-      _provider?.nameMustBeAlphabetic ?? _defaultNameMustBeAlphabetic;
+      provider?.nameMustBeAlphabetic ?? _defaultNameMustBeAlphabetic;
 
-  String get nameRequired => _provider?.nameRequired ?? _defaultNameRequired;
+  String get nameRequired => provider?.nameRequired ?? _defaultNameRequired;
 
   String get passwordMinLength =>
-      _provider?.passwordMinLength ?? _defaultPasswordMinLength;
+      provider?.passwordMinLength ?? _defaultPasswordMinLength;
 
   String get passwordUppercase =>
-      _provider?.passwordUppercase ?? _defaultPasswordUppercase;
+      provider?.passwordUppercase ?? _defaultPasswordUppercase;
 
   String get passwordLowercase =>
-      _provider?.passwordLowercase ?? _defaultPasswordLowercase;
+      provider?.passwordLowercase ?? _defaultPasswordLowercase;
 
-  String get passwordDigit => _provider?.passwordDigit ?? _defaultPasswordDigit;
+  String get passwordDigit => provider?.passwordDigit ?? _defaultPasswordDigit;
 
   String get passwordSpecialChar =>
-      _provider?.passwordSpecialChar ?? _defaultPasswordSpecialChar;
+      provider?.passwordSpecialChar ?? _defaultPasswordSpecialChar;
 
   String get latitudeRequired =>
-      _provider?.latitudeRequired ?? _defaultLatitudeRequired;
+      provider?.latitudeRequired ?? _defaultLatitudeRequired;
 
   String get invalidLatitude =>
-      _provider?.invalidLatitude ?? _defaultInvalidLatitude;
+      provider?.invalidLatitude ?? _defaultInvalidLatitude;
 
   String get longitudeRequired =>
-      _provider?.longitudeRequired ?? _defaultLongitudeRequired;
+      provider?.longitudeRequired ?? _defaultLongitudeRequired;
 
   String get invalidLongitude =>
-      _provider?.invalidLongitude ?? _defaultInvalidLongitude;
+      provider?.invalidLongitude ?? _defaultInvalidLongitude;
 
   String get numberRequired =>
-      _provider?.numberRequired ?? _defaultNumberRequired;
+      provider?.numberRequired ?? _defaultNumberRequired;
 
-  String get doubleRequired =>
-      _provider?.dateRequired ?? _defaultDoubleRequired;
+  String get doubleRequired => provider?.dateRequired ?? _defaultDoubleRequired;
 
   String get positiveNumRequired =>
-      _provider?.positiveNumRequired ?? _defaultPositiveNumRequired;
+      provider?.positiveNumRequired ?? _defaultPositiveNumRequired;
 
-  String get invalidNumber => _provider?.invalidNumber ?? _defaultInvalidNumber;
+  String get invalidNumber => provider?.invalidNumber ?? _defaultInvalidNumber;
 
   String get invalidDouble =>
-      _provider?.invalidDoubleNumber ?? _defaultInvalidDoubleNumber;
+      provider?.invalidDoubleNumber ?? _defaultInvalidDoubleNumber;
 
   String get invalidPositiveNum =>
-      _provider?.invalidPositiveNumber ?? _defaultInvalidPositiveNumber;
+      provider?.invalidPositiveNumber ?? _defaultInvalidPositiveNumber;
 
-  String get urlRequired => _provider?.urlRequired ?? _defaultUrlRequired;
+  String get urlRequired => provider?.urlRequired ?? _defaultUrlRequired;
 
-  String get invalidUrl => _provider?.invalidUrl ?? _defaultInvalidUrl;
+  String get invalidUrl => provider?.invalidUrl ?? _defaultInvalidUrl;
 
-  String get dateRequired => _provider?.dateRequired ?? _defaultDateRequired;
+  String get dateRequired => provider?.dateRequired ?? _defaultDateRequired;
 
-  String get invalidDate => _provider?.invalidDate ?? _defaultInvalidDate;
+  String get invalidDate => provider?.invalidDate ?? _defaultInvalidDate;
 
-  String get alphaRequired => _provider?.alphaRequired ?? _defaultAlphaRequired;
+  String get alphaRequired => provider?.alphaRequired ?? _defaultAlphaRequired;
 
-  String get alphaInvalid => _provider?.alphaInvalid ?? _defaultAlphaInvalid;
+  String get alphaInvalid => provider?.alphaInvalid ?? _defaultAlphaInvalid;
 
   String get alphaNumericRequired =>
-      _provider?.alphaNumericRequired ?? _defaultAlphaNumericRequired;
+      provider?.alphaNumericRequired ?? _defaultAlphaNumericRequired;
 
   String get alphaNumericInvalid =>
-      _provider?.alphaNumericInvalid ?? _defaultAlphaNumericInvalid;
+      provider?.alphaNumericInvalid ?? _defaultAlphaNumericInvalid;
 
   /// Global flag to determine whether
   /// to use the generic required message for all inputs.
@@ -352,7 +343,7 @@ class ValidationMessages {
       genericRequiredMessage: genericRequiredMessage,
     );
 
-    _provider = overrideProvider;
+    provider = overrideProvider;
     this.useGenericRequiredMessage =
         useGenericRequiredMessage ?? this.useGenericRequiredMessage;
   }

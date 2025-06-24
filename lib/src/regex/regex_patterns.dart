@@ -147,7 +147,7 @@ class RegexPatterns {
   /// ```
   /// ^(?=.*(?:[a-z]|[A-Z]|[0-9]))(?=.*(?:foo|bar))(?=.*[+-]?\d+)(?=.*[a-zA-Z]+)(?=.*xyz)(?=.*token).*$
   /// ```
-  String buildFlexibleRegex({
+  static String buildFlexibleRegex({
     List<List<String>> orGroups = const [],
     List<List<String>> andGroups = const [],
     bool matchAllIfEmpty = false,
@@ -192,18 +192,18 @@ class RegexPatterns {
   }
 
   /// Sanitizes a pattern by removing leading ^ and trailing $
-  String sanitize(String pattern) =>
+  static String sanitize(String pattern) =>
       pattern.replaceAll(RegExp(r'^\^|\$+$'), '');
 
   /// Builds a single lookahead for an OR group: (?=.*(a|b|c))
-  String? buildOrLookahead(List<String> group) {
+  static String? buildOrLookahead(List<String> group) {
     if (group.isEmpty) return null;
     final joined = group.map(sanitize).join('|');
     return '(?=.*(?:$joined))';
   }
 
   /// Builds multiple lookaheads for an AND group: (?=.*a)(?=.*b)
-  List<String> buildAndLookaheads(List<String> group) {
+  static List<String> buildAndLookaheads(List<String> group) {
     return group.map((pattern) => '(?=.*${sanitize(pattern)})').toList();
   }
 }

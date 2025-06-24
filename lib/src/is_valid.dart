@@ -1,3 +1,4 @@
+import 'package:boolean_validation/src/annotation/experimental.dart';
 import 'package:boolean_validation/src/core/extensions/string_extension.dart';
 import 'package:boolean_validation/src/enum/country_phone_codes.dart';
 import 'package:boolean_validation/src/enum/email_domains.dart';
@@ -144,6 +145,7 @@ mixin class ValidationLogic {
     return pattern.hasMatch(value) && _luhnCheck(value.trim());
   }
 
+  @UnderDevelopment()
   bool _luhnCheck(String value) {
     var sum = 0;
     var alternate = false;

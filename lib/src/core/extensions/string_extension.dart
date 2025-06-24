@@ -1,4 +1,4 @@
-import 'package:boolean_validation/src/anotations/experimental.dart';
+import 'package:boolean_validation/src/annotation/experimental.dart';
 import 'package:meta/meta.dart';
 
 /// Extension on Null String

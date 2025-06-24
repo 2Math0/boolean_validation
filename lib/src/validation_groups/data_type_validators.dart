@@ -1,4 +1,4 @@
-import 'package:boolean_validation/src/anotations/experimental.dart';
+import 'package:boolean_validation/src/annotation/experimental.dart';
 import 'package:boolean_validation/src/core/common_libs.dart';
 import 'package:boolean_validation/src/enum/supported_languages.dart';
 import 'package:boolean_validation/src/validation_groups/validation_common.dart';

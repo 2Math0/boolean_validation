@@ -89,8 +89,7 @@ void main() {
 
     group('COMPLEX_REGEX_BUILDER', () {
       test('BUILD_COMPLEX_OR_GROUPS', () {
-        final patterns = RegexPatterns();
-        final regex = patterns.buildFlexibleRegex(
+        final regex = RegexPatterns.buildFlexibleRegex(
           orGroups: [
             [
               SupportedLanguage.english.alphaPattern,
@@ -107,8 +106,7 @@ void main() {
       });
 
       test('BUILD_COMPLEX_AND_GROUPS', () {
-        final patterns = RegexPatterns();
-        final regex = patterns.buildFlexibleRegex(
+        final regex = RegexPatterns.buildFlexibleRegex(
           andGroups: [
             [SupportedLanguage.english.alphaPattern],
             [SupportedLanguage.english.digitPattern],
@@ -122,8 +120,7 @@ void main() {
       });
 
       test('BUILD_MIXED_OR_AND_GROUPS', () {
-        final patterns = RegexPatterns();
-        final regex = patterns.buildFlexibleRegex(
+        final regex = RegexPatterns.buildFlexibleRegex(
           orGroups: [
             [
               SupportedLanguage.english.alphaPattern,
