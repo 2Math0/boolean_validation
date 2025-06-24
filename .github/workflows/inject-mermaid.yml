@@ -10,6 +10,8 @@ on:
       - 'inject_mermaid.sh'
       - '.github/workflows/mermaid-to-svg.yml'
       - '.github/workflows/inject-mermaid.yml'
+      - 'mermaid-config.json'
+      - 'puppeteer-config.json'
 
 jobs:
   inject-mermaid:
