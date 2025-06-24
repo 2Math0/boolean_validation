@@ -27,7 +27,7 @@ jobs:
       - name: Render Mermaid to SVG
         run: |
           mkdir -p doc
-          mmdc -i mermaid/simplified_arch.mmd -o doc/full_diagram.svg
+          mmdc -i mermaid/simplified_arch.mmd -o doc/full_diagram.svg --no-sandbox
 
       - name: Commit SVG
         run: |
