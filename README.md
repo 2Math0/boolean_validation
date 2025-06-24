@@ -328,9 +328,9 @@ graph TD
     UV -->|"Uses"| LP
 
 %% Validator Groups with Examples
-    UV -->|"EmailPassword\nMobile\nName\nCredit Card"| Forms
-    DV -->|"Numbers\nDates\nURLs\nAlpha"| Forms
-    LV -->|"Latitude\nLongitude"| Forms
+    UV -->|"Email<br/>Password<br/>Mobile<br/>Name<br/>Credit Card"| Forms
+    DV -->|"Numbers<br/>Dates<br/>URLs<br/>Alpha"| Forms
+    LV -->|"Latitude<br/>Longitude"| Forms
 
 %% Pattern Details
     MP -->|"35+ Countries"| MobileValidation
