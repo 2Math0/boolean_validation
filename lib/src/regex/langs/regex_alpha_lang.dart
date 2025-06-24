@@ -7,7 +7,11 @@ extension AlphaLangRegex on RegexPatterns {
 
   /// Arabic letters only, excluding Arabic-Indic digits (U+0660–U+0669).
   /// Unicode range: 0600–065F, 0670–06FF.
-  static const String arabicOnly = r'^[\u0600-\u065F\u0670-\u06FF]+$';
+  static const String arabicOnly = r'^[\u0621-\u063A\u0641-\u064A\u066E-\u066F\u0671-\u06D3]+$';
+
+  /// Arabic letters only, with Tashkeel (diacritics).
+  static const String arabicWithDiacritics =
+      r'^[\u0621-\u063A\u0641-\u064A\u066E-\u066F\u0671-\u06D3\u064B-\u0652]+$';
 
   /// German letters including umlauts and ß (Latin Extended-A).
   /// Still includes a-z, A-Z plus U+00C0–U+00FF.

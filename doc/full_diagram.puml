@@ -70,6 +70,7 @@ class "RegexPatterns" << (U, UTILITY_COLOR) >> {
 {static} +String sanitize(String pattern)
 {static} +String? buildOrLookahead(List<String> group)
 {static} +List<String> buildAndLookaheads(List<String> group)
+{static} +combineCharsets(Iterable<String> charsets)
 }
 
 
@@ -105,6 +106,7 @@ package "Regex Pattern Extensions" {
 class "AlphaLangRegex" <<extension>> {
 +englishOnly
 +arabicOnly
++arabicWithDiacritics
 +germanOnly
 +japaneseHiragana
 +japaneseKatakana
@@ -470,7 +472,7 @@ class "DataTypeValidators" as DataTypeValidators << (V, VALIDATOR_COLOR) >> {
 +String? validateUrl()
 +String? validateDate()
 +String? validateAlpha(List<SupportedLanguage>)
-+String? validateAlphanumeric(List<SupportedLanguage>)
++String? validateAlphanumeric(List<SupportedLanguage>, ...[booleans])
 }
 
 ' Relationships

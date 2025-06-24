@@ -110,8 +110,7 @@ import 'package:boolean_validation/boolean_validation.dart';
 
 void main() {
   final messages = ValidationMessages();
-  messages.setRequiredMessage('This field cannot be empty!');
-  messages.setEmailMessage('Please enter a valid email address.');
+  messages.copyWith(invalidEmail: 'This not a valid email');
   runApp(MyApp());
 }
 ```

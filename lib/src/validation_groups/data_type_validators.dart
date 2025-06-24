@@ -147,14 +147,50 @@ class DataTypeValidators extends ValidationCommon {
     return null;
   }
 
-  /// Validates a string to ensure it contains only alphanumeric characters.
-  /// Returns an error message if invalid; otherwise, null.
+  /// Validates whether a string contains only **alphanumeric characters**
+  /// based on specified language settings.
+  ///
+  /// Returns:
+  /// - A localized or custom error message if validation fails.
+  /// - `null` if the input is valid or not required.
+  ///
+  /// ### Parameters:
+  /// - [value]: The input string to validate.
+  /// - [isRequired]: If `true`, the field must be non-empty.
+  /// Defaults to `true`.
+  /// - [customRequiredMessage]: Optional custom message shown
+  /// when the input is required but missing.
+  /// - [customInvalidMessage]: Optional custom message shown
+  /// when the input fails alphanumeric validation.
+  /// - [multiLang]: List of supported languages
+  /// whose alphabet and digit sets will be accepted.
+  ///   Defaults to English. Multiple languages can be combined.
+  /// - [mustContainAlpha]: If `true`,
+  /// the string must contain at least one letter from the allowed language(s).
+  /// - [mustContainDigit]: If `true`,
+  /// the string must contain at least one digit.
+  /// - [useDigitsOfMultiLang]: If `true`,
+  /// allows digit characters specific to the selected [multiLang].
+  ///   If `false`, only Western digits (`0-9`) are allowed.
+  ///
+  /// ### Example:
+  /// ```dart
+  /// validateAlphanumeric('Hello123'); // Valid
+  /// validateAlphanumeric('مرحبا١٢٣', multiLang: [SupportedLanguage.arabic], useDigitsOfMultiLang: true); // Valid
+  /// validateAlphanumeric('123!', mustContainAlpha: true); // Invalid
+  /// ```
+  ///
+  /// This method combines both validation logic and error messaging
+  /// for easier use in forms or custom fields.
   String? validateAlphanumeric(
     String? value, {
     bool isRequired = true,
     String? customRequiredMessage,
     String? customInvalidMessage,
     List<SupportedLanguage> multiLang = const [SupportedLanguage.english],
+    bool mustContainAlpha = false,
+    bool mustContainDigit = false,
+    bool useDigitsOfMultiLang = false,
   }) {
     if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
@@ -165,7 +201,13 @@ class DataTypeValidators extends ValidationCommon {
     );
     if (requiredValidation != null) return requiredValidation;
 
-    if (!validationLogic.isAlphanumeric(value, multiLang: multiLang)) {
+    if (!validationLogic.isAlphanumeric(
+      value,
+      multiLang: multiLang,
+      mustContainAlpha: mustContainAlpha,
+      mustContainDigit: mustContainDigit,
+      useDigitsOfMultiLang: useDigitsOfMultiLang,
+    )) {
       return customInvalidMessage ?? messages.alphaNumericInvalid;
     }
     return null;

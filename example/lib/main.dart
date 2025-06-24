@@ -309,16 +309,26 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
                   value,
                   customRequiredMessage: l10n.alphaRequired,
                   customInvalidMessage: l10n.alphaInvalid,
+                  multiLang: [
+                    SupportedLanguage.arabic,
+                    SupportedLanguage.english,
+                  ],
                 ),
               ),
               AnimatedFormField(
                 label: l10n.alphanumericLabel,
                 controller: _controllers['alphanumeric']!,
                 validator: (value) => _validators.dataType.validateAlphanumeric(
-                  value,
-                  customRequiredMessage: l10n.alphaNumericRequired,
-                  customInvalidMessage: l10n.alphaNumericInvalid,
-                ),
+                    value,
+                    customRequiredMessage: l10n.alphaNumericRequired,
+                    customInvalidMessage: l10n.alphaNumericInvalid,
+                    useDigitsOfMultiLang: true,
+                    mustContainAlpha: true,
+                    mustContainDigit: true,
+                    multiLang: [
+                      SupportedLanguage.arabic,
+                      SupportedLanguage.english,
+                    ]),
               ),
               AnimatedFormField(
                 label: l10n.latitudeLabel,

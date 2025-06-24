@@ -206,4 +206,12 @@ class RegexPatterns {
   static List<String> buildAndLookaheads(List<String> group) {
     return group.map((pattern) => '(?=.*${sanitize(pattern)})').toList();
   }
+
+  /// Utility to strip outer brackets and join multiple character classes.
+  static String combineCharsets(Iterable<String> charsets) {
+    return charsets.map((pattern) {
+      final match = RegExp(r'^\[([^\]]+)\]$').firstMatch(pattern);
+      return match?.group(1) ?? pattern;
+    }).join();
+  }
 }
