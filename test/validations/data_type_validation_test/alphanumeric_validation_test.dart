@@ -3,7 +3,7 @@ import '../../test_common_libs.dart';
 void main() {
   final validators = Validators();
   final messages = ValidationMessages();
-  messages.copyWith(useGenericRequiredMessage: false);
+  ValidationMessages.copyWith(useGenericRequiredMessage: false);
 
   group('Alphanumeric Validation', () {
     test('Valid Alphanumeric', () {

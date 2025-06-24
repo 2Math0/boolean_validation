@@ -2,8 +2,8 @@ import '../../test_common_libs.dart';
 
 void main() {
   final validators = Validators();
+  ValidationMessages.copyWith(useGenericRequiredMessage: false);
   final messages = ValidationMessages();
-  messages.copyWith(useGenericRequiredMessage: false);
   group('Longitude Validation', () {
     test('Valid Longitude', () {
       expect(

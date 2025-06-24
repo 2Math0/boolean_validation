@@ -2,8 +2,8 @@ import '../../test_common_libs.dart';
 
 void main() {
   final validators = Validators();
-  final messages = ValidationMessages()
-    ..copyWith(useGenericRequiredMessage: false);
+  final messages = ValidationMessages();
+  ValidationMessages.copyWith(useGenericRequiredMessage: false);
 
   final domain = EmailDomain.custom('domain.com');
   final numDomain = EmailDomain.custom('2Math.com');

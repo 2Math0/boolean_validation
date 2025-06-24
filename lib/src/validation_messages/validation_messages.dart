@@ -200,7 +200,8 @@ class ValidationMessages {
   String get numberRequired =>
       provider?.numberRequired ?? _defaultNumberRequired;
 
-  String get doubleRequired => provider?.dateRequired ?? _defaultDoubleRequired;
+  String get doubleRequired =>
+      provider?.doubleRequired ?? _defaultDoubleRequired;
 
   String get positiveNumRequired =>
       provider?.positiveNumRequired ?? _defaultPositiveNumRequired;
@@ -233,7 +234,8 @@ class ValidationMessages {
 
   /// Global flag to determine whether
   /// to use the generic required message for all inputs.
-  bool useGenericRequiredMessage = true;
+  bool get useGenericRequiredMessage =>
+      provider?.useGenericRequiredMessage ?? true;
 
   // Singleton instance of the class.
   static final ValidationMessages _instance = ValidationMessages._internal();
@@ -251,7 +253,7 @@ class ValidationMessages {
   ///   invalidCreditCard: 'Invalid card number',
   /// );
   /// ```
-  void copyWith({
+  static void copyWith({
     required bool useGenericRequiredMessage,
     String? mobileNumberRequired,
     String? invalidMobileNumber,

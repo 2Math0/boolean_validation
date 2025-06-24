@@ -2,8 +2,8 @@ import '../test_common_libs.dart';
 
 void main() {
   final validators = Validators().userInput;
+  ValidationMessages.copyWith(useGenericRequiredMessage: false);
   final messages = ValidationMessages();
-  messages.copyWith(useGenericRequiredMessage: false);
 
   group('Credit Card Validation', () {
     test('Valid Credit Card', () {

@@ -2,8 +2,7 @@ import '../../test_common_libs.dart';
 
 void main() {
   final validators = Validators().dataType;
-  final messages = ValidationMessages();
-  messages.copyWith(useGenericRequiredMessage: false);
+ValidationMessages.copyWith(useGenericRequiredMessage: false); final messages = ValidationMessages();
 
   group('Alpha Validation', () {
     test('Valid Alpha', () {
