@@ -55,7 +55,6 @@ class _MyAppState extends State<MyApp> {
         // Update validation messages when locale changes
         final l10n = AppLocalizations.of(context);
         if (l10n != null) {
-          ValidationMessages.copyWith(useGenericRequiredMessage: false);
           ValidationMessages.provider = ARBValidationProvider(l10n);
         }
         return child!;
