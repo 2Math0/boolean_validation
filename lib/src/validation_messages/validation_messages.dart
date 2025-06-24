@@ -1,11 +1,12 @@
 import 'package:boolean_validation/src/validation_messages/message_replacements_keys.dart';
+import 'package:boolean_validation/src/validation_messages/messages_provider.dart';
 
-import 'messages_provider.dart';
-
-/// A centralized class for managing validation error messages with flexible localization support.
+/// A centralized class for managing validation error messages
+/// with flexible localization support.
 ///
 /// This class provides default English messages and allows to override them
-/// using any localization system through the [ValidationMessageProvider] interface.
+/// using any localization system
+/// through the [ValidationMessageProvider] interface.
 /// It supports both static configuration and dynamic localization.
 ///
 /// Usage Examples:
@@ -31,21 +32,21 @@ import 'messages_provider.dart';
 /// ```
 ///
 class ValidationMessages {
-  /// Current localization provider
-  static ValidationMessageProvider? _provider;
-
-  /// Sets a custom localization provider.
+  /// Factory constructor to provide access to the singleton instance.
   ///
-  /// Example:
+  /// Usage:
   /// ```dart
-  /// ValidationMessages.setProvider(MyCustomProvider());
+  /// final messages = ValidationMessages();
   /// ```
-  static void setProvider(ValidationMessageProvider? provider) {
-    _provider = provider;
+  factory ValidationMessages() {
+    return _instance;
   }
 
-  /// Gets the current localization provider
-  static ValidationMessageProvider? get provider => _provider;
+  // Private constructor to enforce singleton pattern.
+  ValidationMessages._internal();
+
+  /// Current localization provider
+  static ValidationMessageProvider? provider;
 
   // Default English messages (fallbacks)
   static const String _defaultMobileNumberRequired =
@@ -74,14 +75,16 @@ class ValidationMessages {
       'Email must be a <${MessageReplacementKeys.domain}> address.';
   static const String _defaultUsernameRequired = 'Username is required';
   static const String _defaultUsernameInvalid =
-      'Username must be 4-20 characters long and can include letters, numbers, and underscores';
+      'Username must be 4-20 characters long and can '
+      'include letters, numbers, and underscores';
   static const String _defaultFullNameRequired = 'Full name is required.';
   static const String _defaultFullNameInvalid = 'Please enter your full name';
   static const String _defaultNameMustBeAlphabetic =
       'Name must contain only alphabets.';
   static const String _defaultNameRequired = 'Name is Required';
   static const String _defaultPasswordMinLength =
-      'Password must be at least <${MessageReplacementKeys.minLength}> characters long.';
+      'Password must be at least <${MessageReplacementKeys.minLength}> '
+      'characters long.';
   static const String _defaultPasswordUppercase =
       'Password must contain at least one uppercase letter.';
   static const String _defaultPasswordLowercase =
@@ -89,7 +92,7 @@ class ValidationMessages {
   static const String _defaultPasswordDigit =
       'Password must contain at least one digit.';
   static const String _defaultPasswordSpecialChar =
-      'Password must contain at least one special character (!@#\$&*~).';
+      r'Password must contain at least one special character (!@#$&*~).';
   static const String _defaultLatitudeRequired = 'Latitude is required';
   static const String _defaultInvalidLatitude = 'invalid latitude value';
   static const String _defaultLongitudeRequired = 'Longitude is required';
@@ -115,142 +118,132 @@ class ValidationMessages {
 
   // Validation message getters (with provider fallback)
   String get mobileNumberRequired =>
-      _provider?.mobileNumberRequired ?? _defaultMobileNumberRequired;
+      provider?.mobileNumberRequired ?? _defaultMobileNumberRequired;
 
   String get genericRequiredMessage =>
-      _provider?.genericRequiredMessage ?? _defaultGenericRequiredMessage;
+      provider?.genericRequiredMessage ?? _defaultGenericRequiredMessage;
 
   String get invalidMobileNumber =>
-      _provider?.invalidMobileNumber ?? _defaultInvalidMobileNumber;
+      provider?.invalidMobileNumber ?? _defaultInvalidMobileNumber;
 
   String get creditCardRequired =>
-      _provider?.creditCardRequired ?? _defaultCreditCardRequired;
+      provider?.creditCardRequired ?? _defaultCreditCardRequired;
 
   String get invalidCreditCard =>
-      _provider?.invalidCreditCard ?? _defaultInvalidCreditCard;
+      provider?.invalidCreditCard ?? _defaultInvalidCreditCard;
 
   String get expirationDateRequired =>
-      _provider?.expirationDateRequired ?? _defaultExpirationDateRequired;
+      provider?.expirationDateRequired ?? _defaultExpirationDateRequired;
 
   String get securityCodeRequired =>
-      _provider?.securityCodeRequired ?? _defaultSecurityCodeRequired;
+      provider?.securityCodeRequired ?? _defaultSecurityCodeRequired;
 
   String get cardholderNameRequired =>
-      _provider?.cardholderNameRequired ?? _defaultCardholderNameRequired;
+      provider?.cardholderNameRequired ?? _defaultCardholderNameRequired;
 
   String get invalidCardholderName =>
-      _provider?.invalidCardholderName ?? _defaultInvalidCardholderName;
+      provider?.invalidCardholderName ?? _defaultInvalidCardholderName;
 
-  String get emailRequired => _provider?.emailRequired ?? _defaultEmailRequired;
+  String get emailRequired => provider?.emailRequired ?? _defaultEmailRequired;
 
-  String get invalidEmail => _provider?.invalidEmail ?? _defaultInvalidEmail;
+  String get invalidEmail => provider?.invalidEmail ?? _defaultInvalidEmail;
 
   String get emailFormatValidation =>
-      _provider?.emailFormatValidation ?? _defaultEmailFormatValidation;
+      provider?.emailFormatValidation ?? _defaultEmailFormatValidation;
 
   String get emailDomainValidation =>
-      _provider?.emailDomainValidation ?? _defaultEmailDomainValidation;
+      provider?.emailDomainValidation ?? _defaultEmailDomainValidation;
 
   String get usernameRequired =>
-      _provider?.usernameRequired ?? _defaultUsernameRequired;
+      provider?.usernameRequired ?? _defaultUsernameRequired;
 
   String get usernameInvalid =>
-      _provider?.usernameInvalid ?? _defaultUsernameInvalid;
+      provider?.usernameInvalid ?? _defaultUsernameInvalid;
 
   String get fullNameRequired =>
-      _provider?.fullNameRequired ?? _defaultFullNameRequired;
+      provider?.fullNameRequired ?? _defaultFullNameRequired;
 
   String get fullNameInvalid =>
-      _provider?.fullNameInvalid ?? _defaultFullNameInvalid;
+      provider?.fullNameInvalid ?? _defaultFullNameInvalid;
 
   String get nameMustBeAlphabetic =>
-      _provider?.nameMustBeAlphabetic ?? _defaultNameMustBeAlphabetic;
+      provider?.nameMustBeAlphabetic ?? _defaultNameMustBeAlphabetic;
 
-  String get nameRequired => _provider?.nameRequired ?? _defaultNameRequired;
+  String get nameRequired => provider?.nameRequired ?? _defaultNameRequired;
 
   String get passwordMinLength =>
-      _provider?.passwordMinLength ?? _defaultPasswordMinLength;
+      provider?.passwordMinLength ?? _defaultPasswordMinLength;
 
   String get passwordUppercase =>
-      _provider?.passwordUppercase ?? _defaultPasswordUppercase;
+      provider?.passwordUppercase ?? _defaultPasswordUppercase;
 
   String get passwordLowercase =>
-      _provider?.passwordLowercase ?? _defaultPasswordLowercase;
+      provider?.passwordLowercase ?? _defaultPasswordLowercase;
 
-  String get passwordDigit => _provider?.passwordDigit ?? _defaultPasswordDigit;
+  String get passwordDigit => provider?.passwordDigit ?? _defaultPasswordDigit;
 
   String get passwordSpecialChar =>
-      _provider?.passwordSpecialChar ?? _defaultPasswordSpecialChar;
+      provider?.passwordSpecialChar ?? _defaultPasswordSpecialChar;
 
   String get latitudeRequired =>
-      _provider?.latitudeRequired ?? _defaultLatitudeRequired;
+      provider?.latitudeRequired ?? _defaultLatitudeRequired;
 
   String get invalidLatitude =>
-      _provider?.invalidLatitude ?? _defaultInvalidLatitude;
+      provider?.invalidLatitude ?? _defaultInvalidLatitude;
 
   String get longitudeRequired =>
-      _provider?.longitudeRequired ?? _defaultLongitudeRequired;
+      provider?.longitudeRequired ?? _defaultLongitudeRequired;
 
   String get invalidLongitude =>
-      _provider?.invalidLongitude ?? _defaultInvalidLongitude;
+      provider?.invalidLongitude ?? _defaultInvalidLongitude;
 
   String get numberRequired =>
-      _provider?.numberRequired ?? _defaultNumberRequired;
+      provider?.numberRequired ?? _defaultNumberRequired;
 
   String get doubleRequired =>
-      _provider?.dateRequired ?? _defaultDoubleRequired;
+      provider?.doubleRequired ?? _defaultDoubleRequired;
 
   String get positiveNumRequired =>
-      _provider?.positiveNumRequired ?? _defaultPositiveNumRequired;
+      provider?.positiveNumRequired ?? _defaultPositiveNumRequired;
 
-  String get invalidNumber => _provider?.invalidNumber ?? _defaultInvalidNumber;
+  String get invalidNumber => provider?.invalidNumber ?? _defaultInvalidNumber;
 
   String get invalidDouble =>
-      _provider?.invalidDoubleNumber ?? _defaultInvalidDoubleNumber;
+      provider?.invalidDoubleNumber ?? _defaultInvalidDoubleNumber;
 
   String get invalidPositiveNum =>
-      _provider?.invalidPositiveNumber ?? _defaultInvalidPositiveNumber;
+      provider?.invalidPositiveNumber ?? _defaultInvalidPositiveNumber;
 
-  String get urlRequired => _provider?.urlRequired ?? _defaultUrlRequired;
+  String get urlRequired => provider?.urlRequired ?? _defaultUrlRequired;
 
-  String get invalidUrl => _provider?.invalidUrl ?? _defaultInvalidUrl;
+  String get invalidUrl => provider?.invalidUrl ?? _defaultInvalidUrl;
 
-  String get dateRequired => _provider?.dateRequired ?? _defaultDateRequired;
+  String get dateRequired => provider?.dateRequired ?? _defaultDateRequired;
 
-  String get invalidDate => _provider?.invalidDate ?? _defaultInvalidDate;
+  String get invalidDate => provider?.invalidDate ?? _defaultInvalidDate;
 
-  String get alphaRequired => _provider?.alphaRequired ?? _defaultAlphaRequired;
+  String get alphaRequired => provider?.alphaRequired ?? _defaultAlphaRequired;
 
-  String get alphaInvalid => _provider?.alphaInvalid ?? _defaultAlphaInvalid;
+  String get alphaInvalid => provider?.alphaInvalid ?? _defaultAlphaInvalid;
 
   String get alphaNumericRequired =>
-      _provider?.alphaNumericRequired ?? _defaultAlphaNumericRequired;
+      provider?.alphaNumericRequired ?? _defaultAlphaNumericRequired;
 
   String get alphaNumericInvalid =>
-      _provider?.alphaNumericInvalid ?? _defaultAlphaNumericInvalid;
+      provider?.alphaNumericInvalid ?? _defaultAlphaNumericInvalid;
 
-  /// Global flag to determine whether to use the generic required message for all inputs.
-  bool useGenericRequiredMessage = true;
+  /// Global flag to determine whether
+  /// to use the generic required message for all inputs.
+  bool get useGenericRequiredMessage =>
+      provider?.useGenericRequiredMessage ?? true;
 
   // Singleton instance of the class.
   static final ValidationMessages _instance = ValidationMessages._internal();
 
-  /// Factory constructor to provide access to the singleton instance.
-  ///
-  /// Usage:
-  /// ```dart
-  /// final messages = ValidationMessages();
-  /// ```
-  factory ValidationMessages() {
-    return _instance;
-  }
-
-  // Private constructor to enforce singleton pattern.
-  ValidationMessages._internal();
-
   /// Overrides specific validation messages while keeping others unchanged.
   ///
-  /// This method is useful for customizing messages globally or for localization.
+  /// This method is useful for
+  /// customizing messages globally or for localization.
   /// Note: If a provider is set, it will be used instead of these overrides.
   ///
   /// Example:
@@ -260,12 +253,12 @@ class ValidationMessages {
   ///   invalidCreditCard: 'Invalid card number',
   /// );
   /// ```
-  void copyWith({
+  static void copyWith({
+    required bool useGenericRequiredMessage,
     String? mobileNumberRequired,
     String? invalidMobileNumber,
     String? creditCardRequired,
     String? invalidCreditCard,
-    bool? useGenericRequiredMessage,
     String? expirationDateRequired,
     String? securityCodeRequired,
     String? cardholderNameRequired,
@@ -349,22 +342,23 @@ class ValidationMessages {
       alphaNumericRequired: alphaNumericRequired,
       alphaNumericInvalid: alphaNumericInvalid,
       genericRequiredMessage: genericRequiredMessage,
+      useGenericRequiredMessage: useGenericRequiredMessage,
     );
-
-    _provider = overrideProvider;
-    this.useGenericRequiredMessage =
-        useGenericRequiredMessage ?? this.useGenericRequiredMessage;
+    provider = overrideProvider;
   }
 
-  /// Returns the appropriate required message based on the global configuration and custom message.
+  /// Returns the appropriate required message
+  /// based on the global configuration and custom message.
   ///
   /// Parameters:
   /// - [customMessage]: A custom message provided by the developer.
-  /// - [defaultSpecificMessage]: The default message for the specific input (e.g., [mobileNumberRequired]).
+  /// - [defaultSpecificMessage]: The default message
+  /// for the specific input (e.g., [mobileNumberRequired]).
   ///
   /// Returns:
   /// - The custom message if provided.
-  /// - The generic [genericRequiredMessage] message if [useGenericRequiredMessage] is `true`.
+  /// - The generic [genericRequiredMessage] message if
+  /// [useGenericRequiredMessage] is `true`.
   /// - The default specific message if [useGenericRequiredMessage] is `false`.
   String getRequiredMessage({
     String? customMessage,
@@ -391,10 +385,10 @@ class ValidationMessages {
   }) {
     if (replacements.isEmpty) return message;
 
-    String formattedMessage = message;
+    var formattedMessage = message;
 
     replacements.forEach((key, value) {
-      String replacementValue = _convertToString(value);
+      final replacementValue = _convertToString(value);
       formattedMessage =
           formattedMessage.replaceAll('<$key>', replacementValue);
     });
@@ -404,7 +398,8 @@ class ValidationMessages {
 
   /// Converts different types of values to strings safely.
   ///
-  /// - Enums: Converts `Enum.value` to a readable string (e.g., `EmailDomain.google → "google"`).
+  /// - Enums: Converts `Enum.value` to a readable string
+  /// (e.g., `EmailDomain.google → "google"`).
   /// - Other Objects: Uses `toString()`, handling null values as empty strings.
   /// - Numbers, Strings, Booleans: Converted as expected.
   String _convertToString(dynamic value) {
@@ -416,12 +411,60 @@ class ValidationMessages {
 
 /// Internal provider for copyWith overrides
 class _OverrideProvider implements ValidationMessageProvider {
+  const _OverrideProvider({
+    required this.useGenericRequiredMessage,
+    this.mobileNumberRequired,
+    this.invalidMobileNumber,
+    this.creditCardRequired,
+    this.invalidCreditCard,
+    this.expirationDateRequired,
+    this.securityCodeRequired,
+    this.cardholderNameRequired,
+    this.invalidCardholderName,
+    this.emailRequired,
+    this.invalidEmail,
+    this.emailFormatValidation,
+    this.emailDomainValidation,
+    this.usernameRequired,
+    this.usernameInvalid,
+    this.fullNameRequired,
+    this.fullNameInvalid,
+    this.nameMustBeAlphabetic,
+    this.nameRequired,
+    this.passwordMinLength,
+    this.passwordUppercase,
+    this.passwordLowercase,
+    this.passwordDigit,
+    this.passwordSpecialChar,
+    this.latitudeRequired,
+    this.invalidLatitude,
+    this.longitudeRequired,
+    this.invalidLongitude,
+    this.numberRequired,
+    this.doubleRequired,
+    this.positiveNumRequired,
+    this.invalidNumber,
+    this.invalidDoubleNumber,
+    this.invalidPositiveNumber,
+    this.urlRequired,
+    this.invalidUrl,
+    this.dateRequired,
+    this.invalidDate,
+    this.alphaRequired,
+    this.alphaInvalid,
+    this.alphaNumericRequired,
+    this.alphaNumericInvalid,
+    this.genericRequiredMessage,
+  });
+
   @override
   final String? mobileNumberRequired;
   @override
   final String? invalidMobileNumber;
   @override
   final String? genericRequiredMessage;
+  @override
+  final bool useGenericRequiredMessage;
   @override
   final String? creditCardRequired;
   @override
@@ -501,49 +544,4 @@ class _OverrideProvider implements ValidationMessageProvider {
 
   @override
   final String? alphaNumericInvalid;
-
-  const _OverrideProvider({
-    this.mobileNumberRequired,
-    this.invalidMobileNumber,
-    this.creditCardRequired,
-    this.invalidCreditCard,
-    this.expirationDateRequired,
-    this.securityCodeRequired,
-    this.cardholderNameRequired,
-    this.invalidCardholderName,
-    this.emailRequired,
-    this.invalidEmail,
-    this.emailFormatValidation,
-    this.emailDomainValidation,
-    this.usernameRequired,
-    this.usernameInvalid,
-    this.fullNameRequired,
-    this.fullNameInvalid,
-    this.nameMustBeAlphabetic,
-    this.nameRequired,
-    this.passwordMinLength,
-    this.passwordUppercase,
-    this.passwordLowercase,
-    this.passwordDigit,
-    this.passwordSpecialChar,
-    this.latitudeRequired,
-    this.invalidLatitude,
-    this.longitudeRequired,
-    this.invalidLongitude,
-    this.numberRequired,
-    this.doubleRequired,
-    this.positiveNumRequired,
-    this.invalidNumber,
-    this.invalidDoubleNumber,
-    this.invalidPositiveNumber,
-    this.urlRequired,
-    this.invalidUrl,
-    this.dateRequired,
-    this.invalidDate,
-    this.alphaRequired,
-    this.alphaInvalid,
-    this.alphaNumericRequired,
-    this.alphaNumericInvalid,
-    this.genericRequiredMessage,
-  });
 }

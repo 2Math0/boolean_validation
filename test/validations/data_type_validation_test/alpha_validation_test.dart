@@ -1,10 +1,8 @@
-
 import '../../test_common_libs.dart';
 
 void main() {
-  final DataTypeValidators validators = Validators().dataType;
-  final ValidationMessages messages = ValidationMessages();
-  messages.copyWith(useGenericRequiredMessage: false);
+  final validators = Validators().dataType;
+ValidationMessages.copyWith(useGenericRequiredMessage: false); final messages = ValidationMessages();
 
   group('Alpha Validation', () {
     test('Valid Alpha', () {
@@ -37,7 +35,7 @@ void main() {
 
     // Additional test for custom required message
     test('Custom Required Message', () {
-      var nameMsg = 'Please provide a name';
+      const nameMsg = 'Please provide a name';
       expect(
         validators.validateAlpha('', customRequiredMessage: nameMsg),
         nameMsg,

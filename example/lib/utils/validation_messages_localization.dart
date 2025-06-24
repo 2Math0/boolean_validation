@@ -7,13 +7,16 @@ class ARBValidationProvider implements ValidationMessageProvider {
   ARBValidationProvider(this._localizations);
 
   @override
+  bool get useGenericRequiredMessage => true;
+
+  @override
   String? get mobileNumberRequired => _localizations.mobileNumberRequired;
 
   @override
   String? get invalidMobileNumber => _localizations.invalidMobileNumber;
 
   @override
-  String? get genericRequiredMessage => null;
+  String? get genericRequiredMessage => _localizations.genericRequiredField;
 
   @override
   String? get creditCardRequired => _localizations.creditCardRequired;
@@ -44,7 +47,7 @@ class ARBValidationProvider implements ValidationMessageProvider {
 
   @override
   String? get emailDomainValidation =>
-      _localizations.emailDomainValidation(EmailDomain.outlook.name);
+      _localizations.emailDomainValidation(EmailDomain.outlook.domainName);
 
   @override
   String? get usernameRequired => _localizations.usernameRequired;

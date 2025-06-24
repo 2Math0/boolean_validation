@@ -4,11 +4,15 @@
   "@appTitle": {
     "description": "The title of the application"
   },
+  "genericRequiredField": "Este campo es obligatorio.",
+  "@genericRequiredField": {
+    "description": "Mensaje de error genérico cuando un campo obligatorio está vacío."
+  },
   "validationFormTitle": "Formulario de Validación",
   "@validationFormTitle": {
     "description": "The title of the validation form"
   },
-  "emailLabel": "Correo (gmail.com)",
+  "emailLabel": "Correo",
   "@emailLabel": {
     "description": "Label for email input field"
   },
@@ -56,7 +60,7 @@
   "@alphaLabel": {
     "description": "Label for alphabetic input field"
   },
-  "alphanumericLabel": "Alfanumérico",
+  "alphanumericLabel": "Alfanumérico (Inglés, Árabe)",
   "@alphanumericLabel": {
     "description": "Label for alphanumeric input field"
   },
@@ -288,4 +292,4 @@
   "invalidTaxId": "Formato de ID de impuestos inválido",
   "socialHandleRequired": "El identificador de redes sociales es requerido",
   "invalidSocialHandle": "Formato de identificador de redes sociales inválido"
-} 
+}

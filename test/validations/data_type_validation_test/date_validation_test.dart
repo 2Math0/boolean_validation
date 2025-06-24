@@ -1,9 +1,8 @@
 import '../../test_common_libs.dart';
 
 void main() {
-  final Validators validators = Validators();
-  final ValidationMessages messages = ValidationMessages();
-  messages.copyWith(useGenericRequiredMessage: false);
+  final validators = Validators();
+ValidationMessages.copyWith(useGenericRequiredMessage: false); final messages = ValidationMessages();
 
   group('Date Validation', () {
     test('Valid Date', () {
@@ -36,7 +35,7 @@ void main() {
 
     // Additional test for custom required message
     test('Custom Required Message', () {
-      var customMsg = 'Please provide a date';
+      const customMsg = 'Please provide a date';
       expect(
         validators.dataType.validateDate('', customRequiredMessage: customMsg),
         customMsg,

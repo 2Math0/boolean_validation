@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> {
         // Update validation messages when locale changes
         final l10n = AppLocalizations.of(context);
         if (l10n != null) {
-          ValidationMessages.setProvider(ARBValidationProvider(l10n));
+          ValidationMessages.provider = ARBValidationProvider(l10n);
         }
         return child!;
       },
@@ -75,16 +75,24 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
   final _formKey = GlobalKey<FormState>();
   final _validators = Validators();
 
+  // you can use that for predefined domain
   final EmailDomain _selectedEmailDomain = EmailDomain.gmail;
-  final EmailDomain _selectedEmailDomainCustom =
-      EmailDomain.custom('twomath.com');
+
+  final String customMailKey = '2math';
+  final String customDomain = '2math.com';
 
   CountryPhonePattern _selectedCountryCode =
       CountryPhonePattern.usa; // Default to US
 
+  @override
+  void initState() {
+    super.initState();
+    EmailDomain.addCustomDomain(customMailKey, customDomain);
+  }
+
   final _controllers = {
     'email': TextEditingController(),
-    'email1': TextEditingController(),
+    'emailConstrained': TextEditingController(),
     'mobile': TextEditingController(),
     'countryCode': TextEditingController(),
     'password': TextEditingController(),
@@ -157,10 +165,7 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
                 controller: _controllers['email']!,
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) =>
-                    _validators.userInput.validateConstrainedEmail(
-                  value,
-                  domain: _selectedEmailDomain,
-                ),
+                    _validators.userInput.validateEmail(value),
               ),
 
               ///
@@ -168,18 +173,19 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
               /// Example with custom messages for this specific field
               ///
               ///
-              AnimatedFormField(
-                label: l10n.email2MathLabel,
-                controller: _controllers['email1']!,
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) =>
-                    _validators.userInput.validateConstrainedEmail(
-                  value,
-                  domain: _selectedEmailDomainCustom,
-                  customRequiredMessage: l10n.emailRequired,
-                  customInvalidMessage: l10n.invalidEmail,
+              if (EmailDomain.getDomain(customMailKey) != null)
+                AnimatedFormField(
+                  label: l10n.email2MathLabel,
+                  controller: _controllers['emailConstrained']!,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) =>
+                      _validators.userInput.validateConstrainedEmail(
+                    value,
+                    domain: EmailDomain.getDomain(customMailKey)!,
+                    // customRequiredMessage: l10n.emailRequired,
+                    // customInvalidMessage: l10n.invalidEmail,
+                  ),
                 ),
-              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: IntrinsicHeight(
@@ -246,8 +252,8 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
                 controller: _controllers['username']!,
                 validator: (value) => _validators.userInput.validateUsername(
                   value,
-                  // customRequiredMessage: l10n.usernameRequired,
-                  // customInvalidMessage: l10n.usernameInvalid,
+                  customRequiredMessage: l10n.usernameRequired,
+                  customInvalidMessage: l10n.usernameInvalid,
                 ),
               ),
               AnimatedFormField(
@@ -271,8 +277,8 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
                 keyboardType: TextInputType.number,
                 validator: (value) => _validators.userInput.validateCreditCard(
                   value,
-                  customRequiredMessage: l10n.creditCardRequired,
-                  customInvalidMessage: l10n.invalidCreditCard,
+                  // customRequiredMessage: l10n.creditCardRequired,
+                  // customInvalidMessage: l10n.invalidCreditCard,
                 ),
               ),
               AnimatedFormField(
@@ -281,8 +287,8 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
                 keyboardType: TextInputType.url,
                 validator: (value) => _validators.dataType.validateUrl(
                   value,
-                  customRequiredMessage: l10n.urlRequired,
-                  customInvalidMessage: l10n.invalidUrl,
+                  // customRequiredMessage: l10n.urlRequired,
+                  // customInvalidMessage: l10n.invalidUrl,
                 ),
               ),
               AnimatedFormField(
@@ -290,8 +296,8 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
                 controller: _controllers['date']!,
                 validator: (value) => _validators.dataType.validateDate(
                   value,
-                  customRequiredMessage: l10n.dateRequired,
-                  customInvalidMessage: l10n.invalidDate,
+                  // customRequiredMessage: l10n.dateRequired,
+                  // customInvalidMessage: l10n.invalidDate,
                 ),
               ),
               AnimatedFormField(
@@ -301,16 +307,26 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
                   value,
                   customRequiredMessage: l10n.alphaRequired,
                   customInvalidMessage: l10n.alphaInvalid,
+                  multiLang: [
+                    SupportedLanguage.arabic,
+                    SupportedLanguage.english,
+                  ],
                 ),
               ),
               AnimatedFormField(
                 label: l10n.alphanumericLabel,
                 controller: _controllers['alphanumeric']!,
                 validator: (value) => _validators.dataType.validateAlphanumeric(
-                  value,
-                  customRequiredMessage: l10n.alphaNumericRequired,
-                  customInvalidMessage: l10n.alphaNumericInvalid,
-                ),
+                    value,
+                    customRequiredMessage: l10n.alphaNumericRequired,
+                    customInvalidMessage: l10n.alphaNumericInvalid,
+                    useDigitsOfMultiLang: true,
+                    mustContainAlpha: true,
+                    mustContainDigit: true,
+                    multiLang: [
+                      SupportedLanguage.arabic,
+                      SupportedLanguage.english,
+                    ]),
               ),
               AnimatedFormField(
                 label: l10n.latitudeLabel,
@@ -318,8 +334,8 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
                 keyboardType: TextInputType.number,
                 validator: (value) => _validators.location.validateLat(
                   value,
-                  customRequiredMessage: l10n.latitudeRequired,
-                  customInvalidMessage: l10n.invalidLatitude,
+                  // customRequiredMessage: l10n.latitudeRequired,
+                  // customInvalidMessage: l10n.invalidLatitude,
                 ),
               ),
               AnimatedFormField(

@@ -1,4 +1,4 @@
-import '../core/common_libs.dart';
+import 'package:boolean_validation/src/core/common_libs.dart';
 
 abstract class ValidationCommon {
   final ValidationLogic validationLogic = ValidationLogic();

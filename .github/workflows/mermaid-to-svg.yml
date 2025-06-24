@@ -1,0 +1,51 @@
+name: Generate Mermaid SVG for pub.dev
+
+on:
+  push:
+    paths:
+      - 'README.md'
+      - 'mermaid/*.mmd'
+      - 'inject_mermaid.sh'
+  workflow_dispatch:
+
+jobs:
+  render-svg:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install mermaid CLI
+        run: npm install -g @mermaid-js/mermaid-cli
+
+      - name: Render Mermaid to SVG
+        run: |
+          mkdir -p doc
+          mmdc -i mermaid/simplified_arch.mmd -o doc/full_diagram.svg
+
+      - name: Commit SVG
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add doc/full_diagram.svg
+          git commit -m "Auto-generate Mermaid SVG for pub.dev" || echo "No changes"
+          git push
+
+      - name: Create README_pub.md for pub.dev
+        run: |
+          cp README.md README_pub.md
+          sed -i '/<!--MERMAID_START-->/,<!--MERMAID_END-->/c\<img src="doc/full_diagram.svg" alt="Architecture Diagram" />' README_pub.md
+
+      - name: Commit README_pub.md
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README_pub.md
+          git commit -m "Auto-update README_pub.md for pub.dev" || echo "No changes"
+          git push

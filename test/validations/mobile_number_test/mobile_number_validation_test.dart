@@ -1,9 +1,8 @@
-import '../test_common_libs.dart';
+import '../../test_common_libs.dart';
 
 void main() {
-  final UserInputValidators validators = Validators().userInput;
-  final ValidationMessages messages = ValidationMessages();
-  messages.copyWith(useGenericRequiredMessage: false);
+  final validators = Validators().userInput;
+ValidationMessages.copyWith(useGenericRequiredMessage: false); final messages = ValidationMessages();
 
   group('Mobile Number Validation', () {
     test('Valid Mobile Number', () {
@@ -36,7 +35,7 @@ void main() {
 
     // Additional test for custom required message
     test('Custom Required Message', () {
-      var customMsg = 'Please provide a mobile number';
+      const customMsg = 'Please provide a mobile number';
       expect(
         validators.validateMobileNumber(null, customRequiredMessage: customMsg),
         customMsg,
@@ -44,24 +43,30 @@ void main() {
     });
     test('InValid Egyptian Mobile Number (Internation dialing code)', () {
       expect(
-        validators.validateMobileNumber('11234567890',
-            prefix: CountryPhonePattern.egypt.dialCode),
+        validators.validateMobileNumber(
+          '11234567890',
+          prefix: CountryPhonePattern.egypt.dialCode,
+        ),
         messages.invalidMobileNumber,
       );
     });
 
     test('Valid Egyptian Mobile Number (Internation dialing code)', () {
       expect(
-        validators.validateMobileNumber('1234567890',
-            prefix: CountryPhonePattern.egypt.dialCode),
+        validators.validateMobileNumber(
+          '1234567890',
+          prefix: CountryPhonePattern.egypt.dialCode,
+        ),
         null,
       );
     });
 
     test('InValid Egyptian Mobile Number (Internation dialing code)', () {
       expect(
-        validators.validateMobileNumber('01734567890',
-            prefix: CountryPhonePattern.egypt.dialCode),
+        validators.validateMobileNumber(
+          '01734567890',
+          prefix: CountryPhonePattern.egypt.dialCode,
+        ),
         messages.invalidMobileNumber,
       );
     });
@@ -88,7 +93,7 @@ void main() {
     test('Valid Egyptian Mobile Number (With Spaces and Brackets)', () {
       expect(
         validators.validateMobileNumber(
-          '(017) 345-678-90',
+          '(2017) 345-678-90',
         ),
         null,
       );
@@ -96,8 +101,10 @@ void main() {
 
     test('valid Egyptian Mobile Number (Country code)', () {
       expect(
-        validators.validateMobileNumber('1234567890',
-            prefix: CountryPhonePattern.egypt.isoCode),
+        validators.validateMobileNumber(
+          '1234567890',
+          prefix: CountryPhonePattern.egypt.isoCode,
+        ),
         null,
       );
     });

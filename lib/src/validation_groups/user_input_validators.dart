@@ -1,3 +1,4 @@
+import 'package:boolean_validation/src/core/extensions/string_extension.dart';
 import 'package:boolean_validation/src/enum/email_domains.dart';
 import 'package:boolean_validation/src/enum/supported_languages.dart';
 import 'package:boolean_validation/src/validation_groups/validation_common.dart';
@@ -12,6 +13,7 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -36,7 +38,8 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
-    var emailValidation = validateEmail(
+    if (value.nullOrEmpty && isRequired == false) return null;
+    final emailValidation = validateEmail(
       value,
       isRequired: isRequired,
       customInvalidMessage: customInvalidMessage,
@@ -44,12 +47,16 @@ class UserInputValidators extends ValidationCommon {
     );
     if (emailValidation != null) return emailValidation;
 
-    if (!validationLogic.isValidConstrainedEmail(value, domain)) {
+    if (!validationLogic.isValidConstrainedEmail(
+      value?.toLowerCase(),
+      domain,
+    )) {
       return messages.formatMessage(
-          message: messages.emailDomainValidation,
-          replacements: {
-            MessageReplacementKeys.domain: domain.name,
-          });
+        message: messages.emailDomainValidation,
+        replacements: {
+          MessageReplacementKeys.domain: domain.domainName,
+        },
+      );
     }
 
     return null;
@@ -63,6 +70,7 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -71,17 +79,20 @@ class UserInputValidators extends ValidationCommon {
     );
     if (requiredValidation != null) return requiredValidation;
 
-    if (!validationLogic.isValidUsername(value!)) {
+    if (value != null && !validationLogic.isValidUsername(value)) {
       return customInvalidMessage ?? messages.usernameInvalid;
     }
     return null;
   }
 
-  /// Validates a full name (first and last).
-  /// Returns an error message if invalid; otherwise, null.
-  /// Validates a full name.
-  /// Returns an error message if invalid; otherwise, null.
-  /// [nameLength] the required length of the Full Name
+  /// Validates a full name (e.g., first and last name).
+  ///
+  /// - [isRequired]: If true, the field must not be empty.
+  /// - [customRequiredMessage]: Custom error message for empty input.
+  /// - [customInvalidMessage]: Custom error message for format issues.
+  /// - [nameLength]: Minimum number of name parts
+  /// required (e.g., 2 for first + last).
+  /// - [multiLang]: Supported language alphabets.
   String? validateFullName(
     String? value, {
     bool isRequired = true,
@@ -90,6 +101,8 @@ class UserInputValidators extends ValidationCommon {
     int nameLength = 2,
     List<SupportedLanguage> multiLang = const [SupportedLanguage.english],
   }) {
+    if (value.nullOrEmpty && isRequired == false) return null;
+
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -98,13 +111,24 @@ class UserInputValidators extends ValidationCommon {
     );
     if (requiredValidation != null) return requiredValidation;
 
-    final parts = value!.split(' ');
+    final trimmed = value!;
+    if (trimmed != trimmed.trim()) {
+      return customInvalidMessage ?? messages.nameMustBeAlphabetic;
+    }
+    if (trimmed.contains(RegExp(r'\s{2,}'))) {
+      return customInvalidMessage ?? messages.nameMustBeAlphabetic;
+    }
+
+    // Split by single space
+    final parts = trimmed.split(' ');
     if (parts.length < nameLength) {
       return customInvalidMessage ?? messages.fullNameInvalid;
     }
 
-    for (var part in parts) {
-      if (!validationLogic.isAlpha(part, multiLang: multiLang)) {
+    for (final part in parts) {
+      final cleanedPart =
+          part.replaceAll(RegExp("[-']"), ''); // Allow apostrophes and hyphens
+      if (!validationLogic.isAlpha(cleanedPart, multiLang: multiLang)) {
         return customInvalidMessage ?? messages.nameMustBeAlphabetic;
       }
     }
@@ -120,6 +144,7 @@ class UserInputValidators extends ValidationCommon {
     String? customInvalidMessage,
     List<SupportedLanguage> multiLang = const [SupportedLanguage.english],
   }) {
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -128,7 +153,7 @@ class UserInputValidators extends ValidationCommon {
     );
     if (requiredValidation != null) return requiredValidation;
 
-    if (!validationLogic.isValidName(value!, multiLang: multiLang)) {
+    if (!validationLogic.isValidName(value, multiLang: multiLang)) {
       return customInvalidMessage ?? messages.nameMustBeAlphabetic;
     }
     return null;
@@ -146,13 +171,15 @@ class UserInputValidators extends ValidationCommon {
     bool requireSpecialChar = true,
     String? customSpecialCharMessage,
   }) {
-    List<String> errors = [];
+    final errors = <String>[];
 
     if (value == null || value.length < minLength) {
-      errors.add(messages.formatMessage(
-        message: messages.passwordMinLength,
-        replacements: {MessageReplacementKeys.minLength: minLength},
-      ));
+      errors.add(
+        messages.formatMessage(
+          message: messages.passwordMinLength,
+          replacements: {MessageReplacementKeys.minLength: minLength},
+        ),
+      );
     }
     if (requireUppercase && !validationLogic.containsLowerCase(value!)) {
       errors.add(customUppercaseMessage ?? messages.passwordLowercase);
@@ -181,6 +208,7 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -189,7 +217,7 @@ class UserInputValidators extends ValidationCommon {
     );
     if (requiredValidation != null) return requiredValidation;
 
-    if (!validationLogic.isCorrectMobileNumber(value!, prefix)) {
+    if (!validationLogic.isCorrectMobileNumber(value, prefix)) {
       return customInvalidMessage ?? messages.invalidMobileNumber;
     }
     return null;
@@ -203,6 +231,7 @@ class UserInputValidators extends ValidationCommon {
     String? customRequiredMessage,
     String? customInvalidMessage,
   }) {
+    if (value.nullOrEmpty && isRequired == false) return null;
     final requiredValidation = validateRequired(
       value: value,
       isRequired: isRequired,
@@ -212,7 +241,7 @@ class UserInputValidators extends ValidationCommon {
 
     if (requiredValidation != null) return requiredValidation;
 
-    if (!validationLogic.isValidCreditCard(value!)) {
+    if (value != null && !validationLogic.isValidCreditCard(value)) {
       return customInvalidMessage ?? messages.invalidCreditCard;
     }
     return null;

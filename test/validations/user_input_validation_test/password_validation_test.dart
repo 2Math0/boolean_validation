@@ -1,10 +1,8 @@
-
 import '../../test_common_libs.dart';
 
 void main() {
-  final Validators validators = Validators();
-  final ValidationMessages messages = ValidationMessages();
-  messages.copyWith(useGenericRequiredMessage: false);
+  final validators = Validators();
+ValidationMessages.copyWith(useGenericRequiredMessage: false); final messages = ValidationMessages();
 
   group('Password Validation', () {
     test('Valid Password', () {
@@ -17,10 +15,12 @@ void main() {
     test('Invalid Password - Too Short', () {
       expect(
         validators.userInput.validatePassword('Short1!', minLength: 20),
-        messages
-            .formatMessage(message: messages.passwordMinLength, replacements: {
-          MessageReplacementKeys.minLength: 20,
-        }),
+        messages.formatMessage(
+          message: messages.passwordMinLength,
+          replacements: {
+            MessageReplacementKeys.minLength: 20,
+          },
+        ),
       );
     });
 
@@ -55,9 +55,12 @@ void main() {
     test('Invalid Password - Empty', () {
       expect(
         validators.userInput.validatePassword('', minLength: 10),
-        '${messages.formatMessage(message: messages.passwordMinLength, replacements: {
-              MessageReplacementKeys.minLength: 10,
-            })}\n${messages.passwordLowercase}\n${messages.passwordUppercase}\n${messages.passwordDigit}\n${messages.passwordSpecialChar}',
+        '${messages.formatMessage(
+          message: messages.passwordMinLength,
+          replacements: {
+            MessageReplacementKeys.minLength: 10,
+          },
+        )}\n${messages.passwordLowercase}\n${messages.passwordUppercase}\n${messages.passwordDigit}\n${messages.passwordSpecialChar}',
       );
     });
   });

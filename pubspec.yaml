@@ -1,6 +1,6 @@
 name: boolean_validation
 description: "A comprehensive Flutter package that provides form validation utilities with custom messages and localization ease"
-version: 1.0.0
+version: 1.1.0
 homepage: https://github.com/2Math0/boolean_validation
 repository: https://github.com/2Math0/boolean_validation
 issue_tracker: https://github.com/2Math0/boolean_validation/issues
@@ -10,6 +10,7 @@ keywords:
   - flutter
 documentation: https://2Math0.github.io/boolean_validation/
 example: https://github.com/2Math0/boolean_validation/tree/master/example
+readme: README_pub.md
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -18,11 +19,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  meta: any
+
 
 dev_dependencies:
+  flutter_lints: any
   flutter_test:
     sdk: flutter
-  flutter_lints: any
+  very_good_analysis: ^5.1.0
+
 
 permittedLicenses:
   - 'Apache-2.0'

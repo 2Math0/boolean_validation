@@ -1,9 +1,9 @@
 import '../../test_common_libs.dart';
 
 void main() {
-  final Validators validators = Validators();
-  final ValidationMessages messages = ValidationMessages();
-  messages.copyWith(useGenericRequiredMessage: false);
+  final validators = Validators();
+  final messages = ValidationMessages();
+  ValidationMessages.copyWith(useGenericRequiredMessage: false);
 
   group('URL Validation', () {
     test('Valid URL', () {
@@ -36,7 +36,7 @@ void main() {
 
     // Additional test for custom required message
     test('Custom Required Message', () {
-      String customMsg = 'Please provide a URL';
+      const customMsg = 'Please provide a URL';
       expect(
         validators.dataType.validateUrl('', customRequiredMessage: customMsg),
         customMsg,

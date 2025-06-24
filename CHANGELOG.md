@@ -1,3 +1,13 @@
+## [1.1.0] - 2025-06-24
+
+### Added
+- Added more arabic countries [Algeria, Bahrain, Comoros, Djibouti, Iraq, Jordan, Kuwait, Lebanon, Libya, Mauritania, Morocco, Oman, Palestine, Qatar, Somalia, Sudan, Syria, Tunisia, UAE, and Yemen]
+- Handle null inputs
+- Update Email validation to [RFC 5322](https://www.rfc-editor.org/rfc/rfc5322)
+- Add regex for more Languages and languages' Numbers, Punctuation
+- Add utility methods for `RegexPatterns` and `SupportedLanguages` 
+
+
 ## [1.0.0] - 2025-06-7
 
 - Separate the validation messages in another layer to ease localization and override

@@ -1,0 +1,492 @@
+@startuml
+' General skin params for styling
+skinparam {
+shadowing false
+backgroundColor #ffffff
+  class {
+BackgroundColor #efefef
+    BorderColor #34495e
+    ArrowColor #2980b9
+    FontColor #2c3e50
+    FontName "Roboto"
+FontSize 16
+RoundCorner 12
+}
+package {
+BackgroundColor #edeFeF
+    BorderColor #34495e
+    FontColor #34495e
+  }
+note {
+BackgroundColor #d0f0f7
+    BorderColor #22a6b3
+    FontColor #22a6b3
+    FontName "monospace"
+FontSize 10
+RoundCorner 12
+}
+}
+
+' Define Colors for class stereotypes
+!define VALIDATOR_COLOR #3498db
+!define MESSAGE_COLOR #e67e22
+!define ENUM_COLOR #8e44ad
+!define ABSTRACT_COLOR #27ae60
+!define UTILITY_COLOR #c0392b
+
+' Legend of stereotypes for clarity
+skinparam class {
+stereotypeFontColor #555555
+  stereotypeFontSize 10
+}
+
+' ========== Utility / Constants ==========
+package "Utility & Constants" {
+class "MessageReplacementKeys" as MsgKeys << (K, UTILITY_COLOR) >> {
+{static} +String domain
+{static} +String minLength
+}
+class "RegexPatterns" << (U, UTILITY_COLOR) >> {
+{static} +String email
+{static} +String integer
+{static} +String digits
+{static} +String url
+{static} +String date
+{static} +String creditCard
+{static} +String username
+{static} +String latitude
+{static} +String longitude
+{static} +String alpha
+{static} +String alphanumeric
+{static} +String password
+{static} +String numbers
+{static} +String specialCharacters
+{static} +String lowercaseLetters
+{static} +String uppercaseLetters
+{static} +String unsafeSymbols
+{static} +String constrainedEmail(String domain)
+
+{static} +String buildFlexibleRegex(List<List<String>> orGroups, andGroups, bool matchAllIfEmpty)
+{static} +String sanitize(String pattern)
+{static} +String? buildOrLookahead(List<String> group)
+{static} +List<String> buildAndLookaheads(List<String> group)
+{static} +combineCharsets(Iterable<String> charsets)
+}
+
+
+class "ValidationLogic" << (U, UTILITY_COLOR) >> {
++bool isValidEmail()
++bool isValidConstrainedEmail(...EmailDomain domain)
++bool isValidName()
++bool isCorrectMobileNumber()
++bool isInteger()
++bool isValidUrl()
++bool isValidDate()
++bool isValidCreditCard()
+-bool _luhnCheck()
++bool isValidUsername()
++bool isValidLatLng()
++bool isValidLatitude()
++bool isValidLongitude()
++bool isRequiredField()
++bool isValidPassword()
++bool isPasswordLongEnough()
++bool containsUppercase()
++bool containsLowerCase()
++bool containsDigits()
++bool containsSpecialCharacter()
++bool isAlpha()
++bool isAlphanumeric()
++bool runMultiValidators()
+}
+}
+
+' ========== RegexExtensions =========
+package "Regex Pattern Extensions" {
+class "AlphaLangRegex" <<extension>> {
++englishOnly
++arabicOnly
++arabicWithDiacritics
++germanOnly
++japaneseHiragana
++japaneseKatakana
++japaneseKanji
++japaneseOnly
++chineseOnly
++latinExtended
++cyrillicOnly
++koreanOnly
++hebrewOnly
++devanagariOnly
++thaiOnly
++malayalamOnly
++tamilOnly
++teluguOnly
++bengaliOnly
++gujaratiOnly
++punjabiOnly
++amharicOnly
++armenianOnly
++georgianOnly
++greekOnly
++khmerOnly
++laoOnly
++burmeseOnly
++multiLangCombined
+}
+
+class "NumLangRegex" <<extension>> {
++westernNums
++arabicNums
++devanagariNums
++bengaliNums
++punjabiNums
++gujaratiNums
++tamilNums
++teluguNums
++kannadaNums
++malayalamNums
++thaiNums
++laoNums
++burmeseNums
++khmerNums
+}
+
+class "PunctuationLangRegex" <<extension>> {
++englishPunctuation
++arabicPunctuation
++germanPunctuation
++cyrillicPunctuation
++hebrewPunctuation
++devanagariPunctuation
++thaiPunctuation
++koreanPunctuation
++malayalamPunctuation
++tamilPunctuation
++teluguPunctuation
++bengaliPunctuation
++gujaratiPunctuation
++punjabiPunctuation
++greekPunctuation
++khmerPunctuation
++laoPunctuation
++burmesePunctuation
++japanesePunctuation
++japaneseHalfWidth
++japaneseMiscSymbols
++japaneseFullWidthAlphaNum
+}
+
+class "ScriptComponentRegex" <<extension>> {
++japaneseRadicals
++cjkStrokes
++cjkCompatibilityIdeographs
++bopomofo
++bopomofoExtended
++kanbun
++enclosedCjkLetters
+}
+
+class "MobileRegex" <<extension>> {
+{static} +String mobileNumber
+{static} +String mobileNumberWithoutLeadingPlus
+
+-- Common Countries --
+{static} +String usaRegex
+{static} +String canadaRegex
+{static} +String indiaRegex
+{static} +String saudiArabiaRegex
+{static} +String ukRegex
+{static} +String franceRegex
+{static} +String germanyRegex
+{static} +String italyRegex
+{static} +String brazilRegex
+{static} +String mexicoRegex
+{static} +String chinaRegex
+{static} +String japanRegex
+{static} +String australiaRegex
+{static} +String southAfricaRegex
+{static} +String russiaRegex
+{static} +String turkeyRegex
+{static} +String pakistanRegex
+{static} +String indonesiaRegex
+
+-- Arabic Region --
+{static} +String egyptRegex
+{static} +String algeriaRegex
+{static} +String bahrainRegex
+{static} +String comorosRegex
+{static} +String djiboutiRegex
+{static} +String iraqRegex
+{static} +String jordanRegex
+{static} +String kuwaitRegex
+{static} +String lebanonRegex
+{static} +String libyaRegex
+{static} +String mauritaniaRegex
+{static} +String moroccoRegex
+{static} +String omanRegex
+{static} +String palestineRegex
+{static} +String qatarRegex
+{static} +String somaliaRegex
+{static} +String sudanRegex
+{static} +String syriaRegex
+{static} +String tunisiaRegex
+{static} +String uaeRegex
+{static} +String yemenRegex
+}
+
+"AlphaLangRegex" ..> "RegexPatterns" : extension on
+"NumLangRegex" ..> "RegexPatterns" : extension on
+"PunctuationLangRegex" ..> "RegexPatterns" : extension on
+"ScriptComponentRegex" ..> "RegexPatterns" : extension on
+"MobileRegex" ..> "RegexPatterns" : extension on
+}
+
+' ========== Messages ==========
+package "Validation Messages" {
+class "ValidationMessages" as VMessages << (M, MESSAGE_COLOR) >> {
+-ValidationMessageProvider? _provider
++bool useGenericRequiredMessage
++ValidationMessageProvider? provider
++static void setProvider()
++void copyWith()
++String getRequiredMessage()
++String formatMessage()
+-String _convertToString()
+}
+' Indicate usage or reference to message keys
+VMessages ..> MsgKeys : uses keys from
+
+note right of VMessages
+Contains static default messages,\n
+customizable message provider,\n
+and message formatting utilities.\n
+Singleton pattern used for global access.
+end note
+
+abstract class "ValidationMessageProvider" as MessageProvider << (A, ABSTRACT_COLOR) >> {
++String? mobileNumberRequired
++String? invalidMobileNumber
++String? genericRequiredMessage
++String? creditCardRequired
++String? invalidCreditCard
++String? expirationDateRequired
++String? securityCodeRequired
++String? cardholderNameRequired
++String? invalidCardholderName
++String? emailRequired
++String? invalidEmail
++String? emailFormatValidation
+}
+
+class "_OverrideProvider" as OverrideProvider << (I, MESSAGE_COLOR) >> {
++String? mobileNumberRequired
++String? invalidMobileNumber
++String? genericRequiredMessage
++String? creditCardRequired
++String? invalidCreditCard
++String? expirationDateRequired
++String? securityCodeRequired
++String? cardholderNameRequired
++String? invalidCardholderName
++String? emailRequired
++String? invalidEmail
++String? emailFormatValidation
+}
+
+' Relationships
+MessageProvider <|-- OverrideProvider
+VMessages o-- MessageProvider
+VMessages o-- VMessages : "Singleton _instance"
+}
+
+' ========== Enums ==========
+package "Enums" {
+class "EmailDomain" << (E, ENUM_COLOR) >> {
++String domainName
++String get name
+--
+{static} +EmailDomain gmail
+{static} +EmailDomain yahoo
+{static} +EmailDomain hotmail
+{static} +EmailDomain outlook
+{static} +EmailDomain icloud
+{static} +EmailDomain aol
+{static} +EmailDomain msn
+{static} +EmailDomain mail
+{static} +EmailDomain zoho
+{static} +EmailDomain protonmail
+{static} +EmailDomain gmx
+{static} +EmailDomain live
+{static} +EmailDomain me
+{static} +EmailDomain inbox
+{static} +EmailDomain yandex
+{static} +EmailDomain fastmail
+{static} +EmailDomain hey
+
+{static} +EmailDomain custom(String domain)
+{static} +void addCustomDomain(String key, String domain)
+{static} +EmailDomain? getDomain(String key)
+{static} +bool contains(String key)
+{static} +Iterable<String> predefinedKeys
+{static} +Iterable<String> customKeys
+{static} +Iterable<EmailDomain> allDomains
+
++String toString()
++bool operator==(Object other)
++int get hashCode
+}
+
+class "CountryPhonePattern" << (E, ENUM_COLOR) >> {
++String isoCode
++String dialCode
++String name
++String regex
+--
+{static} +Map<String, CountryPhonePattern> byIsoCode
+{static} +Map<String, CountryPhonePattern> byDialCode
+--
+{static} +usa
+{static} +canada
+{static} +india
+{static} +uk
+{static} +france
+{static} +germany
+{static} +italy
+{static} +brazil
+{static} +mexico
+{static} +china
+{static} +japan
+{static} +australia
+{static} +southAfrica
+{static} +russia
+{static} +turkey
+{static} +pakistan
+{static} +indonesia
+{static} +egypt
+{static} +saudiArabia
+{static} +algeria
+{static} +bahrain
+{static} +comoros
+{static} +djibouti
+{static} +iraq
+{static} +jordan
+{static} +kuwait
+{static} +lebanon
+{static} +libya
+{static} +mauritania
+{static} +morocco
+{static} +oman
+{static} +palestine
+{static} +qatar
+{static} +somalia
+{static} +sudan
+{static} +syria
+{static} +tunisia
+{static} +uae
+{static} +yemen
+}
+
+class "SupportedLanguage" << (E, ENUM_COLOR) >> {
++String alphaPattern
++String digitPattern
++String? punctuationPattern
++List<String> extraPatterns
+--
++String alphaNum
++String? alphaPunctuation
++String? digitPunctuation
++String fullPattern
+--
+{static} +english
+{static} +arabic
+{static} +german
+{static} +latinExtended
+{static} +cyrillic
+{static} +hebrew
+{static} +devanagari
+{static} +thai
+{static} +korean
+{static} +malayalam
+{static} +tamil
+{static} +telugu
+{static} +bengali
+{static} +gujarati
+{static} +punjabi
+{static} +amharic
+{static} +armenian
+{static} +georgian
+{static} +greek
+{static} +khmer
+{static} +lao
+{static} +burmese
+{static} +japaneseHiragana
+{static} +japaneseKatakana
+{static} +japaneseKanji
+{static} +japanese
+}
+class "SupportedLanguageRegexBuilder" <<extension>> {
++String buildRegex(bool includeAlpha=true, bool includeNum=false, bool includePunctuation=false)
+}
+
+"SupportedLanguageRegexBuilder" ..> "SupportedLanguage" : extension on
+}
+
+
+
+' ========== Validators ==========
+package "Validators" {
+class "Validators" as Validators << (V, VALIDATOR_COLOR) >> {
+{static} -Validators _instance
++UserInputValidators userInput
++LocationValidators location
++DataTypeValidators dataType
+}
+
+class "ValidationCommon" as ValidationCommon << (A, ABSTRACT_COLOR) >> {
++ValidationLogic validationLogic
++ValidationMessages messages
++String? validateRequired()
+}
+
+class "UserInputValidators" as UserInputValidators << (V, VALIDATOR_COLOR) >> {
++String? validateEmail()
++String? validateConstrainedEmail(EmailDomain)
++String? validateUsername()
++String? validateFullName()
++String? validateName()
++String? validatePassword()
++String? validateMobileNumber(CountryPhonePattern?)
++String? validateCreditCard()
+}
+
+class "LocationValidators" << (V, VALIDATOR_COLOR) >> {
++String? validateLat()
++String? validateLong()
+}
+
+class "DataTypeValidators" as DataTypeValidators << (V, VALIDATOR_COLOR) >> {
++String? validateInteger()
++String? validateDouble()
++String? validatePositiveNum()
++String? validateUrl()
++String? validateDate()
++String? validateAlpha(List<SupportedLanguage>)
++String? validateAlphanumeric(List<SupportedLanguage>, ...[booleans])
+}
+
+' Relationships
+Validators o-- Validators : singleton _instance
+Validators o-- UserInputValidators : userInput
+Validators o-- LocationValidators : location
+Validators o-- DataTypeValidators : dataType
+
+ValidationCommon o-- ValidationLogic
+ValidationCommon o-- VMessages
+
+UserInputValidators --|> ValidationCommon
+LocationValidators --|> ValidationCommon
+DataTypeValidators --|> ValidationCommon
+}
+
+@enduml

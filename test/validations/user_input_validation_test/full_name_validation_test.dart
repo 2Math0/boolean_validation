@@ -1,16 +1,13 @@
-
-
 import '../../test_common_libs.dart';
 
 void main() {
-  final Validators validators = Validators();
-  final ValidationMessages messages = ValidationMessages();
-  messages.copyWith(useGenericRequiredMessage: false);
+  final validators = Validators();
+ValidationMessages.copyWith(useGenericRequiredMessage: false); final messages = ValidationMessages();
 
   group('Full Name Validation', () {
     test('Valid Full Name', () {
       expect(
-        validators.userInput.validateFullName('John Doe'),
+        validators.userInput.validateFullName('Thomas Samy'),
         null,
       );
     });

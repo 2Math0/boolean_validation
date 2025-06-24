@@ -41,10 +41,10 @@ flutter gen-l10n
 flutter gen-l10n --watch
 
 # Extract ARB strings from code (if using intl_utils)
-flutter pub run intl_utils:generate
+dart run intl_utils:generate
 
 # Generate ARB template from existing strings
-flutter pub run intl_utils:extract_to_arb --output-dir=lib/l10n lib/*.dart
+dart run intl_utils:extract_to_arb --output-dir=lib/l10n lib/*.dart
 ```
 
 ## Development
