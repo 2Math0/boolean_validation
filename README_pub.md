@@ -284,7 +284,7 @@ Note: The diagram below is a static image for compatibility with `pub.dev`.
 <br/>
 
 ![Auto Docs](https://img.shields.io/badge/docs-auto--generated-blueviolet)
-<img src="doc/full_diagram.svg" alt="Architecture Diagram" />
+<img src="doc/simplified_arch.svg" alt="Architecture Diagram" />
 
 A full, detailed diagram of the package architecture can be found here:
 ![Architecture Diagram](doc/full_diagram.svg)
