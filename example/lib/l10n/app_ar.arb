@@ -4,11 +4,15 @@
   "@appTitle": {
     "description": "The title of the application"
   },
+  "genericRequiredField": "هذا الحقل مطلوب.",
+  "@genericRequiredField": {
+    "description": "رسالة خطأ عامة عند ترك حقل مطلوب فارغًا."
+  },
   "validationFormTitle": "نموذج التحقق",
   "@validationFormTitle": {
     "description": "The title of the validation form"
   },
-  "emailLabel": "البريد الإلكتروني (gmail.com)",
+  "emailLabel": "البريد الإلكتروني",
   "email2MathLabel": "البريد الإلكتروني (2math.com)",
   "@emailLabel": {
     "description": "Label for email input field"
@@ -53,7 +57,7 @@
   "@alphaLabel": {
     "description": "Label for alphabetic input field"
   },
-  "alphanumericLabel": "أحرف وأرقام",
+  "alphanumericLabel": "احرف و ارقام (إنجليزي، عربي)",
   "@alphanumericLabel": {
     "description": "Label for alphanumeric input field"
   },

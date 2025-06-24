@@ -75,6 +75,7 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
   final _formKey = GlobalKey<FormState>();
   final _validators = Validators();
 
+  // you can use that for predefined domain
   final EmailDomain _selectedEmailDomain = EmailDomain.gmail;
 
   final String customMailKey = '2math';
@@ -164,10 +165,7 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
                 controller: _controllers['email']!,
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) =>
-                    _validators.userInput.validateConstrainedEmail(
-                  value,
-                  domain: _selectedEmailDomain,
-                ),
+                    _validators.userInput.validateEmail(value),
               ),
 
               ///
@@ -184,8 +182,8 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
                       _validators.userInput.validateConstrainedEmail(
                     value,
                     domain: EmailDomain.getDomain(customMailKey)!,
-                    customRequiredMessage: l10n.emailRequired,
-                    customInvalidMessage: l10n.invalidEmail,
+                    // customRequiredMessage: l10n.emailRequired,
+                    // customInvalidMessage: l10n.invalidEmail,
                   ),
                 ),
               Padding(
@@ -254,8 +252,8 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
                 controller: _controllers['username']!,
                 validator: (value) => _validators.userInput.validateUsername(
                   value,
-                  // customRequiredMessage: l10n.usernameRequired,
-                  // customInvalidMessage: l10n.usernameInvalid,
+                  customRequiredMessage: l10n.usernameRequired,
+                  customInvalidMessage: l10n.usernameInvalid,
                 ),
               ),
               AnimatedFormField(
@@ -279,8 +277,8 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
                 keyboardType: TextInputType.number,
                 validator: (value) => _validators.userInput.validateCreditCard(
                   value,
-                  customRequiredMessage: l10n.creditCardRequired,
-                  customInvalidMessage: l10n.invalidCreditCard,
+                  // customRequiredMessage: l10n.creditCardRequired,
+                  // customInvalidMessage: l10n.invalidCreditCard,
                 ),
               ),
               AnimatedFormField(
@@ -289,8 +287,8 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
                 keyboardType: TextInputType.url,
                 validator: (value) => _validators.dataType.validateUrl(
                   value,
-                  customRequiredMessage: l10n.urlRequired,
-                  customInvalidMessage: l10n.invalidUrl,
+                  // customRequiredMessage: l10n.urlRequired,
+                  // customInvalidMessage: l10n.invalidUrl,
                 ),
               ),
               AnimatedFormField(
@@ -298,8 +296,8 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
                 controller: _controllers['date']!,
                 validator: (value) => _validators.dataType.validateDate(
                   value,
-                  customRequiredMessage: l10n.dateRequired,
-                  customInvalidMessage: l10n.invalidDate,
+                  // customRequiredMessage: l10n.dateRequired,
+                  // customInvalidMessage: l10n.invalidDate,
                 ),
               ),
               AnimatedFormField(
@@ -336,8 +334,8 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
                 keyboardType: TextInputType.number,
                 validator: (value) => _validators.location.validateLat(
                   value,
-                  customRequiredMessage: l10n.latitudeRequired,
-                  customInvalidMessage: l10n.invalidLatitude,
+                  // customRequiredMessage: l10n.latitudeRequired,
+                  // customInvalidMessage: l10n.invalidLatitude,
                 ),
               ),
               AnimatedFormField(

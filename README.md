@@ -111,6 +111,8 @@ import 'package:boolean_validation/boolean_validation.dart';
 void main() {
   final messages = ValidationMessages();
   messages.copyWith(invalidEmail: 'This not a valid email');
+  
+  //Or override the ValidationMessageProvider class
   runApp(MyApp());
 }
 ```

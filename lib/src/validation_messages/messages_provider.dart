@@ -8,6 +8,8 @@ abstract class ValidationMessageProvider {
 
   String? get genericRequiredMessage;
 
+  bool get useGenericRequiredMessage;
+
   String? get creditCardRequired;
 
   String? get invalidCreditCard;

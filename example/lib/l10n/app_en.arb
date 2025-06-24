@@ -4,11 +4,15 @@
   "@appTitle": {
     "description": "The title of the application"
   },
+  "genericRequiredField": "This field is required.",
+  "@genericRequiredField": {
+    "description": "Generic error message when a required field is empty."
+  },
   "validationFormTitle": "Validation Form",
   "@validationFormTitle": {
     "description": "The title of the validation form"
   },
-  "emailLabel": "Email (gmail.com)",
+  "emailLabel": "Email",
   "@emailLabel": {
     "description": "Label for email input field"
   },
@@ -56,7 +60,7 @@
   "@alphaLabel": {
     "description": "Label for alphabetic input field"
   },
-  "alphanumericLabel": "Alphanumeric",
+  "alphanumericLabel": "Alphanumeric (English, Arabic)",
   "@alphanumericLabel": {
     "description": "Label for alphanumeric input field"
   },

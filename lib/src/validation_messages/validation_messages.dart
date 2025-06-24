@@ -1,5 +1,4 @@
 import 'package:boolean_validation/src/validation_messages/message_replacements_keys.dart';
-
 import 'package:boolean_validation/src/validation_messages/messages_provider.dart';
 
 /// A centralized class for managing validation error messages
@@ -253,11 +252,11 @@ class ValidationMessages {
   /// );
   /// ```
   void copyWith({
+    required bool useGenericRequiredMessage,
     String? mobileNumberRequired,
     String? invalidMobileNumber,
     String? creditCardRequired,
     String? invalidCreditCard,
-    bool? useGenericRequiredMessage,
     String? expirationDateRequired,
     String? securityCodeRequired,
     String? cardholderNameRequired,
@@ -341,11 +340,9 @@ class ValidationMessages {
       alphaNumericRequired: alphaNumericRequired,
       alphaNumericInvalid: alphaNumericInvalid,
       genericRequiredMessage: genericRequiredMessage,
+      useGenericRequiredMessage: useGenericRequiredMessage,
     );
-
     provider = overrideProvider;
-    this.useGenericRequiredMessage =
-        useGenericRequiredMessage ?? this.useGenericRequiredMessage;
   }
 
   /// Returns the appropriate required message
@@ -413,6 +410,7 @@ class ValidationMessages {
 /// Internal provider for copyWith overrides
 class _OverrideProvider implements ValidationMessageProvider {
   const _OverrideProvider({
+    required this.useGenericRequiredMessage,
     this.mobileNumberRequired,
     this.invalidMobileNumber,
     this.creditCardRequired,
@@ -463,6 +461,8 @@ class _OverrideProvider implements ValidationMessageProvider {
   final String? invalidMobileNumber;
   @override
   final String? genericRequiredMessage;
+  @override
+  final bool useGenericRequiredMessage;
   @override
   final String? creditCardRequired;
   @override
