@@ -1,4 +1,17 @@
-## [1.1.0] - 2025-06-24
+## [1.1.0+2] - 2025-06-27
+
+### Changed
+
+- Updated `README.md` to show charts on pub.dev
+
+## [1.1.0+1] - 2025-06-27
+
+### Changed
+
+- Updated `README.md` with better usage instructions
+- Fixed typos and improved formatting
+
+## [1.1.0] - 2025-06-27
 
 ### Added
 - Added more arabic countries [Algeria, Bahrain, Comoros, Djibouti, Iraq, Jordan, Kuwait, Lebanon, Libya, Mauritania, Morocco, Oman, Palestine, Qatar, Somalia, Sudan, Syria, Tunisia, UAE, and Yemen]

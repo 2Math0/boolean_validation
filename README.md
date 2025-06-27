@@ -1,3 +1,5 @@
+# Boolean Validation
+
 A powerful and flexible Flutter validation library designed to simplify form validation, provide
 clear user feedback, and support internationalization out of the box.
 
@@ -110,7 +112,7 @@ import 'package:boolean_validation/boolean_validation.dart';
 void main() {
   final messages = ValidationMessages();
   messages.copyWith(invalidEmail: 'This not a valid email');
-  
+
   //Or override the ValidationMessageProvider class
   runApp(MyApp());
 }
@@ -122,11 +124,16 @@ Provide a custom message directly in the validator method to override any global
 
 ```dart
 TextFormField(
-  validator: (value) => validators.userInput.validateEmail(
-    value,
-    customInvalidMessage: 'That doesn\'t look like an email address.',
-    customRequiredMessage: 'We need your email!',
-  ),
+validator: (value) => validators.userInput.validateEmail(
+value,
+customInvalidMessage: 'That doesn\'t look like an email address.',
+customRequiredMessage:
+'
+We need your email!
+'
+,
+)
+,
 )
 ```
 
@@ -161,10 +168,10 @@ For a complete guide on setting up internationalization with ARB files, please s
 
 ### Location Validators
 
-| Validator       | Description                                        |
-|-----------------|----------------------------------------------------|
-| `validateLat`   | Validates a geographic latitude value (-90 to 90). |
-| `validateLong`  | Validates a geographic longitude value (-180 to 180).|
+| Validator      | Description                                           |
+|----------------|-------------------------------------------------------|
+| `validateLat`  | Validates a geographic latitude value (-90 to 90).    |
+| `validateLong` | Validates a geographic longitude value (-180 to 180). |
 
 ## Advanced Usage & Parameters
 
@@ -261,8 +268,8 @@ Use `runMultiValidators` for complex scenarios where multiple conditions must be
 String? validateCustomField(String? value) {
   final success = isValid.runMultiValidators(
     validators: [
-      () => isValid.notEmpty(value),
-      () => isValid.email(value, domain: EmailDomain.custom('2math.io')),
+              () => isValid.notEmpty(value),
+              () => isValid.email(value, domain: EmailDomain.custom('2math.io')),
     ],
   );
 
@@ -357,7 +364,7 @@ class VM,GM,UM,DM,LM messages;
 <!--MERMAID_END-->
 
 A full, detailed diagram of the package architecture can be found here:
-![Architecture Diagram](https://raw.githubusercontent.com/2Math0/boolean_validation/6acd142dc224ab1de59a18a197658c8e3169282b/doc/full_diagram.svg)
+![Architecture Diagram](doc/full_diagram.svg)
 
 ## Contributing
 
@@ -365,4 +372,4 @@ Contributions are welcome! If you find a bug or have a feature request, please o
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
