@@ -194,9 +194,9 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 160),
+                        constraints: const BoxConstraints(maxWidth: 1000, minWidth: 150),
                         child: SizedBox(
-                          width: size.width * .35,
+                          width: size.width * .37,
                           // Increased width to accommodate grouped display
                           child:
                               AnimatedSearchableDropdown<CountryPhonePattern>(
