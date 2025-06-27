@@ -11,7 +11,7 @@ class AnimatedSearchableDropdown<T extends Object> extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
 
   const AnimatedSearchableDropdown({
-    Key? key,
+    super.key,
     required this.label,
     required this.value,
     required this.options,
@@ -20,7 +20,7 @@ class AnimatedSearchableDropdown<T extends Object> extends StatelessWidget {
     required this.displayStringForOption,
     this.errorText,
     this.margin,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class AnimatedSearchableDropdown<T extends Object> extends StatelessWidget {
               suffixIcon: const Icon(Icons.arrow_drop_down),
               filled: true,
               fillColor: errorText != null
-                  ? Colors.red.withOpacity(0.1)
+                  ? Colors.red.withValues(alpha: 0.1)
                   : Theme.of(context).inputDecorationTheme.fillColor,
             ),
           );

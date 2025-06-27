@@ -3,7 +3,7 @@ import 'package:example/utils/validation_messages_localization.dart';
 import 'package:example/widgets/animated_dropdown.dart';
 import 'package:example/widgets/animated_form_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:example/gen_l10n/app_localizations.dart';
 import 'theme/app_theme.dart';
 
 void main() {
@@ -21,7 +21,7 @@ void main() {
 /// 7. Animated form fields
 ///
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   static void setLocale(BuildContext context, Locale newLocale) {
     final state = context.findAncestorStateOfType<_MyAppState>();
@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
 }
 
 class ValidationFormScreen extends StatefulWidget {
-  const ValidationFormScreen({Key? key}) : super(key: key);
+  const ValidationFormScreen({super.key});
 
   @override
   State<ValidationFormScreen> createState() => _ValidationFormScreenState();
@@ -76,6 +76,7 @@ class _ValidationFormScreenState extends State<ValidationFormScreen> {
   final _validators = Validators();
 
   // you can use that for predefined domain
+  // ignore: unused_field
   final EmailDomain _selectedEmailDomain = EmailDomain.gmail;
 
   final String customMailKey = '2math';

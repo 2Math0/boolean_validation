@@ -144,7 +144,8 @@ class RegexPatterns {
   /// ```
   ///
   /// Example result:
-  /// ```
+  ///
+  /// ```dart
   /// ^(?=.*(?:[a-z]|[A-Z]|[0-9]))(?=.*(?:foo|bar))(?=.*[+-]?\d+)(?=.*[a-zA-Z]+)(?=.*xyz)(?=.*token).*$
   /// ```
   static String buildFlexibleRegex({

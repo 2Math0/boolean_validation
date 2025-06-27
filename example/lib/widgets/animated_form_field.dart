@@ -16,7 +16,7 @@ class AnimatedFormField extends StatelessWidget {
   final String? Function(String?)? validator;
 
   const AnimatedFormField({
-    Key? key,
+    super.key,
     required this.label,
     this.hint,
     this.errorText,
@@ -29,7 +29,7 @@ class AnimatedFormField extends StatelessWidget {
     this.onChanged,
     this.onSubmitted,
     this.validator,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

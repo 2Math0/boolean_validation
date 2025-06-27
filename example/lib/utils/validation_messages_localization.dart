@@ -1,5 +1,5 @@
 import 'package:boolean_validation/boolean_validation.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:example/gen_l10n/app_localizations.dart';
 
 class ARBValidationProvider implements ValidationMessageProvider {
   final AppLocalizations _localizations;

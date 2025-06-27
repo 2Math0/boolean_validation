@@ -16,7 +16,7 @@
   "@emailLabel": {
     "description": "Label for email input field"
   },
-  "email2MathLabel": "Correo (twomath.com)",
+  "email2MathLabel": "Correo (2math.com)",
   "@email2MathLabel": {
     "description": "Label for email input field"
   },
