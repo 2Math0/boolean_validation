@@ -1,6 +1,5 @@
-# Boolean Validation
-
-A powerful and flexible Flutter validation library designed to simplify form validation, provide clear user feedback, and support internationalization out of the box.
+A powerful and flexible Flutter validation library designed to simplify form validation, provide
+clear user feedback, and support internationalization out of the box.
 
 ## I basically build this Package so Devs can use
 
@@ -358,7 +357,7 @@ class VM,GM,UM,DM,LM messages;
 <!--MERMAID_END-->
 
 A full, detailed diagram of the package architecture can be found here:
-![Architecture Diagram](doc/full_diagram.svg)
+![Architecture Diagram](https://raw.githubusercontent.com/2Math0/boolean_validation/6acd142dc224ab1de59a18a197658c8e3169282b/doc/full_diagram.svg)
 
 ## Contributing
 
@@ -366,4 +365,4 @@ Contributions are welcome! If you find a bug or have a feature request, please o
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.

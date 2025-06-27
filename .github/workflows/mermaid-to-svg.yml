@@ -53,7 +53,7 @@ jobs:
         run: |
           cp README.md README_pub.md
           sed -i '/<!--MERMAID_START-->/,/<!--MERMAID_END-->/c\
-          <img src="doc/simplified_arch.svg" alt="Architecture Diagram" />' README_pub.md
+          <img src="https://raw.githubusercontent.com/2Math0/boolean_validation/master/doc/simplified_arch.svg" alt="Simplified Architecture Diagram" />' README_pub.md
 
       - name: Commit README_pub.md
         run: |
